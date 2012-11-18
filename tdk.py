@@ -20,15 +20,24 @@ except ImportError:
         print("Sisteminize öncelikle BeautifulSoup kurun")
         sys.exit(1)
 
-def tidyHTML(code):
-    code = code.replace("&nbsp;"," ")
-    code = code.replace("<br>","")
-    code = code.replace("<br />","")
-    code = code.replace("<i>","")
-    code = code.replace("</i>","")
-    code = re.sub("<font.*?>", "", code)
-    code = code.replace("</font>","")
-    code = re.sub("\s+"," ", code)
+def tidyHTML(code, isResult=None):
+    if isResult is None:
+        isResult = True
+
+    if isResult:
+        code = code.replace("&nbsp;"," ")
+        code = code.replace("<br>","")
+        code = code.replace("<br />","")
+        code = code.replace("<i>","")
+        code = code.replace("</i>","")
+        code = code.replace("&lt; ", "")
+        code = code.replace("</font>","")
+        code = re.sub("<font.*?>", "", code)
+        code = re.sub("\s+"," ", code)
+    else:
+        code = code.replace('<span class="comics">', "")
+        code = code.replace("</span>", "")
+
     return code
 
 def searchWord(word):
@@ -37,6 +46,7 @@ def searchWord(word):
     result = urlopen(req).read()
 
     resultTable = soup(result).findAll('p',attrs={'class' : 'thomicb'})
+    refTable = soup(result).findAll('span',attrs={'class' : 'comics'})
 
     if not len(resultTable):
         print("%s sözlükte bulunamadı." % word)
@@ -49,7 +59,9 @@ def searchWord(word):
             print("%s sözlükte bulunamadı." % word)
             return
         else:
-            print("%d. %s" % (index+1, tidyHTML(result)))
+            reference = tidyHTML(str(refTable[index]), isResult=False)
+            print("%d. %s" % (index+1, result))
+            print("(Referans: %s)\n" % reference)
 
 if __name__ == "__main__":
     if (len(sys.argv) != 2):
