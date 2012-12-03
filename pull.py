@@ -10,6 +10,7 @@ import os
 from collections import OrderedDict
 
 vcDict = OrderedDict([
+    (".gclient", "gclient sync"),
     (".git/refs/remotes/git-svn" , "git svn rebase"),
     (".git" , "git pull"),
     (".svn" , "svn up"),
