@@ -41,6 +41,7 @@ def tidyHTML(code, isResult=None):
     return code
 
 def searchWord(word):
+    word = word.decode("utf-8").encode("iso-8859-9")
     req = Request("http://tdkterim.gov.tr/bts/arama/?kategori=verilst&kelime=%s&ayn=tam" % word)
     req.add_header('Referer', 'http://tdkterim.gov.tr/bts/arama/index.php')
     result = urlopen(req).read()
