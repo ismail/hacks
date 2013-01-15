@@ -1,24 +1,19 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Placed under public domain.
-# 2006-2012 İsmail Dönmez <ismail@namtrac.org>
+# 2006-2013 İsmail Dönmez <ismail@donmez.ws>
 
-try:
-    from urllib2 import urlopen, Request
-except ImportError:
-    from urllib.request import urlopen, Request
+from urllib.parse import quote
+from urllib.request import urlopen, Request
 import re
 import sys
 
 try:
     from bs4 import BeautifulSoup as soup
 except ImportError:
-    try:
-        from BeautifulSoup import BeautifulSoup as soup
-    except ImportError:
-        print("Sisteminize öncelikle BeautifulSoup kurun")
-        sys.exit(1)
+    print("Sisteminize öncelikle BeautifulSoup4 kurun.")
+    sys.exit(1)
 
 def tidyHTML(code, isResult=None):
     if isResult is None:
@@ -43,8 +38,7 @@ def tidyHTML(code, isResult=None):
     return code
 
 def searchWord(word):
-    word = word.decode("utf-8").encode("iso-8859-9")
-    req = Request("http://tdkterim.gov.tr/bts/arama/?kategori=verilst&kelime=%s&ayn=tam" % word)
+    req = Request("http://tdkterim.gov.tr/bts/arama/?kategori=verilst&kelime=%s&ayn=tam" % quote(word, encoding="iso8859-9"))
     req.add_header('Referer', 'http://tdkterim.gov.tr/bts/arama/index.php')
     result = urlopen(req).read()
 
