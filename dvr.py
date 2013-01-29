@@ -66,6 +66,6 @@ if __name__ == "__main__":
     playPath = "mp4:%s" % channel
     command = "rtmpdump -r %s -a %s -W %s -p %s -y %s --live" % \
               (url, app, swfVfy, pageUrl, playPath)
-    call("%s | avplay -" % command, shell=True)
+    call("%s | vlc -" % command, shell=True)
 
 
