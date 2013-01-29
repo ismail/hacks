@@ -31,6 +31,8 @@ def tidyHTML(code, isResult=None):
         code = code.replace("</font>","")
         code = re.sub("<font.*?>", "", code)
         code = re.sub("\s+"," ", code)
+        code = code.replace('\u0093','')
+        code = code.replace('\u0094','')
     else:
         code = code.replace('<span class="comics">', "")
         code = code.replace("</span>", "")
