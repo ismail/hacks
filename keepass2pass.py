@@ -1,8 +1,11 @@
-from subprocess import Popen,PIPE
+#!/usr/bin/env python
+
+import sys
+from subprocess import Popen, PIPE
 from xml.etree import ElementTree as ET
 
 if __name__ == "__main__":
-    root = ET.parse(sys.argv[0])
+    root = ET.parse(sys.argv[1])
     for group in root.findall("Root/Group/Group"):
         group_title = group.find("Name").text
         for entry in group.findall("Entry"):
