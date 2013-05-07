@@ -11,6 +11,7 @@ query="q=%23Mega&result_type=recent"
 def fetchTweets(url, query):
     data = urlopen("%s?%s" % (url, query)).read()
     d = json.loads(data.decode("utf-8"))
+    imageUrl = None
 
     for result in d["results"]:
         text = result["text"]
