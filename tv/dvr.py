@@ -8,21 +8,25 @@ from subprocess import call
 
 pageUrl = "http://www.yildiz.tv/?act=dvr"
 swfVfy = "http://www.yildiz.tv/dvr/dvrGoogle16.swf?v=1.6b"
-streamMap = { "ntv"     :   "origin1",
-              "ntvspor" :   "origin1",
-              "tmb"     :   "origin2",
+streamMap = { "ntv"       : "origin1",
+              "ntvspor"   : "origin1",
+              "tmb"       : "origin2",
               "haberturk" : "origin2",
               "kanalturk" : "origin1",
               "sky360"    : "origin2",
               "cnbce"     : "origin2",
               "foxtv"     : "origin2",
-              "eurod"     : "origin1",
-              "euros"     : "origin2",
+              "kanald"    : "origin1",
+              "startv"     : "origin2",
               "trt1"      : "origin1",
               "trt3"      : "origin1",
               "beyaz"     : "origin2",
               "trtcocuk"  : "origin1",
             }
+
+nameMap = { "ntv"    : "canlintv",
+            "kanald" : "eurod",
+            "star"   : "euros"}
 
 def help():
     print("Usage: %s <channel>" % sys.argv[0])
@@ -40,7 +44,10 @@ if __name__ == "__main__":
         help()
 
     try:
-        url = "rtmp://%s.nar.tv/dvrh264/%s" % (streamMap[channel], channel)
+        streamServer = streamMap[channel]
+        if channel in nameMap.keys():
+            channel = nameMap[channel]
+        url = "rtmp://%s.nar.tv/dvrh264/%s" % (streamServer, channel)
     except KeyError:
         print("No channel named %s" % channel)
         help()
