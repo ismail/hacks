@@ -1,3 +1,3 @@
 #!/bin/sh
 
-avplay "rtmp://live.dtv.cubecdn.net:80/cnnturktv app=cnnturktv swfUrl=http://video.cnnturk.com/content/playermed/midyo/mplayer.v3.swf pageUrl=http://video.cnnturk.com/canli-yayin playpath=CNNTurk3 live=1" -window_title CNNTürk
+vlc "http://live.netd.com.tr//S1/HLS_LIVE/cnn_turk/1500/prog_index.m3u8?key=0ac0b403a92d06220e54883c1c9e1087&live=true"
