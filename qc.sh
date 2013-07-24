@@ -3,7 +3,8 @@
 import sys
 
 if len(sys.argv) > 1:
-    code = compile("from math import *\nresult = %s" % sys.argv[1], '<string>', 'exec')
+    input_string = " ".join(sys.argv[1:])
+    code = compile("from math import *\nresult = %s" % input_string, '<string>', 'exec')
     ns = {}
     exec code in ns
     print(ns["result"])
