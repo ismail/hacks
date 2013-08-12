@@ -1,6 +1,6 @@
 #!/bin/sh
 
-destination=/havana/Copy/Pictures/apod/
+destination=/havana/Sync/Pictures/apod/
 image_path=`curl -s -L http://apod.nasa.gov/apod/|grep -m 1 '<a href="image'|cut -f2 -d"\""`
 image_name=`echo $image_path|cut -f3 -d"/"`
 
