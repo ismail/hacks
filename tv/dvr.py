@@ -1,32 +1,35 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# Licensed under public domain
 
-# 11.06.2013
+# 11.01.2014
 
 import sys
 from subprocess import call
 
-pageUrl = "http://www.yildiz.tv/?act=dvr"
-swfVfy = "http://www.yildiz.tv/dvr/dvrGoogle16.swf?v=1.6b"
-streamMap = { "ntv"       : "origin1",
-              "ntvspor"   : "origin1",
-              "tmb"       : "origin2",
-              "haberturk" : "origin2",
-              "kanalturk" : "origin1",
-              "sky360"    : "origin2",
-              "cnbce"     : "origin2",
-              "foxtv"     : "origin2",
-              "kanald"    : "origin1",
-              "startv"     : "origin2",
-              "trt1"      : "origin1",
-              "trt3"      : "origin1",
-              "beyaz"     : "origin2",
-              "trtcocuk"  : "origin1",
+pageUrl = "http://www.myvideo.az/?act=dvr"
+swfVfy = "http://www.myvideo.az/dvr/dvrAvatar7.swf?v=1.91"
+streamMap = { "atv"         : "edge04-01",
+              "startv"      : "edge04-04",
+              "kanald"      : "edge03-01",
+              "fox"         : "edge03-01",
+              "ntv"         : "edge03-08",
+              "kanalturk"   : "edge03-08",
+              "skyturk"     : "edge03-08",
+              "trt1"        : "edge03-08",
+              "trt3"        : "edge03-08",
+              "tmbtv"       : "edge03-07",
+              "kanal24"     : "edge03-04",
+              "planetturk"  : "edge04-07",
+              "yumurcaktv"  : "edge04-07",
             }
 
-nameMap = { "ntv"    : "canlintv",
-            "kanald" : "eurod",
-            "star"   : "euros"}
+nameMap = { "atv"        : "atvturk",
+            "kanald"     : "canald",
+            "fox"        : "foxturk",
+            "ntv"        : "canlintv",
+            "yumurcaktv" : "yumurcak"
+          }
 
 def help():
     print("Usage: %s <channel>" % sys.argv[0])
@@ -47,7 +50,7 @@ if __name__ == "__main__":
         streamServer = streamMap[channel]
         if channel in nameMap.keys():
             channel = nameMap[channel]
-        url = "rtmp://%s.nar.tv/dvrh264/%s" % (streamServer, channel)
+        url = "rtmp://%s.az.myvideo.az/dvrh264/%s" % (streamServer, channel)
     except KeyError:
         print("No channel named %s" % channel)
         help()
