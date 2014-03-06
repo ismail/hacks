@@ -16,7 +16,7 @@ call_spotify() {
 
 case $1 in
     "play")
-        call_spotify org.mpris.MediaPlayer2.Player.Play
+        call_spotify org.mpris.MediaPlayer2.Player.PlayPause
         ;;
     "pause")
         call_spotify org.mpris.MediaPlayer2.Player.Pause
