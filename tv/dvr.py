@@ -12,7 +12,7 @@ swfVfy = "http://www.myvideo.az/dvr/dvrAvatar7.swf?v=1.91"
 streamMap = { "atv"         : "edge04-01",
               "startv"      : "edge04-04",
               "kanald"      : "edge03-01",
-              "fox"         : "edge03-01",
+              "fox"         : "edge04-09",
               "ntv"         : "edge03-08",
               "kanalturk"   : "edge03-08",
               "skyturk"     : "edge03-08",
