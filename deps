@@ -1,0 +1,6 @@
+#!/bin/sh
+
+if [ ! -z $1 ]; then
+    objdump -p "$1" | awk  '/DLL.*dll$/ { print $3 }' | sort
+fi
+
