@@ -4,10 +4,12 @@
 # Placed under public domain.
 # 2006-2013 İsmail Dönmez <ismail@donmez.ws>
 
-from urllib.parse import quote
+from urllib.parse import urlencode
 from urllib.request import urlopen, Request
 import re
 import sys
+
+URL="http://www.tdk.gov.tr/index.php?option=com_bts&arama=kelime&guid=TDK.GTS.5385b1116652d6.90197017"
 
 try:
     from bs4 import BeautifulSoup as soup
@@ -40,9 +42,8 @@ def tidyHTML(code, isResult=None):
     return code
 
 def searchWord(word):
-    req = Request("http://tdkterim.gov.tr/bts/arama/?kategori=verilst&kelime=%s&ayn=tam" % quote(word, encoding="iso8859-9"))
-    req.add_header('Referer', 'http://tdkterim.gov.tr/bts/arama/index.php')
-    result = urlopen(req).read()
+    params = urlencode({'kelime' : word, 'kategori' : 'verilst', 'ayn' : 'tam', 'gonder' : 'ARA'})
+    result = urlopen(URL, params.encode("iso-8859-9")).read()
 
     resultTable = soup(result).findAll('p',attrs={'class' : 'thomicb'})
     refTable = soup(result).findAll('span',attrs={'class' : 'comics'})
