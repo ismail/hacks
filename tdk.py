@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # Placed under public domain.
-# 2006-2013 İsmail Dönmez <ismail@donmez.ws>
+# 2006-2014 İsmail Dönmez <ismail@donmez.ws>
 
 from urllib.parse import urlencode
 from urllib.request import urlopen, Request
