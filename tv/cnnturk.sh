@@ -8,4 +8,4 @@ if [ -z $key ]; then
     echo "Failed to get play path.";
 fi
 
-vlc "http://live.netd.com.tr/S1/HLS_LIVE/cnn_turk/$bitrate/prog_index.m3u8?key=$key&live=true"
+mpv "http://live.netd.com.tr/S1/HLS_LIVE/cnn_turk/$bitrate/prog_index.m3u8?key=$key&live=true"
