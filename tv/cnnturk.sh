@@ -1,6 +1,6 @@
 #!/bin/sh
 
-subpage=`curl -s http://www.cnnturk.com/canli-yayin|grep embed|cut -f4 -d"/"|cut -f1 -d '"'`
+subpage=`curl -s http://www.cnnturk.com/canli-yayin|grep -oP "/embed/(\w{24})"|uniq|cut -f3 -d"/"`
 key=`curl -s "http://www.cnnturk.com/player/embed/$subpage"|grep key|cut -f2 -d"="|cut -f1 -d"&"`
 bitrate=1000
 
