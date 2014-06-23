@@ -11,5 +11,5 @@ lang=sys.argv[1]
 word="%22".join(sys.argv[2:])
 
 if __name__ == "__main__":
-    os.system('curl -s -A "%s" "%s%s&q="%s"" | mpv - &> /dev/null' % (userAgent, url, lang, word))
+    os.system('curl -s -A "%s" "%s%s&q="%s"" | mpv.exe - &> /dev/null' % (userAgent, url, lang, word))
 
