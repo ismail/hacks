@@ -1,0 +1,15 @@
+#!/bin/sh
+
+CARDNO=$1
+
+if [ -f ~/.ticketno -a -z "$CARDNO" ]; then
+    CARDNO=`cat ~/.ticketno`
+fi
+
+RND=`base64 </dev/urandom | tr -dc 'a-zA-Z0-9' | head -c29 | tr [a-z] [A-Z]`
+ID="FFFFFFFF$RND"
+URL=https://ws.ticket.com.tr/iphone/RestService.svc/Account
+UA="Mozilla/5.0 (iPhone; CPU iPhone OS 7_0_4 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11B554a Safari/9537.53"
+
+curl -s -A "$UA" "$URL/?id=$ID&cardno=$CARDNO" | jq "."
+
