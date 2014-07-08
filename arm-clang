@@ -2,5 +2,11 @@
 
 SYSROOT=/havana/linaro-arm-linux-gnueabihf-4.9
 TARGET=armv7-unknown-linux-gnueabihf
+STATIC_LINK="-static -static-libgcc"
 
-/opt/clang/bin/clang -target $TARGET --sysroot=$SYSROOT -static -static-libgcc "$@"
+if [[ "$@" == *-c* ]] || [[ "$@" == *-S* ]]
+then
+    STATIC_LINK=
+fi
+
+/opt/clang/bin/clang -target $TARGET --sysroot=$SYSROOT $STATIC_LINK "$@"
