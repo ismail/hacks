@@ -1,12 +1,14 @@
 #!/bin/sh
 
+CC=/opt/clang/bin/clang
 SYSROOT=/havana/linaro-arm-linux-gnueabihf-4.9
 TARGET=armv7-unknown-linux-gnueabihf
 STATIC_LINK="-static -static-libgcc"
+CFLAGS="-mfloat-abi=hard -march=armv7-a -mtune=cortex-a8 -mfpu=vfpv3-d16"
 
 if [[ "$@" == *-c* ]] || [[ "$@" == *-S* ]]
 then
     STATIC_LINK=
 fi
 
-/opt/clang/bin/clang -target $TARGET --sysroot=$SYSROOT $STATIC_LINK "$@"
+$CC -target $TARGET $CFLAGS --sysroot=$SYSROOT $STATIC_LINK "$@"
