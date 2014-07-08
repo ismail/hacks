@@ -1,0 +1,4 @@
+#!/bin/sh
+
+/opt/clang/bin/clang -target armv7-unknown-linux-gnueabihf \
+--sysroot=/havana/linaro-arm-linux-gnueabihf-4.9 -static -static-libgcc "$@"
