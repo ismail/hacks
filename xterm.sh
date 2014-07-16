@@ -1,3 +1,3 @@
 #!/bin/sh
 
-/usr/bin/xterm -fa "Droid Sans Mono" -fs 11 -rightbar -geometry 87x35+301+38 $@
+/usr/bin/xterm -fa "Consolas" -fs 13 -rightbar -geometry 128x55+70+41 $@
