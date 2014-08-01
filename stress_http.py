@@ -9,13 +9,17 @@ import sys
 MAX_CONNECTIONS=int(sys.argv[2])
 HOST=sys.argv[1]
 
+failures = 0
+
 def do_it(index):
+    global failures
+
     try:
         req = urlopen(HOST)
         req.readlines()
         req.close()
     except:
-        print("Request %d failed" % index)
+        failures += 1
 
 if __name__ == "__main__":
     threads = []
@@ -25,3 +29,9 @@ if __name__ == "__main__":
 
     [t.start() for t in threads]
     [t.join() for t in threads]
+
+    if failures:
+        print("%d%% of requests failed" % (float(failures)/MAX_CONNECTIONS*100))
+    else:
+        print("All requests succesfull!")
+
