@@ -2,5 +2,5 @@
 
 SYSROOT=/havana/binaries/linaro-arm-linux-gnueabihf-4.9
 
-qemu-arm $SYSROOT/lib/ld-linux-armhf.so.3 --library-path $SYSROOT/arm-linux-gnueabihf/lib:$SYSROOT/arm-linux-gnueabihf/libc/lib/arm-linux-gnueabihf:/havana/binaries/linaro-arm-linux-gnueabihf-4.9/arm-linux-gnueabihf/libc/usr/lib:$PWD "$@"
+qemu-arm $SYSROOT/lib/ld-linux-armhf.so.3 --library-path $SYSROOT/arm-linux-gnueabihf/lib:$SYSROOT/arm-linux-gnueabihf/libc/lib/arm-linux-gnueabihf:$SYSROOT/arm-linux-gnueabihf/libc/usr/lib:$PWD "$@"
 
