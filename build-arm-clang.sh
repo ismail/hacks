@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 root=/havana/llvm
+svnversion=`svnversion $root/CREDITS.TXT`
 version=3.6
 target=armv7l-unknown-linux-gnueabihf
 
@@ -14,9 +15,9 @@ CC=arm-clang CXX=arm-clang++ cmake -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Rel
 ninja &&
 ninja install/strip &&
 echo "Creating the tarball..." &&
-tar cJf llvm-armv7-$version-r`svnversion ../CREDITS.TXT`.tar.xz llvm &&
-echo -n "Uploading to Mega... " &&
-backoff mega -force put llvm-armv7-$version-*.tar.xz mega:/llvm/ &&
+tar cJf llvm-armv7-$version-r$svnversion.tar.xz llvm &&
+scp llvm-armv7-*.tar.xz i10z.com:/havana/llvm &&
+ssh i10z.com ln -sf /havana/llvm/llvm-armv7-$version-r$svnversion.tar.xz /havana/llvm/latest &&
 cd .. &&
 rm -rf $root/build &&
 echo "Done."
