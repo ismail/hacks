@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 root=/havana/llvm
 version=3.6
@@ -16,7 +16,7 @@ ninja install/strip &&
 echo "Creating the tarball..." &&
 tar cJf llvm-armv7-$version-r`svnversion ../CREDITS.TXT`.tar.xz llvm &&
 echo -n "Uploading to Mega... " &&
-mega -force put llvm-armv7-$version-*.tar.xz mega:/llvm/ &&
+backoff mega -force put llvm-armv7-$version-*.tar.xz mega:/llvm/ &&
 cd .. &&
 rm -rf $root/build &&
 echo "Done."
