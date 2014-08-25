@@ -9,7 +9,10 @@ persist-key
 persist-tun
 
 ns-cert-type server
+auth SHA512
 cipher AES-256-CBC
+tls-cipher DHE-RSA-AES256-SHA
+
 comp-lzo
 verb 3
 
