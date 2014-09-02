@@ -1,4 +1,4 @@
-LD_VERSION=2.19-2014.07
+LD_VERSION=2.19-2014.08
 
 cd $1
 ln -sf arm-linux-gnueabihf/libc/usr usr
