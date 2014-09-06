@@ -6,7 +6,7 @@ case $platform in
         FILE_PATH=`cygpath -w ~/`
     ;;
     Linux*)
-        FILE_PATH="~/"
+        FILE_PATH="$HOME/"
     ;;
 esac
 
