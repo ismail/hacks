@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ -z $1 ]; then
+    echo "Usage: $(basename $0) <pass name>"
+    exit 1
+fi
+
 platform=`uname -s`
 case $platform in
     CYGWIN*)
@@ -10,5 +15,12 @@ case $platform in
     ;;
 esac
 
-gpg -d "$FILE_PATH".$1"_pass"
+FILE_PATH="$FILE_PATH".$1"_pass"
+
+if [ -e $FILE_PATH ]; then
+    gpg -d $FILE_PATH
+else
+    echo "$FILE_PATH does not exist."
+    exit 1
+fi
 
