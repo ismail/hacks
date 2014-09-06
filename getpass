@@ -1,0 +1,14 @@
+#!/bin/sh
+
+platform=`uname -s`
+case $platform in
+    CYGWIN*)
+        FILE_PATH=`cygpath -w ~/`
+    ;;
+    Linux*)
+        FILE_PATH="~/"
+    ;;
+esac
+
+gpg -d "$FILE_PATH".$1"_pass"
+
