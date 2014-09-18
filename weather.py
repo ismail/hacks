@@ -6,7 +6,8 @@ from urllib.parse import urlencode
 from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup as soup
 
-url="http://in.weather.com/weather/hourByHour/Istanbul+34+Turkey+TUXX0014:1:TU?pagenum=2&nextbeginIndex=0"
+cityString = "Istanbul+34+Turkey+TUXX0014"
+url = ("http://in.weather.com/weather/hourByHour/%s?pagenum=2&nextbeginIndex=0" % cityString)
 
 if __name__ == "__main__":
     request = Request(url)
