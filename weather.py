@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from gzip import GzipFile
+from io import BytesIO
 from urllib.parse import urlencode
 from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup as soup
@@ -7,7 +9,10 @@ from bs4 import BeautifulSoup as soup
 url="http://in.weather.com/weather/hourByHour/Istanbul+34+Turkey+TUXX0014:1:TU?pagenum=2&nextbeginIndex=0"
 
 if __name__ == "__main__":
-    result = urlopen(url).read()
+    request = Request(url)
+    request.add_header('Accept-encoding', 'gzip,deflate')
+    bytesIO = BytesIO(urlopen(request).read())
+    result = GzipFile(fileobj=bytesIO, mode="rb").read()
     resultTable=soup(result).findAll('div', attrs={"class" : "wx-timepart"})
 
     print("\n%s%7s%10s %20s\n" % ("Time", u"\u2103", "Rain%", "Conditions"))
