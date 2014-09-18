@@ -12,10 +12,13 @@ if __name__ == "__main__":
     request = Request(url)
     request.add_header('Accept-encoding', 'gzip,deflate')
     bytesIO = BytesIO(urlopen(request).read())
-    result = GzipFile(fileobj=bytesIO, mode="rb").read()
-    resultTable=soup(result).findAll('div', attrs={"class" : "wx-timepart"})
+    data = GzipFile(fileobj=bytesIO, mode="rb").read()
+    bs = soup(data)
+    resultTable = bs.findAll('div', attrs={"class" : "wx-timepart"})
 
     print("\n%s%7s%10s %20s\n" % ("Time", u"\u2103", "Rain%", "Conditions"))
+
+    updateTime = bs.find('p', attrs={'class' : 'wx-timestamp'}).text.strip()
 
     for result in resultTable:
         hour = result.find('h3').text.split("\n")[0]
@@ -23,3 +26,5 @@ if __name__ == "__main__":
         condition = result.find('p', attrs={'class' : 'wx-phrase'}).text
         temperature, humidity, rain, wind = [x.text.strip() for x  in result.findAll('dd')]
         print("%s%9s%8s %20s" % (hour, temperature, rain, condition))
+
+    print("\n%s" % updateTime.replace("\n"," "))
