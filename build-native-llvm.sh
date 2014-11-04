@@ -12,9 +12,9 @@ CC=clang CXX=clang++ cmake -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DL
 ninja
 
 # Test manually
-./bin/llvm-lit -s -j4 test
-./bin/llvm-lit -s -j4 tools/clang/test
-#./bin/llvm-lit -s -j4 projects/libcxx/test
+./bin/llvm-lit -v -j4 test
+./bin/llvm-lit -v -j4 tools/clang/test
+./bin/llvm-lit -v -j4 projects/libcxx/test
 
 ninja install/strip
 
