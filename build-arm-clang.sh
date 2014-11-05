@@ -2,7 +2,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-revision=221327
+revision=$1
 root=/havana/llvm
 version=3.6
 target=armv7l-unknown-linux-gnueabihf
