@@ -15,6 +15,7 @@ ninja
 ./bin/llvm-lit -v -j4 test
 ./bin/llvm-lit -v -j4 tools/clang/test
 ./bin/llvm-lit -v -j4 projects/libcxx/test
+./bin/llvm-lit -v -j4 projects/libcxxabi/test
 
 ninja install/strip
 
