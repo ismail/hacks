@@ -2,12 +2,13 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+revision=221327
 root=/havana/llvm
 version=3.6
 target=armv7l-unknown-linux-gnueabihf
 
 cd $root
-svn up . tools/clang tools/clang/tools/extra projects/compiler-rt projects/libcxx projects/libcxxabi
+svn up -r$revision . tools/clang tools/clang/tools/extra projects/compiler-rt projects/libcxx projects/libcxxabi
 
 svnversion=`svnversion $root/CREDITS.TXT`
 rm -rf build; mkdir build; cd build
