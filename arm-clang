@@ -3,6 +3,6 @@
 CC=/opt/clang/bin/clang
 SYSROOT=/havana/binaries/linaro-arm-linux-gnueabihf-4.9
 TARGET=armv7a-unknown-linux-gnueabihf
-CFLAGS="-mfloat-abi=hard -mcpu=cortex-a8 -mfpu=vfpv3 -fuse-ld=gold"
+CFLAGS="-mfloat-abi=hard -march=armv7-a -mtune=cortex-a8 -mfpu=vfpv3-d16 -fuse-ld=gold"
 
 $CC -target $TARGET $CFLAGS --sysroot=$SYSROOT "$@"
