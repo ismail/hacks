@@ -8,7 +8,7 @@ from urllib.parse import urlencode
 from urllib.request import urlopen, Request
 import sys
 
-URL="http://www.tdk.gov.tr/index.php?option=com_gts&arama=gts&guid=TDK.GTS.53bbbb840c1f86.89845199"
+URL="http://www.tdk.gov.tr/index.php?option=com_gts&arama=gts&guid=TDK.GTS.546b3e9c2e0046.90953438"
 
 try:
     from bs4 import BeautifulSoup as soup
@@ -20,7 +20,13 @@ def searchWord(word):
     postData = {'kelime' : word}
     req = Request(URL, urlencode(postData).encode("iso-8859-9"))
     result = urlopen(req).read()
-    resultTable = soup(result).findAll('table',attrs={'id' : 'hor-minimalist-a'})[0]
+    results = soup(result).findAll('table',attrs={'id' : 'hor-minimalist-a'})
+    if results:
+        resultTable = results[0]
+    else:
+        print("%s sözlükte bulunamadı." % word)
+        sys.exit(0)
+
     for td in resultTable.findAll('td'):
         text = td.text.strip()
         # Ansi escape code for italic
