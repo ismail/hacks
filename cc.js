@@ -1,4 +1,3 @@
-var util = require('util');
 var XMLHttpRequest = require('xhr2');
 var xhr = new XMLHttpRequest();
 
