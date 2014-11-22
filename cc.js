@@ -16,7 +16,7 @@ function compile(data) {
     xhr.onerror = function (e) {
         console.error(xhr.statusText);
     };
-    xhr.send(JSON.stringify({ "cmd": "clang++ -std=c++11 -Wall main.cpp && ./a.out", "src": data }));
+    xhr.send(JSON.stringify({ "cmd": "clang++ -std=c++11 -stdlib=libc++ -O2 -Wall main.cpp && ./a.out", "src": data }));
 }
 
 process.stdin.resume();
