@@ -10,6 +10,7 @@ function compile(data) {
       } else {
         console.error(xhr.statusText);
       }
+      process.exit()
     }
   };
 
