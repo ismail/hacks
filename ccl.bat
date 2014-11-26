@@ -1,0 +1,6 @@
+@echo OFF
+
+set TMPFILE=%TMP%\ccl-%RANDOM%-%TIME:~6,5%.exe
+clang-cl /D_HAS_EXCEPTIONS=0 /Fe%TMPFILE% /Tp -
+IF NOT ERRORLEVEL 1 %TMPFILE%
+del %TMPFILE%
