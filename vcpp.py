@@ -7,7 +7,7 @@ import sys
 
 
 def compileCode(code):
-    req = request.Request("http://webcompiler.cloudapp.net/");
+    req = request.Request("http://webcompiler.cloudapp.net/")
     data = request.urlopen(req)
     soup = BeautifulSoup(data)
     eventValidation = soup.find('input', attrs={'id': '__EVENTVALIDATION'}).get('value')
