@@ -24,8 +24,8 @@ def compileCode(code):
     })
 
     headers = {
-        "Content-type": "application/x-www-form-urlencoded",
         "Accept": "text/html",
+        "Content-type": "application/x-www-form-urlencoded",
         "Origin": "http://webcompiler.cloudapp.net",
         "Referer": "http://webcompiler.cloudapp.net/"
     }
