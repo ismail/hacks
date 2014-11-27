@@ -18,7 +18,7 @@ def compileCode(code):
         "__EVENTVALIDATION": eventValidation,
         "Button1": "►",
         "execute": "on",
-        "TextBoxArgument": "argv[0] argv[1] ...",
+        "TextBoxArgument": "",
         "TextBoxOutputLatest": "",
         "TextBoxSource": code,
     })
