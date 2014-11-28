@@ -8,7 +8,6 @@ function compile(data)
     xhr.onload = function(e) {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
-        console.log("Result:\n");
         console.log(xhr.responseText);
       } else {
         console.error(xhr.statusText);
