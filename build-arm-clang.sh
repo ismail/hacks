@@ -13,7 +13,6 @@ svn up -r$revision . tools/clang tools/clang/tools/extra projects/compiler-rt pr
 svnversion=`svnversion $root/CREDITS.TXT`
 rm -rf build; mkdir build; cd build
 
-sudo ~/hacks/setup-arm-emu.sh
 CC=arm-clang CXX=arm-clang++ cmake -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENABLE_PIC=ON -DLLVM_TARGET_ARCH=ARM -DLLVM_TARGETS_TO_BUILD=all -DLLVM_DEFAULT_TARGET_TRIPLE=$target -DLLVM_ENABLE_TIMESTAMPS=OFF -DCMAKE_INSTALL_PREFIX=$PWD/llvm -DLLVM_BUILD_EXAMPLES=OFF -DENABLE_CLANG_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -G "Ninja" ..
 
 ninja
@@ -25,6 +24,5 @@ scp llvm-armv7-*.tar.xz i10z.com:/havana/llvm
 ssh i10z.com ln -sf /havana/llvm/llvm-armv7-$version-r$svnversion.tar.xz /havana/llvm/latest
 cd ..
 rm -rf $root/build
-sudo ~/hacks/setup-arm-emu.sh reset
 echo "Done."
 
