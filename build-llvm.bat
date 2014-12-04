@@ -1,6 +1,5 @@
 @echo OFF
 
-vcvars32.bat
 svn up . tools/clang tools/clang/tools/extra projects/compiler-rt
 
 rm -rf dist
