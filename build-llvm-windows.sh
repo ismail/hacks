@@ -1,5 +1,4 @@
 #!/bin/sh
-
 set -euo pipefail
 
 svn up . tools/clang tools/clang/tools/extra
