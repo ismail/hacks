@@ -13,3 +13,5 @@ cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_TIMESTAMPS=OFF -DLLVM_
 ninja
 ninja check-all
 ninja package
+
+cp *.exe ~
