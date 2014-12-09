@@ -1,5 +1,5 @@
 #!/bin/bash
 
-node ~/hacks/cc.js
+node ~/hacks/compilers/cc.js
 
 
