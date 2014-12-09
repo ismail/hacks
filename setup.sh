@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 cd ~
-mkdir bin
+mkdir -p bin
 pushd bin
 
 ln -sf ../hacks/ccl.sh ccl
