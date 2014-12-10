@@ -19,7 +19,7 @@ function compile(data)
     xhr.onerror = function(e) { console.error(xhr.statusText); };
     xhr.send(JSON.stringify({
         "cmd" :
-            "clang++ -std=c++14 -Wall -g -fsanitize=undefined main.cpp && ./a.out",
+            "clang++ -std=c++14 -Weverything -g -fsanitize=undefined main.cpp && ./a.out",
         "src" : data
     }));
 }
