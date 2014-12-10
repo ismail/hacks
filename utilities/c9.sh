@@ -20,7 +20,7 @@ download_url() {
         exit 1
     fi
 
-    title=`grep -oP '(?<=<title>).*(?=</title>)' $tmp | recode HTML_4.0 | sed -e 's/ |.*//g' -e 's|/|_|g'`
+    title=`grep -oP '(?<=<title>).*(?=</title>)' $tmp | recode HTML_4.0 | sed -e 's/ |.*//g' -e 's|/|_|g' -e 's/:/./g'`
 
     rm $tmp
     echo "Downloading \""$title".$ext\" ..."
