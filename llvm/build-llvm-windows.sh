@@ -1,5 +1,6 @@
 #!/bin/sh
 set -euo pipefail
+version=3.6.0
 
 svn up . tools/clang tools/clang/tools/extra
 
@@ -14,4 +15,7 @@ ninja | tee build.log
 ninja check-all | tee build.log
 ninja package | tee build.log
 
-cp *.exe ~
+rev=`svn ~/code/llvm/CREDITS.TXT`
+mv LLVM-*.exe ~/dist/LLVM-$version-$rev-win32.exe
+cd ~/dist
+ln -sf LLVM-$version-$rev-win32.exe latest
