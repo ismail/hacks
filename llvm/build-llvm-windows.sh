@@ -19,4 +19,4 @@ cd ..
 rev=`git log -1 --format="%h"`
 mv dist/LLVM-*.exe ~/dist/LLVM-$version-$rev-win32.exe
 cd ~/dist
-ln -sf LLVM-$version-$rev-win32.exe latest
+ln -sf LLVM-$version-$rev-win32.exe latest.exe
