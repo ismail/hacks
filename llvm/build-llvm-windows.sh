@@ -11,7 +11,7 @@ cd dist
 cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_TIMESTAMPS=OFF -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_TARGETS_TO_BUILD=X86 -DPYTHON_EXECUTABLE=C:/Python27/python.exe -DLLVM_BUILD_TESTS=ON .. | tee build.log
 
 ninja | tee -a build.log
-ninja check-all | tee -a build.log || true
+ninja check-all | tee -a build.log
 ninja package | tee -a build.log
 
 cd ..
@@ -21,3 +21,4 @@ mv dist/build.log ~/dist/build-$rev.log
 
 cd ~/dist
 ln -sf LLVM-$version-$rev-win32.exe latest.exe
+ln -sf build-$rev.log latest.log
