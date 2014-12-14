@@ -16,7 +16,7 @@ ninja package | tee -a build.log
 
 cd ..
 rev=`git log -1 --format="%h"`
-rm ~/dist/*
+rm -f ~/dist/*
 mv dist/LLVM-*.exe ~/dist/LLVM-$version-$rev-win32.exe
 mv dist/build.log ~/dist/build-$rev.log
 
