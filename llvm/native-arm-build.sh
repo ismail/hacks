@@ -22,6 +22,12 @@ ninja install/strip
 version=3.6
 revision=`svnversion ../CREDITS.TXT`
 cd /havana/dist
+
+rm $PWD/llvm/lib/libc++.so
+cat > $PWD/llvm/lib/libc++.so <<EOF
+GROUP ( libc++.so.1 libc++abi.so.1 )
+EOF
+
 echo "Compressing with xz..."
 tar cJf llvm-armv7-$version-r"$revision".tar.xz llvm
 echo "Uploading..."

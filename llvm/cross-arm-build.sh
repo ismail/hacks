@@ -18,6 +18,11 @@ CC=arm-clang CXX=arm-clang++ cmake -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Rel
 ninja
 ninja install/strip
 
+rm $PWD/llvm/lib/libc++.so
+cat > $PWD/llvm/lib/libc++.so <<EOF
+GROUP ( libc++.so.1 libc++abi.so.1 )
+EOF
+
 echo "Creating the tarball..."
 tar cJf llvm-armv7-$version-r$svnversion.tar.xz llvm
 scp llvm-armv7-*.tar.xz i10z.com:/havana/llvm
