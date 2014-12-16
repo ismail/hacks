@@ -16,10 +16,6 @@ ninja package | tee -a build.log
 
 cd ..
 rev=`git log -1 --format="%h"`
-rm -f ~/dist/*
-mv dist/LLVM-*.exe ~/dist/LLVM-$version-$rev-win32.exe
-mv dist/build.log ~/dist/build-$rev.log
-
-cd ~/dist
-ln -sf LLVM-$version-$rev-win32.exe latest.exe
-ln -sf build-$rev.log latest.log
+scp dist/LLVM-*.exe i10z.com:/havana/llvm/win32/LLVM-$version-$rev-win32.exe
+scp dist/build.log i10z.com:/havana/llvm/win32/build-$version-$rev.log
+ssh i10z.com ln -sf /havana/llvm/win32/LLVM-$version-$rev-win32.exe /havana/llvm/win32/latest.exe
