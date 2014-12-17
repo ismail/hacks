@@ -19,3 +19,4 @@ rev=`git log -1 --format="%h"`
 scp dist/LLVM-*.exe i10z.com:/havana/llvm/win32/LLVM-$version-$rev-win32.exe
 scp dist/build.log i10z.com:/havana/llvm/win32/build-$version-$rev.log
 ssh i10z.com ln -sf /havana/llvm/win32/LLVM-$version-$rev-win32.exe /havana/llvm/win32/latest.exe
+ssh i10z.com ln -sf /havana/llvm/win32/LLVM-$version-$rev.log /havana/llvm/win32/latest.log
