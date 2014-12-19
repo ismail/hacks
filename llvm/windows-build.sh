@@ -2,6 +2,21 @@
 set -euo pipefail
 version=3.6.0
 
+got_control_c=0
+
+control_c()
+{
+    if [ $got_control_c -eq 1 ]; then
+        echo "Exiting".
+        exit 0
+    fi
+
+    got_control_c=1
+    echo "CTRL-C again to exit"
+}
+
+trap control_c SIGINT
+
 pull . tools/clang
 
 rm -rf dist

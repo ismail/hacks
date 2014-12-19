@@ -2,6 +2,21 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+got_control_c=0
+
+control_c()
+{
+    if [ $got_control_c -eq 1 ]; then
+        echo "Exiting".
+        exit 0
+    fi
+
+    got_control_c=1
+    echo "CTRL-C again to exit"
+}
+
+trap control_c SIGINT
+
 cd /havana/src/llvm
 svn up . tools/clang tools/clang/tools/extra projects/compiler-rt projects/libcxx projects/libcxxabi
 rm -rf build; mkdir build; cd build
