@@ -17,9 +17,7 @@ fi
 # We set here because cmp would exit early otherwise
 set -e
 
-rm -rf dist
-mkdir dist
-cd dist
+rm -rf build; mkdir build; cd build
 
 cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_TIMESTAMPS=OFF -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_TARGETS_TO_BUILD=X86 -DPYTHON_EXECUTABLE=C:/Python27/python.exe -DLLVM_BUILD_TESTS=ON .. | tee build.log
 

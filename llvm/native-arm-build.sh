@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
 IFS=$'\n\t'
 
 cd /havana/src/llvm
@@ -13,6 +13,9 @@ if [ $? = 0 ]; then
     sleep 10m
     exit 0
 fi
+
+# We set here because cmp would exit early otherwise
+set -e
 
 rm -rf build; mkdir build; cd build
 
