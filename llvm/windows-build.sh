@@ -2,7 +2,11 @@
 set -euo pipefail
 version=3.6.0
 
-pull . tools/clang
+git pull
+
+pushd
+git pull tools/clang
+popd
 
 git log -1 --format="%h" > .newbuild
 git --git-dir=./tools/clang/.git log -1 --format="%h" >> .newbuild
