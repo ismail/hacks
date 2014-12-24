@@ -2,13 +2,7 @@
 set -euo pipefail
 version=3.6.0
 
-echo "Updating llvm..."
-git pull
-
-pushd tools/clang > /dev/null
-echo "Updating clang..."
-git pull
-popd > /dev/null
+pull . tools/clang
 
 git log -1 --format="%h" > .newbuild
 git --git-dir=./tools/clang/.git log -1 --format="%h" >> .newbuild
