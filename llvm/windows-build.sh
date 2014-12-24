@@ -4,9 +4,9 @@ version=3.6.0
 
 git pull
 
-pushd tools/clang
+pushd tools/clang > /dev/null
 git pull
-popd
+popd > /dev/null
 
 git log -1 --format="%h" > .newbuild
 git --git-dir=./tools/clang/.git log -1 --format="%h" >> .newbuild
