@@ -1,18 +1,21 @@
 #!/bin/sh
-set -euo pipefail
+set -uo pipefail
 version=3.6.0
 
 pull . tools/clang
 
 git log -1 --format="%h" > .newbuild
 git --git-dir=./tools/clang/.git log -1 --format="%h" >> .newbuild
-cmp .newbuild .oldbuild &> /dev/null
+cmp -s .newbuild .oldbuild
 
 if [ $? = 0 ]; then
     echo "No new build. Sleeping for 10 minutes."
     sleep 10m
     exit 0
 fi
+
+# We set here because cmp would exit early otherwise
+set -e
 
 rm -rf dist
 mkdir dist
