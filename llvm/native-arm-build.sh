@@ -4,6 +4,16 @@ IFS=$'\n\t'
 
 cd /havana/src/llvm
 svn up . tools/clang tools/clang/tools/extra projects/compiler-rt projects/libcxx projects/libcxxabi
+
+svnversion CREDITS.TXT > .newbuild
+cmp .newbuild .oldbuild &> /dev/null
+
+if [ $? = 0 ]; then
+    echo "No new build. Sleeping for 10 minutes."
+    sleep 10m
+    exit 0
+fi
+
 rm -rf build; mkdir build; cd build
 
 CFLAGS="-mfloat-abi=hard -march=armv7-a -mtune=cortex-a8 -mfpu=vfpv3-d16 -fuse-ld=gold"
@@ -36,3 +46,5 @@ scp /havana/src/llvm/build/build.log i10z.com:/havana/llvm/checked/latest-build.
 ssh i10z.com ln -sf /havana/llvm/checked/llvm-armv7-$version-r"$revision".tar.xz  /havana/llvm/checked/latest
 rm llvm-armv7-*
 echo "llvm-armv7-$version-r"$revision".tar.xz uploaded."
+
+mv .newbuild .oldbuild
