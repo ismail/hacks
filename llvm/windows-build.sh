@@ -4,8 +4,8 @@ version=3.6.0
 
 git pull
 
-pushd
-git pull tools/clang
+pushd tools/clang
+git pull
 popd
 
 git log -1 --format="%h" > .newbuild
