@@ -33,6 +33,8 @@ ninja | tee -a build.log
 rm -rf /havana/dist/llvm
 ninja install/strip
 
+mv .newbuild .oldbuild
+
 version=3.6
 revision=`svnversion ../CREDITS.TXT`
 cd /havana/dist
@@ -50,5 +52,3 @@ scp /havana/src/llvm/build/build.log i10z.com:/havana/llvm/checked/latest-build.
 ssh i10z.com ln -sf /havana/llvm/checked/llvm-armv7-$version-r"$revision".tar.xz  /havana/llvm/checked/latest
 rm llvm-armv7-*
 echo "llvm-armv7-$version-r"$revision".tar.xz uploaded."
-
-mv .newbuild .oldbuild
