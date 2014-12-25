@@ -30,6 +30,7 @@ ninja | tee -a build.log
 ./bin/llvm-lit -v -j4 projects/libcxx/test | tee -a build.log
 ./bin/llvm-lit -v -j4 projects/libcxxabi/test | tee -a build.log
 
+rm -rf /havana/dist/llvm
 ninja install/strip
 
 version=3.6
