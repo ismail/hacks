@@ -1,3 +1,10 @@
 #!/bin/sh
+set -u
 
-/usr/bin/tmux attach || /usr/bin/tmux new
+TMUX_BIN=/usr/local/bin/tmux
+
+if [ ! -f $TMUX_BIN ]; then
+    TMUX_BIN=/usr/bin/tmux
+fi
+
+$TMUX_BIN attach || $TMUX_BIN new
