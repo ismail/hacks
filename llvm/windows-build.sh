@@ -22,7 +22,7 @@ rm -rf dist; mkdir dist; cd dist
 cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_TIMESTAMPS=OFF -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_TARGETS_TO_BUILD="ARM;X86" -DPYTHON_EXECUTABLE=C:/Python27/python.exe -DLLVM_BUILD_TESTS=ON .. | tee build.log
 
 ninja | tee -a build.log
-ninja check-all | tee -a build.log || true
+ninja check-all | tee -a build.log
 ninja package | tee -a build.log
 
 cd ..
