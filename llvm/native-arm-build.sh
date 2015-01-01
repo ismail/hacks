@@ -16,7 +16,7 @@ svnversion CREDITS.TXT > .newbuild
 cmp .newbuild .oldbuild &> /dev/null
 
 if [ $? = 0 ]; then
-    echo "No new build. Sleeping for 10 minutes."
+    echo "No new build. Sleeping for 10 minutes." | tee -a build.log
     sleep 10m
     exit 0
 fi
