@@ -1,8 +1,12 @@
 #!/bin/sh
 set -uo pipefail
 version=3.6.0
+src=/home/ismail/code/llvm
+
+cd $src
 
 function cleanup {
+    cd $src
     mv -f .newbuild .oldbuild
 }
 
