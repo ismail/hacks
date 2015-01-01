@@ -1,8 +1,15 @@
 #!/bin/bash
 set -uo pipefail
-IFS=$'\n\t'
+src=/havana/src/llvm
 
-cd /havana/src/llvm
+function cleanup {
+    cd $src
+    mv -f .newbuild .oldbuild
+}
+trap cleanup EXIT
+
+cd $src
+
 svn up . tools/clang tools/clang/tools/extra projects/compiler-rt projects/libcxx projects/libcxxabi | tee build.log
 
 svnversion CREDITS.TXT > .newbuild
@@ -34,7 +41,6 @@ rm -rf /havana/dist/llvm
 ninja install/strip
 
 cd ..
-mv .newbuild .oldbuild
 
 version=3.6
 revision=`svnversion CREDITS.TXT`
