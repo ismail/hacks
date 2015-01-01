@@ -27,6 +27,7 @@ def doPull(directory):
     for path in vcDict.keys():
         if os.path.exists(path):
             print "\033[1;31mUpdating %s\033[0m" % directory
+            sys.stdout.flush()
             os.system(vcDict[path])
             break
 
