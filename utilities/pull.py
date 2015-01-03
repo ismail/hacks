@@ -20,13 +20,19 @@ vcDict = OrderedDict([
     (".osc" , "osc up"),
     ])
 
+def log(string, isTTY=sys.stdout.isatty()):
+    if isTTY:
+        print("\033[1;31m%s\033[0m" % string)
+    else:
+        print(string)
+
 def doPull(directory):
     currentDirectory = os.getcwd()
     os.chdir(directory)
 
     for path in vcDict.keys():
         if os.path.exists(path):
-            print "\033[1;31mUpdating %s\033[0m" % directory
+            log("Updating %s" % directory)
             sys.stdout.flush()
             os.system(vcDict[path])
             break
