@@ -7,4 +7,6 @@ if [ ! -f $TMUX_BIN ]; then
     TMUX_BIN=/usr/bin/tmux
 fi
 
+export TERM=screen-256color
+
 $TMUX_BIN attach || $TMUX_BIN new
