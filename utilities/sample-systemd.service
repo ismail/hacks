@@ -1,0 +1,16 @@
+[Unit]
+Description=ngrok client
+After=network.target
+Before=systemd-user-sessions.service
+
+[Service]
+User=ismail
+Type=simple
+ExecStart=/home/ismail/bin/ngrok -log=/home/ismail/.ngrok.log -log-level=INFO -config /home/ismail/.ngrok start ssh
+TimeoutSec=0
+StandardOutput=tty
+SysVStartPriority=99
+
+[Install]
+WantedBy=multi-user.target
+
