@@ -14,6 +14,7 @@ f=`mktemp /tmp/prog.XXXXXX`
 
 if [ -d /cygdrive ]; then
     chmod +x $f
+    i=`cygpath -m $i`
     f=`cygpath -m $f`
 fi
 
