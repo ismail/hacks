@@ -1,9 +1,15 @@
 #!/bin/sh
 
 set -euo pipefail
+trap cleanup EXIT
 
 CLANG_EXTRAS="$CLANG_EXTRAS -fno-color-diagnostics"
 
+cleanup () {
+    rm -f $i $f
+}
+
+i=`mktemp /tmp/code.XXXXXX.cpp`
 f=`mktemp /tmp/prog.XXXXXX`
 
 if [ -d /cygdrive ]; then
@@ -11,8 +17,8 @@ if [ -d /cygdrive ]; then
     f=`cygpath -m $f`
 fi
 
-clang++ -std=c++14 $CLANG_EXTRAS -x c++ -o $f -
+cat /dev/stdin > $i
+
+clang++ -std=c++14 $CLANG_EXTRAS -o $f $i
 
 $f
-rm -f $f
-
