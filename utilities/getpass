@@ -5,20 +5,10 @@ if [ -z $1 ]; then
     exit 1
 fi
 
-platform=`uname -s`
-case $platform in
-    CYGWIN*)
-        FILE_PATH=`cygpath -w ~/`
-    ;;
-    Linux*)
-        FILE_PATH="$HOME/"
-    ;;
-esac
-
-FILE_PATH="$FILE_PATH".$1"_pass"
+FILE_PATH="$HOME/.$1_pass"
 
 if [ -e $FILE_PATH ]; then
-    gpg -d $FILE_PATH
+    gpg -d $FILE_PATH(+cyg)
 else
     echo "$FILE_PATH does not exist."
     exit 1
