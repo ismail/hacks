@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 cat<<EOF
 client
@@ -22,20 +22,20 @@ EOF
 
 cat<<EOF
 <ca>
-`cat ca.crt`
+$(cat ca.crt)
 </ca>
 
 <cert>
-`cat $1.crt|grep -A 200 -- '-----BEGIN CERTIFICATE-----'`
+$(sed -n '/-----BEGIN CERTIFICATE-----/,$p' $1.crt)
 </cert>
 
 <key>
-`cat $1.key`
+$(cat $1.key)
 </key>
 
 key-direction 1
 <tls-auth>
-`cat ta.key|grep -vE ^#`
+$(grep -vE ^# ta.key)
 </tls-auth>
 EOF
 
