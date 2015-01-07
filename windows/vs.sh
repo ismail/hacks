@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/zsh
 VERSION=12.0
 
-name=`basename $0`
+name=${0:t}
 case $name in
     vs|vs32)
         ARCH=x86
@@ -19,7 +19,5 @@ else
     ZSH_PATH="/bin/zsh"
 fi
 
-ZSH_PATH=`cygpath -w $ZSH_PATH`
-
-cmd /c "C:/Program Files (x86)/Microsoft Visual Studio $VERSION/VC/vcvarsall.bat" "$ARCH" "&&" "$ZSH_PATH" "--login" "-i"
+cmd /c "C:/Program Files (x86)/Microsoft Visual Studio $VERSION/VC/vcvarsall.bat" "$ARCH" "&&" "$ZSH_PATH"(+cyg) "--login" "-i"
 
