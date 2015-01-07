@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/zsh
 
-NEWFILE=/tmp/mutt_bak_`basename $1`
+NEWFILE=/tmp/mutt_bak_${1:t}
 rm ${NEWFILE} -f
 
 cp $1 ${NEWFILE} 1>/dev/null 2>&1

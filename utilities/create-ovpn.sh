@@ -1,3 +1,5 @@
+#/bin/bash
+
 cat<<EOF
 client
 dev tun
