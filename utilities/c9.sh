@@ -9,9 +9,9 @@ download_url() {
     tmp=`mktemp`
     curl -s $1 -o $tmp
 
-    url=`grep -oP '(?<=<a href=").*(?=\">High Quality WMV</a>)' $tmp || true`
+    url=$(grep -oP '(?<=<a href=").*(?=\">High Quality WMV</a>)' $tmp || true)
     if [ -z $url ]; then
-        url=`grep -oP '(?<=<a href=").*(?=\">High Quality MP4</a>)' $tmp || true`
+        url=$(grep -oP '(?<=<a href=").*(?=\">High Quality MP4</a>)' $tmp || true)
         ext="mp4"
     fi
 
@@ -20,7 +20,7 @@ download_url() {
         exit 1
     fi
 
-    title=`grep -oP '(?<=<title>).*(?=</title>)' $tmp | recode HTML_4.0 | sed -e 's/ |.*//g' -e 's|/|_|g' -e 's/:/./g'`
+    title=$(grep -oP '(?<=<title>).*(?=</title>)' $tmp | recode HTML_4.0 | sed -e 's/ |.*//g' -e 's|/|_|g' -e 's/:/./g')
 
     rm $tmp
     echo "Downloading \""$title".$ext\" ..."
