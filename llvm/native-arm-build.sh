@@ -44,7 +44,7 @@ ninja install/strip
 cd ..
 
 version=3.6
-revision=`svnversion CREDITS.TXT`
+revision=$(svnversion CREDITS.TXT)
 cd /havana/dist
 
 rm $PWD/llvm/lib/libc++.so

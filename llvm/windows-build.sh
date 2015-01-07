@@ -36,7 +36,7 @@ ninja check-all | tee -a ../build.log
 ninja package | tee -a ../build.log
 
 cd ..
-rev=`git log -1 --format="%h"`
+rev=$(git log -1 --format="%h")
 scp dist/LLVM-*.exe i10z.com:/havana/llvm/win32/LLVM-$version-$rev-win32.exe
 scp build.log i10z.com:/havana/llvm/win32/latest.log
 ssh i10z.com ln -sf /havana/llvm/win32/LLVM-$version-$rev-win32.exe /havana/llvm/win32/latest.exe
