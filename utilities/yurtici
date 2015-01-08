@@ -1,3 +1,9 @@
 #!/bin/sh
 
-curl 'http://www.yurticikargo.com/_layouts/ArikanliHolding.YurticiKargo.WebSite/ajaxproxy-shipmentservices.aspx/GetShipmentsByDocId' -H 'Origin: http://www.yurticikargo.com' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2020.0 Safari/537.36' -H 'Content-Type: application/json; charset=UTF-8' -H 'Referer: http://www.yurticikargo.com/bilgi-servisleri/sayfalar/kargom-nerede.aspx' --data-binary "{docId:$1,captcha:'999999'}" -s | sed 's/\\//g'|sed 's/^.\{6\}//'|sed 's/.\{2\}$//' | jq -C ".UniqeView"
+url=http://www.yurticikargo.com/_layouts/ArikanliHolding.YurticiKargo.WebSite/ajaxproxy-shipmentservices.aspx
+method=GetShipmentsByDocId
+
+curl $url/$method -H 'Content-Type: application/json; charset=UTF-8' \
+    --data-binary "{docId:$1,captcha:'999999'}" -s |
+    sed -e 's/\\//g' -e 's/^.\{6\}//' -e 's/.\{2\}$//' |
+    jq -C ".UniqeView"

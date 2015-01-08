@@ -60,5 +60,3 @@ if __name__ == "__main__":
     command = "rtmpdump -r %s -a %s -W %s -p %s -y %s --live" % \
               (url, app, swfVfy, pageUrl, playPath)
     call("%s | vlc -" % command, shell=True)
-
-
