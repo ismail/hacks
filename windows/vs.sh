@@ -19,5 +19,5 @@ else
     ZSH_PATH="/bin/zsh"
 fi
 
-cmd /c "C:/Program Files (x86)/Microsoft Visual Studio $VERSION/VC/vcvarsall.bat" "$ARCH" "&&" "$ZSH_PATH"(+cyg) "--login" "-i"
+cmd /c "C:/Program Files (x86)/Microsoft Visual Studio $VERSION/VC/vcvarsall.bat" "$ARCH" "&&" "$ZSH_PATH"(+cyg) "-i"
 
