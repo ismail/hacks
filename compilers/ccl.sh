@@ -16,6 +16,6 @@ fi
 
 cat /dev/stdin > $i
 
-clang++ $CLANG_EXTRAS -o $f(+cyg) $i(+cyg)
+clang++ -std=c++14 ${=CLANG_EXTRAS} -o $f(+cyg) $i(+cyg)
 
 $f
