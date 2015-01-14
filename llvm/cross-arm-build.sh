@@ -4,7 +4,7 @@ IFS=$'\n\t'
 
 revision=$1
 root=/havana/llvm
-version=3.6
+version=3.7
 target=armv7l-unknown-linux-gnueabihf
 
 cd $root
