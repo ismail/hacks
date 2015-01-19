@@ -1,12 +1,9 @@
 #!/bin/sh
 set -uo pipefail
+
 version=3.7
 src=~/code/llvm
-target=win32
-
-if [ ! -z $1 ]; then
-    target=$1
-fi
+target=name=${1:-win32}
 
 cd $src
 
