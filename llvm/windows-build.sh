@@ -2,6 +2,11 @@
 set -uo pipefail
 version=3.7
 src=~/code/llvm
+target=win32
+
+if [ ! -z $1 ]; then
+    target=$1
+fi
 
 cd $src
 
@@ -29,6 +34,8 @@ set -e
 
 rm -rf dist; mkdir dist; cd dist
 
+export CC=$(whence cl.exe)
+export CXX=$CC
 cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_TIMESTAMPS=OFF -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_TARGETS_TO_BUILD="ARM;X86" -DPYTHON_EXECUTABLE=C:/Python27/python.exe -DLLVM_BUILD_TESTS=ON .. | tee -a ../build.log
 
 ninja | tee -a ../build.log
@@ -37,7 +44,7 @@ ninja package | tee -a ../build.log
 
 cd ..
 rev=$(git log -1 --format="%h")
-scp dist/LLVM-*.exe i10z.com:/havana/llvm/win32/LLVM-$version-$rev-win32.exe
-scp build.log i10z.com:/havana/llvm/win32/latest.log
-ssh i10z.com ln -sf /havana/llvm/win32/LLVM-$version-$rev-win32.exe /havana/llvm/win32/latest.exe
+scp dist/LLVM-*.exe i10z.com:/havana/llvm/$target/LLVM-$version-$rev-$target.exe
+scp build.log i10z.com:/havana/llvm/$target/latest.log
+ssh i10z.com ln -sf /havana/llvm/$target/LLVM-$version-$rev-$target.exe /havana/llvm/win32/latest.exe
 
