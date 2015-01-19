@@ -1,7 +1,7 @@
 #!/bin/sh
 set -uo pipefail
 version=3.7
-src=/home/ismail/code/llvm
+src=~/code/llvm
 
 cd $src
 
