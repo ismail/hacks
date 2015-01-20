@@ -1,16 +1,11 @@
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
 src=/havana/src/llvm
-
-function canfail {
-    set +e; $@; set -e
-}
 
 function cleanup {
     cd $src
     mv -f .newbuild .oldbuild
 }
-
 trap cleanup EXIT
 
 cd $src
@@ -18,13 +13,16 @@ cd $src
 svn up . tools/clang tools/clang/tools/extra projects/compiler-rt projects/libcxx projects/libcxxabi | tee build.log
 
 svnversion CREDITS.TXT > .newbuild
-canfail cmp .newbuild .oldbuild &> /dev/null
+cmp .newbuild .oldbuild &> /dev/null
 
 if [ $? = 0 ]; then
     echo "No new build. Sleeping for 10 minutes." | tee -a build.log
     sleep 10m
     exit 0
 fi
+
+# We set here because cmp would exit early otherwise
+set -e
 
 rm -rf build; mkdir build; cd build
 
