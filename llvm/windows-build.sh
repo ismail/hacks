@@ -3,7 +3,7 @@ set -uo pipefail
 
 version=3.7
 src=~/code/llvm
-target=name=${1:-win32}
+target=${1:-win32}
 python_exe=C:/Python27/python.exe
 
 cd $src
