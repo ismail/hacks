@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 set -uo pipefail
 
 version=3.7
