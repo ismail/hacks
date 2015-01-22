@@ -32,7 +32,7 @@ set -e
 
 rm -rf dist; mkdir dist; cd dist
 
-export CC="$(whence cl.exe)"
+export CC="$(cygpath -m "$(whence cl.exe)")"
 export CXX=$CC
 cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_TIMESTAMPS=OFF -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_TARGETS_TO_BUILD="ARM;X86" -DPYTHON_EXECUTABLE=$python_exe -DLLVM_BUILD_TESTS=ON .. | tee -a ../build.log
 
