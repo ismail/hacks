@@ -36,7 +36,7 @@ ninja | tee -a ../build.log
 ./bin/llvm-lit -v -j4 test | tee -a ../build.log
 ./bin/llvm-lit -v -j4 tools/clang/test | tee -a ../build.log
 ./bin/llvm-lit -v -j4 --param compile_flags="-mfpu=vfpv3-d16" projects/libcxx/test | tee -a ../build.log
-./bin/llvm-lit -v -j4 projects/libcxxabi/test | tee -a ../build.log
+./bin/llvm-lit -v -j4 --param link_flags="-lgcc_s" projects/libcxxabi/test | tee -a ../build.log
 
 rm -rf /havana/dist/llvm
 ninja install/strip
