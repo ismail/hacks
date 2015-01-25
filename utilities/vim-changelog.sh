@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 directory=ftp://ftp.vim.org/pub/vim/patches
 version=7.4
