@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+VCPATH=/havana/binaries/msvc2013
+export INCLUDE="$VCPATH/VC/include;$VCPATH/win8sdk/Include/shared/;$VCPATH/win8sdk/Include/um/;$VCPATH/win8sdk/Include/winrt/"
+export LIB="$VCPATH/VC/lib;$VCPATH/win8sdk/Lib/winv6.3/um/x86"
+export WINEDEBUG=-all
+export WINEDLLOVERRIDES="*msvcr120=n"
+
+wine $VCPATH/VC/bin/cl.exe /EHsc- /nologo "$@"
