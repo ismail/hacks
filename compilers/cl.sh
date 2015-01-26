@@ -6,4 +6,8 @@ export LIB="$VCPATH/VC/lib;$VCPATH/win8sdk/Lib/winv6.3/um/x86"
 export WINEDEBUG=-all
 export WINEDLLOVERRIDES="*msvcr120=n"
 
-wine $VCPATH/VC/bin/cl.exe /EHsc- /nologo "$@[1,-2]" $(winepath -w "$@[-1]")
+input=$@[-1]
+obj=${input:t:r}.obj
+
+wine $VCPATH/VC/bin/cl.exe /EHsc- /nologo "$@[1,-2]" $(winepath -w $input)
+rm -f $obj
