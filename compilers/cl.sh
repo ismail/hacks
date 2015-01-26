@@ -9,5 +9,5 @@ export WINEDLLOVERRIDES="*msvcr120=n"
 input=$@[-1]
 obj=${input:t:r}.obj
 
-wine $VCPATH/VC/bin/cl.exe /EHsc- /nologo "$@[1,-2]" $(winepath -w $input)
+wine $VCPATH/VC/bin/cl.exe /EHsc- /nologo "$@[1,-2]" $(winepath -w $input) | sed '1d'
 rm -f $obj
