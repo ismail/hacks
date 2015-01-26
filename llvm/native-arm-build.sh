@@ -55,8 +55,8 @@ EOF
 echo "Compressing with xz..."
 tar cJf llvm-armv7-$version-r"$revision".tar.xz llvm
 echo "Uploading..."
-scp llvm-armv7-$version-r"$revision".tar.xz i10z.com:/havana/llvm/checked
-scp /havana/src/llvm/build.log i10z.com:/havana/llvm/checked/latest-build.log
-ssh i10z.com ln -sf /havana/llvm/checked/llvm-armv7-$version-r"$revision".tar.xz  /havana/llvm/checked/latest
+scp llvm-armv7-$version-r"$revision".tar.xz i10z.com:/havana/llvm/armv7
+scp /havana/src/llvm/build.log i10z.com:/havana/llvm/armv7/latest-build.log
+ssh i10z.com ln -sf /havana/llvm/armv7/llvm-armv7-$version-r"$revision".tar.xz  /havana/llvm/armv7/latest
 rm llvm-armv7-*
 echo "llvm-armv7-$version-r"$revision".tar.xz uploaded."
