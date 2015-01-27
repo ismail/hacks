@@ -2,10 +2,9 @@ var XMLHttpRequest = require('xhr2');
 var xhr = new XMLHttpRequest();
 var data = '';
 
-function compile(data)
-{
-    xhr.open("POST", "http://coliru.stacked-crooked.com/compile", true);
-    xhr.onload = function(e) {
+function compile(data) {
+  xhr.open("POST", "http://coliru.stacked-crooked.com/compile", true);
+  xhr.onload = function(e) {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         console.log(xhr.responseText);
@@ -14,14 +13,14 @@ function compile(data)
       }
       process.exit()
     }
-    };
+  };
 
-    xhr.onerror = function(e) { console.error(xhr.statusText); };
-    xhr.send(JSON.stringify({
-        "cmd" :
-            "clang++ -std=c++14 -Weverything -Wno-c++98-compat -g -fsanitize=undefined main.cpp && ./a.out",
-        "src" : data
-    }));
+  xhr.onerror = function(e) { console.error(xhr.statusText); };
+  xhr.send(JSON.stringify({
+    "cmd" :
+        "clang++ -std=c++14 -Weverything -Wno-c++98-compat -g -fsanitize=undefined main.cpp && ./a.out",
+    "src" : data
+  }));
 }
 
 process.stdin.resume();
