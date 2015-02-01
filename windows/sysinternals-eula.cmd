@@ -19,6 +19,7 @@ reg.exe ADD "HKCU\Software\Sysinternals\Disk2vhd" /v EulaAccepted /t REG_DWORD /
 reg.exe ADD "HKCU\Software\Sysinternals\DiskExt" /v EulaAccepted /t REG_DWORD /d 1 /f
 reg.exe ADD "HKCU\Software\Sysinternals\Diskmon" /v EulaAccepted /t REG_DWORD /d 1 /f
 reg.exe ADD "HKCU\Software\Sysinternals\DiskView" /v EulaAccepted /t REG_DWORD /d 1 /f
+reg.exe ADD "HKCU\Software\Sysinternals\Du" /v EulaAccepted /t REG_DWORD /d 1 /f
 reg.exe ADD "HKCU\Software\Sysinternals\EFSDump" /v EulaAccepted /t REG_DWORD /d 1 /f
 reg.exe ADD "HKCU\Software\Sysinternals\Handle" /v EulaAccepted /t REG_DWORD /d 1 /f
 reg.exe ADD "HKCU\Software\Sysinternals\Hex2dec" /v EulaAccepted /t REG_DWORD /d 1 /f
@@ -62,6 +63,7 @@ reg.exe ADD "HKCU\Software\Sysinternals\Sigcheck" /v EulaAccepted /t REG_DWORD /
 reg.exe ADD "HKCU\Software\Sysinternals\Streams" /v EulaAccepted /t REG_DWORD /d 1 /f
 reg.exe ADD "HKCU\Software\Sysinternals\Strings" /v EulaAccepted /t REG_DWORD /d 1 /f
 reg.exe ADD "HKCU\Software\Sysinternals\Sync" /v EulaAccepted /t REG_DWORD /d 1 /f
+reg.exe ADD "HKCU\Software\Sysinternals\System Monitor" /v EulaAccepted /t REG_DWORD /d 1 /f
 reg.exe ADD "HKCU\Software\Sysinternals\TCPView" /v EulaAccepted /t REG_DWORD /d 1 /f
 reg.exe ADD "HKCU\Software\Sysinternals\VMMap" /v EulaAccepted /t REG_DWORD /d 1 /f
 reg.exe ADD "HKCU\Software\Sysinternals\VolumeId" /v EulaAccepted /t REG_DWORD /d 1 /f
