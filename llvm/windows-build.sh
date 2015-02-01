@@ -46,4 +46,4 @@ cd ..
 rev=$(git log -1 --format="%h")
 scp dist/LLVM-*.exe i10z.com:/havana/llvm/$target/LLVM-$version-$rev-$target.exe
 scp build.log i10z.com:/havana/llvm/$target/latest.log
-ssh i10z.com ln -sf /havana/llvm/$target/LLVM-$version-$rev-$target.exe /havana/llvm/win32/latest.exe
+ssh i10z.com ln -sf /havana/llvm/$target/LLVM-$version-$rev-$target.exe /havana/llvm/$target/latest.exe
