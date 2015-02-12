@@ -58,5 +58,9 @@ echo "Uploading..."
 scp llvm-armv7-$version-r"$revision".tar.xz i10z.com:/havana/llvm/armv7
 scp /havana/src/llvm/build.log i10z.com:/havana/llvm/armv7/latest-build.log
 ssh i10z.com ln -sf /havana/llvm/armv7/llvm-armv7-$version-r"$revision".tar.xz  /havana/llvm/armv7/latest
+
+# Bintray upload
+curl -T llvm-armv7-$version-r"$revision".tar.xz -uismail:$(cat ~/.bintray) -H X-Bintray-Package:llvm-armv7 -H X-Bintray-Version:$version-$revision https://api.bintray.com/content/ismail/llvm/llvm-armv7-$version-r"$revision".tar.xz
+
 rm llvm-armv7-*
 echo "llvm-armv7-$version-r"$revision".tar.xz uploaded."

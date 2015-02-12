@@ -4,6 +4,7 @@ IFS=$'\n\t'
 
 revision=$1
 root=/havana/llvm
+rm -rf $root/build
 version=3.7
 target=armv7l-unknown-linux-gnueabihf
 
@@ -27,7 +28,8 @@ echo "Creating the tarball..."
 tar cJf llvm-armv7-$version-r$svnversion.tar.xz llvm
 scp llvm-armv7-*.tar.xz i10z.com:/havana/llvm/armv7-notchecked
 ssh i10z.com ln -sf /havana/llvm/armv7-notchecked/llvm-armv7-$version-r$svnversion.tar.xz /havana/llvm/armv7-notchecked/latest
-cd ..
-rm -rf $root/build
-echo "Done."
 
+# Bintray upload
+curl -T llvm-armv7-$version-r$svnversion.tar.xz -uismail:$(cat ~/.bintray) -H X-Bintray-Package:llvm-armv7-notchecked -H X-Bintray-Version:$version-r$svnversion https://api.bintray.com/content/ismail/llvm/llvm-armv7-$version-r$svnversion.tar.xz
+
+echo "Done."

@@ -47,3 +47,6 @@ rev=$(git log -1 --format="%h")
 scp dist/LLVM-*.exe i10z.com:/havana/llvm/$target/LLVM-$version-$rev-$target.exe
 scp build.log i10z.com:/havana/llvm/$target/latest.log
 ssh i10z.com ln -sf /havana/llvm/$target/LLVM-$version-$rev-$target.exe /havana/llvm/$target/latest.exe
+
+# Bintray upload
+curl -T LLVM-$version-$rev-$target.exe -uismail:$(cat ~/.bintray) -H X-Bintray-Package:llvm-$target -H X-Bintray-Version:$version-$rev https://api.bintray.com/content/ismail/llvm/LLVM-$version-$rev-$target.exe
