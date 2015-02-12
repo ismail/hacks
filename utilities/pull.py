@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # Laziness is virtue
-# Copyright 2007-2012 İsmail Dönmez <ismail@namtrac.org>
+# Copyright 2007-2015 İsmail Dönmez
 # Licensed under public domain
 
 import sys
@@ -32,7 +32,7 @@ def doPull(directory):
 
     for path in vcDict.keys():
         if os.path.exists(path):
-            log("Updating %s" % directory)
+            log("Updating %s" % os.path.basename(directory))
             sys.stdout.flush()
             os.system(vcDict[path])
             break
