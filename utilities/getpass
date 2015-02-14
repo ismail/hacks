@@ -8,7 +8,11 @@ fi
 FILE_PATH="$HOME/.$1_pass"
 
 if [ -e $FILE_PATH ]; then
-    gpg -d $FILE_PATH(+cyg)
+    if grep -q "BEGIN PGP MESSAGE" $FILE_PATH; then
+        gpg -d $FILE_PATH(+cyg)
+    else
+        cat $FILE_PATH
+    fi
 else
     echo "$FILE_PATH does not exist."
     exit 1
