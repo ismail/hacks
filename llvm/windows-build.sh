@@ -49,7 +49,7 @@ scp build.log i10z.com:/havana/llvm/$target/latest.log
 ssh i10z.com ln -sf /havana/llvm/$target/LLVM-$version-$rev-$target.exe /havana/llvm/$target/latest.exe
 
 # Bintray upload
-curl -T LLVM-*-$target.exe -uismail:$(cat ~/.bintray) -H X-Bintray-Package:llvm-$target -H X-Bintray-Version:$version-$rev https://api.bintray.com/content/ismail/llvm/LLVM-$version-$rev-$target.exe
+curl -T dist/LLVM-*-$target.exe -uismail:$(cat ~/.bintray) -H X-Bintray-Package:llvm-$target -H X-Bintray-Version:$version-$rev https://api.bintray.com/content/ismail/llvm/LLVM-$version-$rev-$target.exe
 
 # Publish
 curl -X POST -uismail:$(cat ~/.bintray) https://api.bintray.com/content/ismail/llvm/llvm-$target/$version-$rev/publish
