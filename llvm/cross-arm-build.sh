@@ -32,4 +32,6 @@ ssh i10z.com ln -sf /havana/llvm/armv7-notchecked/llvm-armv7-$version-r$svnversi
 # Bintray upload
 curl -T llvm-armv7-$version-r$svnversion.tar.xz -uismail:$(cat ~/.bintray) -H X-Bintray-Package:llvm-armv7-notchecked -H X-Bintray-Version:$version-r$svnversion https://api.bintray.com/content/ismail/llvm/llvm-armv7-$version-r$svnversion.tar.xz
 
+# Publish
+curl -X POST -uismail:$(cat ~/.bintray) https://api.bintray.com/content/ismail/llvm/llvm-armv7-notchecked/$version-r$svnversion/publish
 echo "Done."

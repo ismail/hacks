@@ -62,5 +62,8 @@ ssh i10z.com ln -sf /havana/llvm/armv7/llvm-armv7-$version-r"$revision".tar.xz  
 # Bintray upload
 curl -T llvm-armv7-$version-r"$revision".tar.xz -uismail:$(cat ~/.bintray) -H X-Bintray-Package:llvm-armv7 -H X-Bintray-Version:$version-$revision https://api.bintray.com/content/ismail/llvm/llvm-armv7-$version-r"$revision".tar.xz
 
+# Publish
+curl -X POST -uismail:$(cat ~/.bintray) https://api.bintray.com/content/ismail/llvm/llvm-armv7/$version-$revision/publish
+
 rm llvm-armv7-*
 echo "llvm-armv7-$version-r"$revision".tar.xz uploaded."
