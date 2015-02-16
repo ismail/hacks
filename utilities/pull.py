@@ -22,7 +22,7 @@ vcDict = OrderedDict([
 
 def log(string, isTTY=sys.stdout.isatty()):
     if isTTY:
-        print("\033[1;31m%s\033[0m" % string)
+        print("Updating \033[1;31m%s\033[0m" % string)
     else:
         print(string)
 
@@ -32,7 +32,7 @@ def doPull(directory):
 
     for path in vcDict.keys():
         if os.path.exists(path):
-            log("Updating %s" % os.path.basename(directory))
+            log(os.path.basename(directory))
             sys.stdout.flush()
             os.system(vcDict[path])
             break
