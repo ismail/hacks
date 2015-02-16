@@ -7,22 +7,22 @@
 
 import sys
 import os
-from collections import OrderedDict
 
-vcDict = OrderedDict([
-    (".gclient", "gclient sync"),
-    (".git/refs/remotes/git-svn" , "git svn rebase"),
-    (".git" , "git pull"),
-    (".svn" , "svn up"),
-    (".hg"  , "hg pull -u -v"),
-    ("CVS"  , "cvs -q -z3 update -dPA"),
-    (".bzr" , "bzr pull"),
-    (".osc" , "osc up"),
-    ])
+vcDict = \
+    {
+        ".gclient": "gclient sync",
+        ".git/refs/remotes/git-svn": "git svn rebase",
+        ".git": "git pull",
+        ".svn": "svn up",
+        ".hg": "hg pull -u -v",
+        "CVS": "cvs -q -z3 update -dPA",
+        ".bzr": "bzr pull",
+        ".osc": "osc up",
+    }
 
 def log(string, isTTY=sys.stdout.isatty()):
     if isTTY:
-        print("Updating \033[1;31m%s\033[0m" % string)
+        print("Updating \033[0;32m%s\033[0m" % string)
     else:
         print(string)
 
