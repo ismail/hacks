@@ -2,7 +2,6 @@
 
 if [ -z $1 ]; then
     echo "Usage: ${0:t} <pass name>"
-    exit 1
 fi
 
 FILE_PATH="$HOME/.$1_pass"
@@ -15,6 +14,5 @@ if [ -e $FILE_PATH ]; then
     fi
 else
     echo "$FILE_PATH does not exist."
-    exit 1
 fi
 
