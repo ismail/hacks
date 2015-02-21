@@ -2,13 +2,12 @@
 # -*- coding: utf-8 -*-
 
 from mailer import mail
-import os
 import sys
 
 gmail_user = "ismail@donmez.ws"
 gmail_pwd =  open("%s/.gpass" % os.environ["HOME"] ).readlines()[0].strip("\r\n")
-subject = "convert"
-recipient = "donmez@free.kindle.com"
+subject = ""
+recipient = "suse-ist@hpeprint.com"
 
 if __name__ == "__main__":
 
