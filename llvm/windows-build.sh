@@ -6,8 +6,6 @@ src=~/code/llvm
 target=${1:-win32}
 python_exe=C:/Python27/python.exe
 
-cd $src
-
 function cleanup {
     cd $src
     mv -f .newbuild .oldbuild
@@ -15,6 +13,14 @@ function cleanup {
 }
 
 trap cleanup EXIT
+
+cd $src
+
+if [ -e .sleep ]; then
+    echo "Build sleep requested. Sleeping for 10 minutes."
+    sleep 10m
+    exit 0
+fi
 
 pull . tools/clang | tee build.log
 
