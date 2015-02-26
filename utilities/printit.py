@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from mailer import mail
+import os
 import sys
 
 gmail_user = "ismail@donmez.ws"
