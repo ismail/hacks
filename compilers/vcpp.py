@@ -5,13 +5,20 @@
 # 2014 İsmail Dönmez <ismail@donmez.ws>
 
 from bs4 import BeautifulSoup
-from urllib import parse, request
+from urllib import error, parse, request
 import sys
 
+url="http://webcompiler.cloudapp.net/"
 
 def compileCode(code):
-    req = request.Request("http://webcompiler.cloudapp.net/")
-    data = request.urlopen(req)
+    req = request.Request(url)
+
+    try:
+        data = request.urlopen(req)
+    except error.HTTPError as e:
+        print("Error while trying to connect %s: %s" % (url, e))
+        sys.exit(-1)
+
     soup = BeautifulSoup(data)
     eventValidation = soup.find('input', attrs={'id': '__EVENTVALIDATION'}).get('value')
     viewState = soup.find('input', attrs={'id': '__VIEWSTATE'}).get('value')
@@ -37,7 +44,13 @@ def compileCode(code):
     req = request.Request("http://webcompiler.cloudapp.net/",
                           params.encode("utf-8"),
                           headers)
-    data = request.urlopen(req).read()
+
+    try:
+        data = request.urlopen(req).read()
+    except error.HTTPError as e:
+        print("Error while trying to connect %s: %s" % (url, e))
+        sys.exit(-1)
+
     soup = BeautifulSoup(data)
     result = soup.find('textarea', attrs={'id': 'TextBoxOutputLatest'})
     print(result.contents[0])
