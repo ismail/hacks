@@ -26,6 +26,8 @@ set -e
 
 rm -rf build; mkdir build; cd build
 
+
+export PATH=/havana/dist/llvm/bin:$PATH
 export CFLAGS="-mfloat-abi=hard -march=armv7-a -mtune=cortex-a8 -mfpu=vfpv3-d16 -fuse-ld=gold"
 export CXXFLAGS=$CFLAGS
 CC=clang CXX=clang++ cmake -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_ENABLE_PIC=ON -DLLVM_TARGETS_TO_BUILD=ARM -DLLVM_ENABLE_TIMESTAMPS=OFF -DCMAKE_INSTALL_PREFIX=/havana/dist/llvm -DLIBCXXABI_USE_LLVM_UNWINDER=ON -G "Ninja" .. | tee -a ../build.log
