@@ -1,12 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 set -u
-
-TMUX_BIN=/usr/local/bin/tmux
-
-if [ ! -f $TMUX_BIN ]; then
-    TMUX_BIN=/usr/bin/tmux
-fi
 
 export TERM=screen-256color-it
 
-$TMUX_BIN -2 attach || $TMUX_BIN -2 new
+tmux -2 attach || tmux -2 new
