@@ -11,13 +11,5 @@ case $name in
         ;;
 esac
 
-if [ -f /usr/local/bin/zsh ]; then
-    ZSH_PATH="/usr/local/bin/zsh"
-elif [ -f /usr/bin/zsh ]; then
-    ZSH_PATH="/usr/bin/zsh"
-else
-    ZSH_PATH="/bin/zsh"
-fi
-
-cmd /c "C:/Program Files (x86)/Microsoft Visual Studio $VERSION/VC/vcvarsall.bat" "$ARCH" "&&" "$ZSH_PATH"(+cyg) "-i"
+cmd /c "C:/Program Files (x86)/Microsoft Visual Studio $VERSION/VC/vcvarsall.bat" "$ARCH" "&&" zsh "-i"
 
