@@ -19,7 +19,7 @@ if __name__ == "__main__":
     bs = soup(data)
     resultTable = bs.findAll('div', attrs={"class" : "wx-timepart"})
 
-    print("\n%s%8s%10s %19s\n" % ("Time", u"\u2103", "Rain%", "Conditions"))
+    print("\n%s%8s%10s %19s\n" % ("Time", "\u2103", "Rain%", "Conditions"))
 
     updateTime = bs.find('p', attrs={'class' : 'wx-timestamp'}).text.strip()
 
