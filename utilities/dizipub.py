@@ -16,6 +16,7 @@ def download(url):
         return
 
     r = requests.get(video_url)
+    r.close()
     m = re.search("sources:.*]", r.text).group(0).replace("sources:", "sources =")
 
     code = compile(m, '<string>', 'exec')
@@ -34,6 +35,7 @@ def download(url):
                     if chunk:
                         f.write(chunk)
                         f.flush()
+            r.close()
             os.rename("%s.part" % output, output)
             return
 
