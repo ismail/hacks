@@ -8,25 +8,25 @@ import sys
 
 def download(url):
     r = requests.get(url)
-    m = re.search("(http://dizipub.com/player\S+)\"", r.text)
+    m = re.search("(http:\/\/dizipub.com\/player\S+)|(http:\/\/play.dizibox.org\/dbx.php\S+)", r.text)
     if m:
-        video_url = m.group(1).replace('#038;','')
+        video_url = m.group(0)[:-1].replace('#038;','')
     else:
         print("Not using Dizipub player.")
         return
 
     r = requests.get(video_url)
     r.close()
-    m = re.search("sources:.*]", r.text).group(0).replace("sources:", "sources =")
+    m = re.search('sources:(.|\n)*?]', r.text).group(0).replace("sources:", "sources =")
 
     code = compile(m, '<string>', 'exec')
     ns = {}
     exec(code, ns)
 
     for src in ns['sources']:
-        if src['label'] == '720':
-            target_url=src['file']
-            output="%s.mp4" % url.split("/")[-1]
+        if src['label'].startswith('720'):
+            target_url=src['file'].replace("\\","")
+            output="%s.mp4" % url.split("/")[-2]
             output=output.replace("-izle","").replace("-bolum","").replace("-","_")
             r = requests.get(target_url, stream=True)
             with open("%s.part" % output, "wb") as f:
@@ -45,6 +45,8 @@ def download(url):
 if __name__ == "__main__":
     for url in sys.argv[1:]:
         try:
+            if not url.endswith("/"):
+                url.append("/")
             download(url)
         except KeyboardInterrupt:
             pass
