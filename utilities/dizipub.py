@@ -29,8 +29,17 @@ def download(url):
             output="%s.mp4" % url.split("/")[-2]
             output=output.replace("-izle","").replace("-bolum","").replace("-","_")
             print("Saving output to %s..." % output)
-            r = requests.get(target_url, stream=True)
-            with open("%s.part" % output, "wb") as f:
+
+            resume_header = {}
+            part_file = "%s.part" % output
+            if os.path.exists(part_file):
+                start = os.path.getsize(part_file)
+                start = start - 100*1024 # Move back 100k
+                resume_header = {'Range': 'bytes=%d-' % start}
+                print("Resuming...")
+
+            r = requests.get(target_url, headers=resume_header, stream=True)
+            with open("%s.part" % output, "ab") as f:
                 total_length = int(r.headers.get('content-length'))
                 for chunk in progress.bar(r.iter_content(chunk_size=1024),
                                           expected_size=(total_length/1024) + 1):
