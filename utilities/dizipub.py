@@ -28,6 +28,7 @@ def download(url):
             target_url=src['file'].replace("\\","")
             output="%s.mp4" % url.split("/")[-2]
             output=output.replace("-izle","").replace("-bolum","").replace("-","_")
+            print("Saving output to %s..." % output)
             r = requests.get(target_url, stream=True)
             with open("%s.part" % output, "wb") as f:
                 total_length = int(r.headers.get('content-length'))
