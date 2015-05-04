@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+temp=$(mktemp --suffix=.fs)
+output=${temp:t:r}.exe
+echo "module Program" > $temp
+cat /dev/stdin >> $temp
+fsc.exe --consolecolors- --nologo $temp
+./$output
+rm -f $temp $output
