@@ -8,7 +8,7 @@ import sys
 
 def download(url):
     r = requests.get(url)
-    m = re.search("(http:\/\/dizipub.com\/player\S+)|(http:\/\/play.dizibox.org\/dbx.php\S+)", r.text)
+    m = re.search("(http:\/\/dizipub.com\/player\S+)|(http:\/\/play.dizibox.(net|org)\/dbx.php\S+)", r.text)
     if m:
         video_url = m.group(0)[:-1].replace('#038;','')
     else:
