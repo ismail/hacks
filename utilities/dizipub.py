@@ -32,10 +32,11 @@ def download(url):
             r = requests.get(target_url, stream=True)
             with open("%s.part" % output, "wb") as f:
                 total_length = int(r.headers.get('content-length'))
-                for chunk in progress.bar(r.iter_content(chunk_size=1024), expected_size=(total_length/1024) + 1):
+                for chunk in progress.bar(r.iter_content(chunk_size=1024),
+                                          expected_size=(total_length/1024) + 1):
                     if chunk:
                         f.write(chunk)
-                        f.flush()
+                f.flush()
             r.close()
             os.rename("%s.part" % output, output)
             return
