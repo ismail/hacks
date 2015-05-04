@@ -34,7 +34,6 @@ def download(url):
             part_file = "%s.part" % output
             if os.path.exists(part_file):
                 start = os.path.getsize(part_file)
-                start = start - 100*1024 # Move back 100k
                 resume_header = {'Range': 'bytes=%d-' % start}
                 print("Resuming...")
 
