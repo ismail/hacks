@@ -5,6 +5,6 @@ temp=$(mktemp --suffix=.fs)
 output=${temp:t:r}.exe
 echo "module Program" > $temp
 cat /dev/stdin >> $temp
-fsc.exe --consolecolors- --nologo --utf8output $temp
+fsc.exe --nologo --utf8output $temp
 ./$output
 rm -f $temp $output
