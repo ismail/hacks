@@ -6,6 +6,8 @@ import re
 import requests
 import sys
 
+CHUNK_SIZE=64*1024 # 64k
+
 def download(url):
     r = requests.get(url)
     m = re.search("(http:\/\/dizipub.com\/player\S+)|(http:\/\/play.dizibox.(net|org)\/dbx.php\S+)", r.text)
@@ -40,8 +42,8 @@ def download(url):
             r = requests.get(target_url, headers=resume_header, stream=True)
             with open("%s.part" % output, "ab") as f:
                 total_length = int(r.headers.get('content-length'))
-                for chunk in progress.bar(r.iter_content(chunk_size=1024),
-                                          expected_size=(total_length/1024) + 1):
+                for chunk in progress.bar(r.iter_content(chunk_size=CHUNK_SIZE),
+                                          expected_size=total_length/CHUNK_SIZE + 1):
                     if chunk:
                         f.write(chunk)
                 f.flush()
