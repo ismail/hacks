@@ -22,7 +22,7 @@ vcDict = \
 
 def log(string, isTTY=sys.stdout.isatty()):
     if isTTY:
-        print("Updating \x1b[42;1m%s\x1b[0m" % string)
+        print("Updating \033[0;33m%s\033[0m" % string)
     else:
         print(string)
 
