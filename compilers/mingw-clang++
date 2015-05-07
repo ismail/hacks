@@ -1,0 +1,13 @@
+#!/bin/sh
+
+GCC_ROOT=C:/gcc-5-win64
+GCC_VERSION=5.1.1
+C_INCLUDE_PATH=$GCC_ROOT/x86_64-w64-mingw32/include
+CXX_INCLUDE_PATH_1=$GCC_ROOT/include/c++/$GCC_VERSION
+CXX_INCLUDE_PATH_2=$CXX_INCLUDE_PATH_1/x86_64-w64-mingw32
+
+clang++ -std=c++11 -m64 -target x86_64-pc-windows-gnu \
+        -isystem $C_INCLUDE_PATH \
+        -isystem $CXX_INCLUDE_PATH_1 \
+        -isystem $CXX_INCLUDE_PATH_2 \
+        -B $GCC_ROOT/bin/ld "$@"
