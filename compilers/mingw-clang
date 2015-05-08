@@ -2,6 +2,7 @@
 
 GCC_ROOT=C:/gcc-5-win64
 GCC_VERSION=5.1.1
+COMMON_ARGS="-m64 -target x86_64-pc-windows-gnu -static-libgcc"
 C_INCLUDE_PATH=$GCC_ROOT/x86_64-w64-mingw32/include
 CXX_INCLUDE_PATH_1=$GCC_ROOT/include/c++/$GCC_VERSION
 CXX_INCLUDE_PATH_2=$CXX_INCLUDE_PATH_1/x86_64-w64-mingw32
@@ -9,16 +10,15 @@ PATH=$(cygpath -u $GCC_ROOT/bin):$PATH
 
 case $0 in
     *-clang)
-        clang -std=c11 -m64 -target x86_64-pc-windows-gnu \
-              -isystem $C_INCLUDE_PATH \
-              -static-libgcc "$@"
+        clang -std=c11 $COMMON_ARGS \
+              -isystem $C_INCLUDE_PATH "$@"
         ;;
     *-clang++)
-        clang++ -std=c++11 -m64 -target x86_64-pc-windows-gnu \
+        clang++ -std=c++11 $COMMON_ARGS \
                 -isystem $C_INCLUDE_PATH \
                 -isystem $CXX_INCLUDE_PATH_1 \
                 -isystem $CXX_INCLUDE_PATH_2 \
-                -static-libgcc -static-libstdc++ "$@"
+                -static-libstdc++ "$@"
         ;;
     *)
         echo "Unknown command ${0:t}"
