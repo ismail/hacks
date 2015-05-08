@@ -19,7 +19,7 @@ else
     PATH=/opt/clang/bin:$PATH
 fi
 
-COMMON_ARGS=(-m64 -target $TARGET -static-libgcc)
+COMMON_ARGS=(-m64 -target $TARGET -DWINVER=0x0603 -D_WIN32_WINNT=0x0603 -static-libgcc)
 
 case $0 in
     *-clang)
