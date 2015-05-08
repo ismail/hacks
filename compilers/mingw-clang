@@ -3,10 +3,10 @@ set -euo pipefail
 
 TARGET=x86_64-w64-mingw32
 
-if [ ! -z ${CYGWIN:-} ]; then
-    GCC_ROOT=$(cygpath -u C:/gcc-5-win64)
+if [ ! -z ${WINDIR:-} ]; then
+    GCC_ROOT=C:/gcc-5-win64
     GCC_VERSION=5.1.1
-    PATH=$GCC_ROOT/bin:$PATH
+    PATH=$(cygpath -u $GCC_ROOT)/bin:$PATH
     C_INCLUDE_PATH=$GCC_ROOT/$TARGET/include
     CXX_INCLUDE_PATH_1=$GCC_ROOT/include/c++/$GCC_VERSION
     CXX_INCLUDE_PATH_2=$CXX_INCLUDE_PATH_1/$TARGET
