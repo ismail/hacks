@@ -27,7 +27,7 @@ case $0 in
               -isystem $C_INCLUDE_PATH "$@"
         ;;
     *-clang++)
-        clang++ -std=c++11 $COMMON_ARGS \
+        clang++ -std=c++14 $COMMON_ARGS \
                 -isystem $C_INCLUDE_PATH \
                 -isystem $CXX_INCLUDE_PATH_1 \
                 -isystem $CXX_INCLUDE_PATH_2 \
