@@ -2,6 +2,7 @@
 set -euo pipefail
 
 TARGET=x86_64-w64-mingw32
+WINDOWS_TARGET=0x0603
 
 if [ ! -z ${WINDIR:-} ]; then
     GCC_ROOT=C:/gcc-5-win64
@@ -19,7 +20,7 @@ else
     PATH=/opt/clang/bin:$PATH
 fi
 
-COMMON_ARGS=(-target $TARGET -DWINVER=0x0603 -D_WIN32_WINNT=0x0603 -static-libgcc)
+COMMON_ARGS=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET -static-libgcc)
 
 case $0 in
     *-clang)
