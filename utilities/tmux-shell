@@ -3,4 +3,4 @@ set -u
 
 export TERM=screen-256color-it
 
-tmux -2 attach || tmux -2 new
+tmux -u -2 attach || tmux -u -2 new
