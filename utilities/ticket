@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
 if [ ! -f ~/.ticketno ]; then
     echo "Create a ~/.ticketno file with your Ticket card number"
@@ -10,14 +10,13 @@ RND=$(base64 </dev/urandom | tr -dc 'a-zA-Z0-9' | head -c29 | tr "[a-z]" "[A-Z]"
 ID="FFFFFFFF$RND"
 URL=https://ws.ticket.com.tr/iphone/RestService.svc/Account
 UA="Mozilla/5.0 (iPhone; CPU iPhone OS 7_0_4 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11B554a Safari/9537.53"
+JQ_FLAGS='.[0] | {"Card Balance": .card_balance,
+                  "Awaiting Credit": .not_loaded_credit_amount,
+                  "Awaiting Credit Date": .not_loaded_credit_date}'
 
-case $1 in
-    "-v")
-        jq_flags=.
-        ;;
-    *)
-        jq_flags='.[0] | {"Card Balance": .card_balance, "Awaiting Credit": .not_loaded_credit_amount, "Awaiting Credit Date": .not_loaded_credit_date}'
-        ;;
-esac
+local -a verbose
+zparseopts  v=verbose -verbose=verbose
 
-curl -s -A "$UA" "$URL/?id=$ID&cardno=$CARDNO" | jq "$jq_flags"
+[[ ! -z $verbose ]] && JQ_FLAGS=.
+
+curl -s -A "$UA" "$URL/?id=$ID&cardno=$CARDNO" | jq "$JQ_FLAGS"
