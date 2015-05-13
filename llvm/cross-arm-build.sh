@@ -26,10 +26,4 @@ EOF
 
 echo "Creating the tarball..."
 tar cJf llvm-armv7-$version-r$svnversion.tar.xz llvm
-scp llvm-armv7-*.tar.xz i10z.com:/havana/llvm/armv7-notchecked
-ssh i10z.com ln -sf /havana/llvm/armv7-notchecked/llvm-armv7-$version-r$svnversion.tar.xz /havana/llvm/armv7-notchecked/latest
-
-# Bintray upload
-curl -T llvm-armv7-$version-r$svnversion.tar.xz -uismail:$(cat ~/.bintray) -H X-Bintray-Package:llvm-armv7-notchecked -H X-Bintray-Version:$version-r$svnversion -H X-Bintray-Publish:1 https://api.bintray.com/content/ismail/llvm/llvm-armv7-$version-r$svnversion.tar.xz
-
 echo "Done."
