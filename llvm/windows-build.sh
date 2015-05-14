@@ -47,3 +47,9 @@ ninja | tee -a ../build.log
 $python_exe -u ./bin/llvm-lit.py -v test | tee -a ../build.log
 $python_exe -u ./bin/llvm-lit.py -v tools/clang/test | tee -a ../build.log
 ninja package | tee -a ../build.log
+
+cd ..
+rev=$(git log -1 --format="%h")
+scp dist/LLVM-*.exe i10z.com:/havana/llvm/$target/LLVM-$version-$rev-$target.exe
+scp build.log i10z.com:/havana/llvm/$target/$rev.log
+ssh i10z.com ln -sf /havana/llvm/$target/LLVM-$version-$rev-$target.exe /havana/llvm/$target/latest.exe
