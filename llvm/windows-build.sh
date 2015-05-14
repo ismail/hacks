@@ -17,8 +17,8 @@ trap cleanup EXIT
 cd $src
 
 if [ -e .sleep ]; then
-    echo "Build sleep requested. Sleeping for 10 minutes."
-    sleep 10m
+    echo "Build sleep requested. Sleeping for 1 minute."
+    sleep 1m
     exit 0
 fi
 
