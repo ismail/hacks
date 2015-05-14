@@ -17,8 +17,8 @@ trap cleanup EXIT
 cd $src
 
 if [ -e .sleep ]; then
-    echo "Build sleep requested. Sleeping for 1 minute."
-    sleep 1m
+    echo "Build sleep requested. Sleeping for 10 minutes."
+    sleep 10m
     exit 0
 fi
 
@@ -29,8 +29,8 @@ git --git-dir=./tools/clang/.git log -1 --format="%h" >> .newbuild
 cmp -s .newbuild .oldbuild
 
 if [ $? = 0 ]; then
-    echo "No new build. Sleeping for 10 minutes." | tee -a build.log
-    sleep 10m
+    echo "No new build. Sleeping for 1 minutes." | tee -a build.log
+    sleep 1m
     exit 0
 fi
 
