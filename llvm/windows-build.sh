@@ -49,6 +49,6 @@ $python_exe -u ./bin/llvm-lit.py -v tools/clang/test | tee -a ../build.log
 ninja package | tee -a ../build.log
 
 cd ..
-rev=$(git log -1 --format="%h")
+rev="r$(git show | grep -oP "trunk@\d+" | cut -f2 -d"@")"
 scp dist/LLVM-*.exe i10z.com:/havana/llvm/$target/LLVM-$version-$rev-$target.exe
 ssh i10z.com ln -sf /havana/llvm/$target/LLVM-$version-$rev-$target.exe /havana/llvm/$target/latest.exe
