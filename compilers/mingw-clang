@@ -9,14 +9,12 @@ if [ ! -z ${WINDIR:-} ]; then
     GCC_VERSION=5.1.1
     PATH=$(cygpath -u $GCC_ROOT)/bin:$PATH
     C_INCLUDE_PATH=$GCC_ROOT/$TARGET/include
-    CXX_INCLUDE_PATH_1=$GCC_ROOT/include/c++/$GCC_VERSION
-    CXX_INCLUDE_PATH_2=$CXX_INCLUDE_PATH_1/$TARGET
+    CXX_INCLUDE_PATH=$GCC_ROOT/include/c++/$GCC_VERSION
 else
     GCC_ROOT=/usr/lib64/gcc
     GCC_VERSION=5.1.0
     C_INCLUDE_PATH="/usr/$TARGET/sys-root/$TARGET/include"
-    CXX_INCLUDE_PATH_1="$GCC_ROOT/$TARGET/$GCC_VERSION/include/c++"
-    CXX_INCLUDE_PATH_2="$GCC_ROOT/$TARGET/$GCC_VERSION/include/c++/$TARGET"
+    CXX_INCLUDE_PATH="$GCC_ROOT/$TARGET/$GCC_VERSION/include/c++"
     PATH=/opt/clang/bin:$PATH
 fi
 
@@ -30,8 +28,8 @@ case $0 in
     *-clang++)
         clang++ -std=c++14 $COMMON_ARGS \
                 -isystem $C_INCLUDE_PATH \
-                -isystem $CXX_INCLUDE_PATH_1 \
-                -isystem $CXX_INCLUDE_PATH_2 \
+                -isystem $CXX_INCLUDE_PATH \
+                -isystem $CXX_INCLUDE_PATH/$TARGET \
                 -static-libstdc++ "$@"
         ;;
     *)
