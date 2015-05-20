@@ -9,7 +9,7 @@ python_exe=C:/Python34/python.exe
 function cleanup {
     cd $src
     mv -f .newbuild .oldbuild
-    cp build.log ~/build.log.$(date +%d.%m.%Y-%H.%M)
+    mv build.log ~/llvm-latest-build.log
 }
 
 trap cleanup EXIT
@@ -22,7 +22,7 @@ if [ -e .sleep ]; then
     exit 0
 fi
 
-pull . tools/clang | tee build.log
+pull . tools/clang projects/compiler-rt | tee build.log
 
 git log -1 --format="%h" > .newbuild
 git --git-dir=./tools/clang/.git log -1 --format="%h" >> .newbuild
@@ -52,4 +52,3 @@ cd ..
 rev="r$(git show | grep -oP "trunk@\d+" | cut -f2 -d"@")"
 scp dist/LLVM-*.exe i10z.com:/havana/llvm/$target/LLVM-$version-$rev-$target.exe
 ssh i10z.com ln -sf /havana/llvm/$target/LLVM-$version-$rev-$target.exe /havana/llvm/$target/latest.exe
-mv build.log ~/latest-llvm-build.log
