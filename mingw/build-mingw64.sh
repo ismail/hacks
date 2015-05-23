@@ -53,7 +53,7 @@ make install
 cd ..
 cd gdb-$GDB_VERSION
 rm -rf build; mkdir build; cd build
-../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT
+../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT --disable-nls
 make -j$(nproc)
 make install
 
