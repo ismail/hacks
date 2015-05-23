@@ -38,7 +38,13 @@ cd ..
 
 rm -rf build; mkdir build; cd build
 
-../combined/configure --build=x86_64-suse-linux-gnu --host=x86_64-w64-mingw32 --prefix=/havana/mingw-w64 --with-sysroot=/havana/mingw-w64 --target=x86_64-w64-mingw32 --disable-gcov-tool --disable-multilib --disable-nls --disable-win32-registry --enable-checking=release --enable-languages=c,c++,fortran --enable-fully-dynamic-string --enable-libgomp --enable-threads=win32 --disable-werror --disable-libvtv --with-arch=corei7 --with-tune=haswell
+../combined/configure --build=x86_64-suse-linux-gnu --host=x86_64-w64-mingw32 \
+                      --prefix=/havana/mingw-w64 --with-sysroot=/havana/mingw-w64 \
+                      --target=x86_64-w64-mingw32 --disable-gcov-tool --disable-multilib \
+                      --disable-nls --disable-win32-registry --enable-checking=release \
+                      --enable-languages=c,c++,fortran --enable-fully-dynamic-string \
+                      --enable-libgomp --enable-threads=win32 --disable-werror \
+                      --disable-libvtv --with-arch=corei7 --with-tune=haswell
 
 make -j$(nproc)
 make install
