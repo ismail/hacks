@@ -2,8 +2,9 @@
 set -euo pipefail
 
 GCC_VERSION=5.1.1
+GDB_VERSION=7.9.1
 SRC_ROOT=/havana/mingw-w64-build
-INSTALL_ROOT=/havana/mingw-w64
+INSTALL_ROOT=/havana/mingw-w64-$GCC_VERSION
 
 rm -rf $INSTALL_ROOT
 cd $SRC_ROOT
@@ -42,13 +43,19 @@ rm -rf build; mkdir build; cd build
 make -j$(nproc)
 make install
 
+cd ..
+cd gdb-$GDB_VERSION
+./configure --build=x86_64-suse-linux-gnu --host=x86_64-w64-mingw32 --prefix=/havana/mingw-w64
+make -j$(nproc)
+make install
+
 cd $INSTALL_ROOT
 x86_64-w64-mingw32-strip bin/* libexec/gcc/x86_64-w64-mingw32/$GCC_VERSION/* || true
 rm -rf libexec/gcc/x86_64-w64-mingw32/$GCC_VERSION/install-tools
 rm -rf mingw/include
-rm bin/ld.bfd
+rm bin/ld.bfd.exe
 cd ..
 
-tar --exclude-vcs -cf mingw-w64-$GCC_VERSION.tar mingw-w64
+tar --exclude-vcs -cf mingw-w64-$GCC_VERSION.tar mingw-w64-$GCC_VERSION
 xz -6 -T0 mingw-w64-$GCC_VERSION.tar
 mv mingw-w64-$GCC_VERSION.tar.xz $HOME
