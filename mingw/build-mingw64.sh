@@ -69,3 +69,4 @@ tar --exclude-vcs -cf $f.tar mingw-w64-$GCC_VERSION
 xz -6 -T0 $f.tar
 scp $f.tar.xz i10z.com:/havana/mingw-w64
 ssh i10z.com ln -sf /havana/mingw-w64/$f.tar.xz /havana/mingw-w64/latest.tar.xz
+rm $f.tar.xz
