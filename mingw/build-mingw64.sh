@@ -68,3 +68,4 @@ f=mingw-w64-$GCC_VERSION-$(date +%Y%m%d)
 7z a -t7z -m0=lzma2 -mx=9 -mmt$(nproc) -ms=on $f.7z mingw-w64-$GCC_VERSION
 scp $f.7z i10z.com:/havana/mingw-w64
 ssh i10z.com ln -sf /havana/mingw-w64/$f.7z /havana/mingw-w64/latest.7z
+rm $f.7z
