@@ -65,7 +65,6 @@ rm bin/ld.bfd.exe
 cd ..
 
 f=mingw-w64-$GCC_VERSION-$(date +%Y%m%d)
-tar --exclude-vcs -cf $f.tar mingw-w64-$GCC_VERSION
-xz -6 -T0 $f.tar
-scp $f.tar.xz i10z.com:/havana/mingw-w64
-ssh i10z.com ln -sf /havana/mingw-w64/$f.tar.xz /havana/mingw-w64/latest.tar.xz
+7z a -t7z -m0=lzma2 -mx=9 -mmt$(nproc) -ms=on $f.7z mingw-w64-$GCC_VERSION
+scp $f.7z i10z.com:/havana/mingw-w64
+ssh i10z.com ln -sf /havana/mingw-w64/$f.7z /havana/mingw-w64/latest.7z
