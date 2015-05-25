@@ -25,7 +25,9 @@ def download(url):
     ns = {}
     exec(code, ns)
 
+    labels = []
     for src in ns['sources']:
+        labels.append(src['label'])
         if src['label'].strip() in ['716','718','720','720p']:
             target_url=src['file'].replace("\\","")
             output="%s.mp4" % url.split("/")[-2]
@@ -51,7 +53,7 @@ def download(url):
             os.rename("%s.part" % output, output)
             return
 
-    print("Failed to find a HD source.")
+    print("Failed to find a HD source, possible options were: ", ",".join(labels))
     return
 
 if __name__ == "__main__":
