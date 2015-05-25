@@ -26,7 +26,7 @@ def download(url):
     exec(code, ns)
 
     for src in ns['sources']:
-        if src['label'].strip() in ['716','720','720p']:
+        if src['label'].strip() in ['716','718','720','720p']:
             target_url=src['file'].replace("\\","")
             output="%s.mp4" % url.split("/")[-2]
             output=output.replace("-izle","").replace("-bolum","").replace("-","_")
