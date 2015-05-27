@@ -2,14 +2,14 @@
 set -eu
 
 case $0 in
-    pbcopy )
+    *pbcopy )
         if [ -e /dev/clipboard ]; then
             cat > /dev/clipboard
         else
             xclip -selection clipboard
         fi
         ;;
-    pbpaste )
+    *pbpaste )
         if [ -e /dev/clipboard ]; then
             cat /dev/clipboard
         else
