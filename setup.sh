@@ -11,5 +11,7 @@ ln -sf ../hacks/utilities/pull.py pull
 ln -sf ../hacks/utilities/qc.py qc
 ln -sf ../hacks/utilities/weather.py weather
 ln -sf ../hacks/utilities/tmux-shell tmuxsh
+ln -sf ../hacks/utilities/pb pbcopy
+ln -sf ../hacks/utilities/pb pbpaste
 
 popd
