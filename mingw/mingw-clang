@@ -18,18 +18,15 @@ else
     PATH=/opt/clang/bin:$PATH
 fi
 
-INTERNAL_INCLUDES=$GCC_ROOT/lib/gcc/$TARGET/$GCC_VERSION/include
 COMMON_ARGS=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET -static)
 
 case $0 in
     *-clang)
         clang -std=c11 $COMMON_ARGS \
-              -isystem $INTERNAL_INCLUDES \
               -isystem $C_INCLUDE_PATH "$@"
         ;;
     *-clang++)
         clang++ -std=c++14 $COMMON_ARGS \
-                -isystem $INTERNAL_INCLUDES \
                 -isystem $C_INCLUDE_PATH \
                 -isystem $CXX_INCLUDE_PATH \
                 -isystem $CXX_INCLUDE_PATH/$TARGET "$@"
