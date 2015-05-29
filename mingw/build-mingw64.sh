@@ -13,7 +13,10 @@ pull gcc-5-branch mingw-w64
 
 cd mingw-w64
 rm -rf build; mkdir build; cd build
-../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT/x86_64-w64-mingw32 --disable-lib32
+../configure --host=$TARGET --target=$TARGET \
+             --prefix=$INSTALL_ROOT/x86_64-w64-mingw32 \
+             --with-tools=all --enabel-sdk-all \
+             --enable-secure-api --disable-lib32
 make -j$(nproc)
 make install-strip
 
