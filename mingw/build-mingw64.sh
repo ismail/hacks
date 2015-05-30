@@ -15,8 +15,8 @@ cd mingw-w64
 rm -rf build; mkdir build; cd build
 ../configure --host=$TARGET --target=$TARGET \
              --prefix=$INSTALL_ROOT/x86_64-w64-mingw32 \
-             --enable-sdk=all --enable-secure-api \
-             --disable-lib32
+             --with-tools=all --enable-sdk=all \
+             --enable-secure-api --disable-lib32
 make -j$(nproc)
 make install-strip
 
@@ -48,8 +48,7 @@ rm -rf build; mkdir build; cd build
                       --disable-win32-registry --enable-checking=release \
                       --enable-languages=c,c++,fortran --enable-fully-dynamic-string \
                       --enable-libgomp --enable-threads=win32 --disable-werror \
-                      --disable-libvtv --with-arch=corei7 --with-tune=haswell \
-                      --program-prefix=$TARGET-
+                      --disable-libvtv --with-arch=corei7 --with-tune=haswell
 
 make -j$(nproc)
 make install
@@ -57,8 +56,7 @@ make install
 cd ..
 cd gdb-$GDB_VERSION
 rm -rf build; mkdir build; cd build
-../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT \
-            --program-prefix=$TARGET- --disable-nls
+../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT --disable-nls
 make -j$(nproc)
 make install
 
@@ -66,7 +64,7 @@ cd $INSTALL_ROOT
 $TARGET-strip bin/* libexec/gcc/$TARGET/$GCC_VERSION/* || true
 rm -rf libexec/gcc/$TARGET/$GCC_VERSION/install-tools
 rm -rf mingw/include
-rm -r $TARGET/bin bin/$TARGET-$TARGET-* bin/$TARGET-ld.bfd.exe
+rm bin/ld.bfd.exe
 cd ..
 
 f=mingw-w64-$GCC_VERSION-$(date +%Y%m%d)
