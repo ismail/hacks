@@ -1,6 +1,6 @@
 #!/bin/zsh
 set -u
 
-export TERM=screen-256color-it
+export TERM=tmux-256color
 
 tmux -u -2 attach || tmux -u -2 new
