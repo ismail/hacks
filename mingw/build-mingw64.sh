@@ -15,6 +15,7 @@ cd mingw-w64
 rm -rf build; mkdir build; cd build
 ../configure --host=$TARGET --target=$TARGET \
              --prefix=$INSTALL_ROOT/x86_64-w64-mingw32 \
+             --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
              --with-tools=all --enable-sdk=all \
              --enable-secure-api --disable-lib32
 make -j$(nproc)
@@ -22,7 +23,8 @@ make install-strip
 
 cd ../mingw-w64-libraries/winpthreads
 rm -rf build; mkdir build; cd build
-../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT/x86_64-w64-mingw32
+../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT/x86_64-w64-mingw32 \
+             --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec
 make -j$(nproc)
 make install-strip
 
@@ -44,6 +46,7 @@ rm -rf build; mkdir build; cd build
 
 ../combined/configure --build=x86_64-suse-linux-gnu --host=$TARGET --target=$TARGET \
                       --prefix=$INSTALL_ROOT --with-sysroot=$INSTALL_ROOT \
+                      --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
                       --disable-gcov-tool --disable-multilib --disable-nls \
                       --disable-win32-registry --enable-checking=release \
                       --enable-languages=c,c++,fortran --enable-fully-dynamic-string \
@@ -56,15 +59,17 @@ make install
 cd ..
 cd gdb-$GDB_VERSION
 rm -rf build; mkdir build; cd build
-../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT --disable-nls
+../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT \
+             --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
+             --disable-nls
 make -j$(nproc)
 make install
 
 cd $INSTALL_ROOT
-$TARGET-strip bin/* libexec/gcc/$TARGET/$GCC_VERSION/* || true
 rm -rf libexec/gcc/$TARGET/$GCC_VERSION/install-tools
 rm -rf mingw/include
-rm bin/ld.bfd.exe
+rm bin/ld.bfd.exe $TARGET/bin/ld.bfd.exe
+$TARGET-strip bin/* libexec/gcc/$TARGET/$GCC_VERSION/* || true
 cd ..
 
 f=mingw-w64-$GCC_VERSION-$(date +%Y%m%d)
