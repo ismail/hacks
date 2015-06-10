@@ -22,7 +22,7 @@ INSTALL_ROOT=/havana/mingw-w64-$GCC_VERSION
 
 rm -rf $INSTALL_ROOT
 cd $SRC_ROOT
-pull $GCC_VERSION mingw-w64
+pull $DIRECTORY_NAME mingw-w64
 
 cd mingw-w64
 rm -rf build; mkdir build; cd build
