@@ -3,8 +3,10 @@ set -euo pipefail
 
 if [ -z ${1:-} ]; then
     DIRECTORY_NAME=gcc-5-branch
+    UPLOAD_DIRECTORY="5.x"
 elif [ x${1:-} = "xtrunk" ]]; then
     DIRECTORY_NAME=gcc
+    UPLOAD_DIRECTORY="6.x"
 else
     echo "Unknown build type: $1"
     exit 1
@@ -89,6 +91,6 @@ cd ..
 
 f=mingw-w64-$GCC_VERSION-$(date +%Y%m%d)
 7z a -t7z -m0=lzma2 -mx=9 -mmt$(nproc) -ms=on $f.7z mingw-w64-$GCC_VERSION
-scp $f.7z i10z.com:/havana/mingw-w64
-ssh i10z.com ln -sf /havana/mingw-w64/$f.7z /havana/mingw-w64/latest.7z
+scp $f.7z i10z.com:/havana/mingw-w64/$UPLOAD_DIRECTORY/
+ssh i10z.com ln -sf /havana/mingw-w64/$UPLOAD_DIRECTORY/$f.7z /havana/mingw-w64/$UPLOAD_DIRECTORY/latest.7z
 rm $f.7z
