@@ -4,7 +4,7 @@ set -euo pipefail
 if [ -z ${1:-} ]; then
     DIRECTORY_NAME=gcc-5-branch
     UPLOAD_DIRECTORY="5.x"
-elif [ x${1:-} = "xtrunk" ]]; then
+elif [ x${1:-} = "xtrunk" ]; then
     DIRECTORY_NAME=gcc
     UPLOAD_DIRECTORY="6.x"
 else
