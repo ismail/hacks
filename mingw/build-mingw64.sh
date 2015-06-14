@@ -25,7 +25,7 @@ cd $SRC_ROOT
 pull $DIRECTORY_NAME mingw-w64
 
 cd mingw-w64
-rm -rf build; mkdir build; cd build
+rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
 ../configure --host=$TARGET --target=$TARGET \
              --prefix=$INSTALL_ROOT/x86_64-w64-mingw32 \
              --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
@@ -35,7 +35,7 @@ make -j$(nproc)
 make install-strip
 
 cd ../mingw-w64-libraries/winpthreads
-rm -rf build; mkdir build; cd build
+rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
 ../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT/x86_64-w64-mingw32 \
              --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
              --disable-shared
