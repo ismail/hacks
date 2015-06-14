@@ -19,7 +19,6 @@ else
 fi
 
 COMMON_ARGS=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET -static)
-COMMON_ARGS+=(-fcolor-diagnostics -fansi-escape-codes)
 
 case $0 in
     *-clang)
