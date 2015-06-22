@@ -83,8 +83,7 @@ make install
 
 cd $INSTALL_ROOT
 cp $LOCAL_MINGW_ROOT/bin/{libexpat-1,zlib1}.dll bin
-rm -rf libexec/gcc/$TARGET/$GCC_VERSION/install-tools
-rm -rf mingw/include
+rm -rf mingw libexec/gcc/$TARGET/$GCC_VERSION/install-tools
 rm bin/ld.bfd.exe $TARGET/bin/ld.bfd.exe
 $TARGET-strip bin/* libexec/gcc/$TARGET/$GCC_VERSION/* || true
 cd ..
