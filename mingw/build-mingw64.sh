@@ -2,10 +2,10 @@
 set -euo pipefail
 
 if [ -z ${1:-} ]; then
-    DIRECTORY_NAME=gcc-5-branch
+    BRANCH_NAME=gcc-5-branch
     UPLOAD_DIRECTORY="5.x"
 elif [ x${1:-} = "xtrunk" ]; then
-    DIRECTORY_NAME=gcc
+    BRANCH_NAME=master
     UPLOAD_DIRECTORY="6.x"
 else
     echo "Unknown build type: $1"
@@ -15,14 +15,20 @@ fi
 SRC_ROOT=/havana/mingw-w64-build
 LOCAL_MINGW_ROOT=/usr/x86_64-w64-mingw32/sys-root/mingw
 TARGET=x86_64-w64-mingw32
-
 GDB_VERSION=7.9.1
-GCC_VERSION=$(cat $SRC_ROOT/$DIRECTORY_NAME/gcc/BASE-VER)
+
+cd $SRC_ROOT
+pull mingw-w64
+
+pushd gcc
+git checkout -f $BRANCH_NAME
+git pull
+GCC_VERSION=$(cat gcc/BASE-VER)
 INSTALL_ROOT=/havana/mingw-w64-$GCC_VERSION
+REVISION=$(git show | grep -oP "($BRANCH_NAME|trunk)@\d+" | cut -f2 -d"@")
+popd
 
 rm -rf $INSTALL_ROOT
-cd $SRC_ROOT
-pull $DIRECTORY_NAME mingw-w64
 
 cd mingw-w64
 rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
@@ -52,7 +58,7 @@ ln -s ../gmp-* gmp
 ln -s ../isl-* isl
 ln -s ../mpfr-* mpfr
 ln -s ../mpc-* mpc
-ln -s ../$DIRECTORY_NAME/* .
+ln -s ../gcc/* .
 ln -s ../binutils-*/* . || true
 cd ..
 
@@ -88,7 +94,7 @@ rm bin/ld.bfd.exe $TARGET/bin/ld.bfd.exe
 $TARGET-strip bin/* libexec/gcc/$TARGET/$GCC_VERSION/* || true
 cd ..
 
-f=mingw-w64-$GCC_VERSION-$(date +%Y%m%d)
+f=mingw-w64-$GCC_VERSION-r$REVISION
 7z a -t7z -m0=lzma2 -mx=9 -mmt$(nproc) -ms=on $f.7z mingw-w64-$GCC_VERSION
 scp $f.7z i10z.com:/havana/mingw-w64/$UPLOAD_DIRECTORY/
 ssh i10z.com ln -sf /havana/mingw-w64/$UPLOAD_DIRECTORY/$f.7z /havana/mingw-w64/$UPLOAD_DIRECTORY/latest.7z
