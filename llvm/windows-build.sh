@@ -14,9 +14,9 @@ function cleanup {
 
 trap cleanup EXIT
 
-last_build_time=$(cat .last_build_time &> /dev/null)
+last_build_time=$(cat $src/.last_build_time 2> /dev/null)
 current_time=$(date +%s)
-time_diff=$(( (current_time - last_build_time) / 60*60 ))
+time_diff=$(( (current_time - last_build_time) / (60*60) ))
 
 if [ $time_diff -lt 6 ]; then
     echo "Last successful build was less than 6 hours, sleeping for an hour."
