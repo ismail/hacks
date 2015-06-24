@@ -19,7 +19,7 @@ current_time=$(date +%s)
 time_diff=$(( (current_time - last_build_time) / (60*60) ))
 
 if [ $time_diff -lt 6 ]; then
-    echo "Last successful build was less than 6 hours, sleeping for an hour."
+    echo "Last successful build was less than 6 hours ago, sleeping for 1 hour."
     sleep 1h
     exit 0
 fi
