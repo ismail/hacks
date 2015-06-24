@@ -40,7 +40,7 @@ fi
 # We set here because cmp would exit early otherwise
 set -e
 
-rm .last_build_time
+rm -f .last_build_time
 rm -rf dist; mkdir dist; cd dist
 
 export CC="$(cygpath -m =cl.exe)"
