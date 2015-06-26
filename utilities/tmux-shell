@@ -2,5 +2,6 @@
 
 export TERM=screen-256color-it
 PATH=/usr/bin:$PATH
+unset TMUX
 
 tmux -u -2 attach || tmux -u -2 new
