@@ -4,6 +4,7 @@ set -uo pipefail
 version=3.7
 src=~/src/llvm
 target=${1:-win32}
+wait_hours=3
 python_exe=C:/Python34/python.exe
 
 function cleanup {
@@ -18,8 +19,8 @@ last_build_time=$(cat $src/.last_build_time 2> /dev/null)
 current_time=$(date +%s)
 time_diff=$(( (current_time - last_build_time) / (60*60) ))
 
-if [ $time_diff -lt 6 ]; then
-    echo "Last successful build was less than 3 hours ago, sleeping for 1 hours."
+if [ $time_diff -lt $wait_hours ]; then
+    echo "Last successful build was less than $wait_hours hours ago, sleeping for 1 hour."
     sleep 1h
     exit 0
 fi
