@@ -2,9 +2,11 @@
 # Simple downloader for channel9.msdn.com
 
 set -euo pipefail
-IFS=$'\n\t'
 
-download_url() {
+title=""
+url=""
+
+extract_url () {
     ext="wmv"
     tmp=`mktemp`
     curl -s $1 -o $tmp
@@ -23,12 +25,26 @@ download_url() {
     title=$(grep -oP '(?<=<title>).*(?=</title>)' $tmp | recode HTML_4.0 | sed -e 's/ |.*//g' -e 's|/|_|g' -e 's/:/./g')
 
     rm $tmp
+}
+
+stream_url () {
+    extract_url $1
+    mpv $url
+}
+
+download_url () {
+    extract_url $1
     echo "Downloading \""$title".$ext\" ..."
     curl -C - -# $url -o "$title.$ext"
 }
 
-for url in "$@"; do
-    download_url $url
-done
+if [[ ${1:-} = "-s" ]]; then
+    stream=1
+    stream_url $2
+else
+    for url in "$@"; do
+        download_url $url
+    done
+fi
 
 echo "Done."
