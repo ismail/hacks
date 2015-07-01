@@ -8,7 +8,7 @@ url=""
 
 extract_url () {
     ext="wmv"
-    tmp=`mktemp`
+    tmp=$(mktemp)
     curl -s $1 -o $tmp
 
     url=$(grep -oP '(?<=<a href=").*(?=\">High Quality WMV</a>)' $tmp || true)
