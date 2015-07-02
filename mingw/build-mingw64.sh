@@ -2,11 +2,11 @@
 set -euo pipefail
 
 if [ -z ${1:-} ]; then
-    BRANCH_NAME=gcc-5-branch
-    UPLOAD_DIRECTORY="5.x"
-elif [ x${1:-} = "xtrunk" ]; then
     BRANCH_NAME=master
     UPLOAD_DIRECTORY="6.x"
+elif [ x${1:-} = "xstable" ]; then
+    BRANCH_NAME=gcc-5-branch
+    UPLOAD_DIRECTORY="5.x"
 else
     echo "Unknown build type: $1"
     exit 1
