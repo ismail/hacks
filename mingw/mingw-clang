@@ -5,11 +5,11 @@ TARGET=x86_64-w64-mingw32
 WINDOWS_TARGET=0x0603
 
 if [ ! -z ${WINDIR:-} ]; then
-    GCC_VERSION=5.1.0
-    GCC_ROOT=C:/tdm-gcc-64
+    GCC_VERSION=6.0.0
+    GCC_ROOT=C:/mingw-w64-$GCC_VERSION
     PATH=$(cygpath -u $GCC_ROOT)/bin:$PATH
     C_INCLUDE_PATH=$GCC_ROOT/$TARGET/include
-    CXX_INCLUDE_PATH=$GCC_ROOT/lib/gcc/$TARGET/$GCC_VERSION/include/c++
+    CXX_INCLUDE_PATH=$GCC_ROOT/include/c++/$GCC_VERSION
 else
     GCC_ROOT=/usr/lib64/gcc
     GCC_VERSION=5.1.0
