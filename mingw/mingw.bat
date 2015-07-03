@@ -1,6 +1,6 @@
 @echo off
 IF [%1]==[] (
-    set GCC_VERSION=5.1.1
+    set GCC_VERSION=6.0.0
     ) ELSE (
     set GCC_VERSION=%1
     )
