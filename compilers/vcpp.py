@@ -10,8 +10,11 @@ import sys
 
 url="http://webcompiler.cloudapp.net/"
 
-def compileCode(code):
+def compileCode(code, opts=None):
     req = request.Request(url)
+
+    if opts is None:
+        opts = ""
 
     try:
         data = request.urlopen(req)
@@ -26,6 +29,7 @@ def compileCode(code):
     params = parse.urlencode({
         "__VIEWSTATE": viewState,
         "__EVENTVALIDATION": eventValidation,
+        "TextBoxCompilerArgs": opts,
         "Button1": "►",
         "execute": "on",
         "TextBoxArgument": "",
@@ -57,5 +61,9 @@ def compileCode(code):
 
 
 if __name__ == "__main__":
+    opts = None
+    if len(sys.argv) >= 2:
+        opts = " ".join(sys.argv[1:])
+
     data = "".join(sys.stdin.readlines())
-    compileCode(data.encode("utf-8"))
+    compileCode(data.encode("utf-8"), opts)
