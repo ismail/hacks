@@ -71,7 +71,7 @@ rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
                       --disable-win32-registry --enable-checking=release \
                       --enable-languages=c,c++,fortran --enable-fully-dynamic-string \
                       --enable-libgomp --enable-threads=win32 --disable-werror \
-                      --disable-libvtv --disable-shared --with-arch=corei7 \
+                      --disable-libvtv --with-arch=corei7 \
                       --with-tune=haswell --with-system-zlib --disable-nls \
                       --without-included-gettext --enable-linker-build-id
 
