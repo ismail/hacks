@@ -9,22 +9,19 @@ if [ ! -z ${WINDIR:-} ]; then
     GCC_ROOT=C:/mingw-w64-$GCC_VERSION
     PATH=$(cygpath -u $GCC_ROOT)/bin:$PATH
 else
-    GCC_ROOT=/usr/lib64/gcc
-    GCC_VERSION=5.1.0
-    C_INCLUDE_PATH="/usr/$TARGET/sys-root/$TARGET/include"
-    CXX_INCLUDE_PATH="$GCC_ROOT/$TARGET/$GCC_VERSION/include/c++"
     PATH=/opt/clang/bin:$PATH
 fi
 
-COMMON_ARGS=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET -static)
-COMMON_ARGS+=(-static-libgcc -static-libstdc++)
+COMMON_ARGS+=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET -static)
+COMMON_C_ARGS=(-static-libgcc)
+COMMON_CXX_ARGS=(-stdlib=libstdc++ -static-libstdc++)
 
 case $0 in
     *-clang)
-        clang -std=c11 "$@"
+        clang -std=c11 $COMMON_ARGS $COMMON_C_ARGS "$@"
         ;;
     *-clang++)
-        clang++ -std=c++14 $COMMON_ARGS "$@"
+        clang++ -std=c++14 $COMMON_ARGS $COMMON_CXX_ARGS "$@"
         ;;
     *)
         echo "Unknown command ${0:t}"
