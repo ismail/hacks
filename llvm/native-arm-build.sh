@@ -45,7 +45,7 @@ ninja install/strip
 
 cd ..
 
-version=3.7
+version=3.8
 revision=$(svnversion CREDITS.TXT)
 cd /havana/dist
 

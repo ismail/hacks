@@ -5,7 +5,7 @@ IFS=$'\n\t'
 revision=$1
 root=/havana/llvm
 rm -rf $root/build
-version=3.7
+version=3.8
 target=armv7l-unknown-linux-gnueabihf
 
 cd $root

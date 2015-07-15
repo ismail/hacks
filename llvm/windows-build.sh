@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 set -uo pipefail
 
-version=3.7
+version=3.8
 src=~/src/llvm
 target=${1:-win32}
 wait_hours=3
