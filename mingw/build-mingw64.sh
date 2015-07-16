@@ -53,7 +53,6 @@ mkdir -p $INSTALL_ROOT/mingw/include
 cd $SRC_ROOT
 
 rm -rf combined-$GCC_VERSION; mkdir combined-$GCC_VERSION; cd combined-$GCC_VERSION
-ln -s ../cloog-* cloog
 ln -s ../gmp-* gmp
 ln -s ../isl-* isl
 ln -s ../mpfr-* mpfr
