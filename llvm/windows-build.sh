@@ -3,7 +3,7 @@ set -uo pipefail
 
 version=3.8
 src=~/src/llvm
-target=${1:-win32}
+target=${1:-win64}
 wait_hours=3
 python_exe=C:/Python34/python.exe
 
