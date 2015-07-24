@@ -14,7 +14,7 @@ fi
 
 COMMON_ARGS+=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET -static)
 COMMON_C_ARGS=(-static-libgcc)
-COMMON_CXX_ARGS=(-stdlib=libstdc++ -static-libstdc++ $COMMON_C_ARGS)
+COMMON_CXX_ARGS=(-static-libstdc++ $COMMON_C_ARGS)
 
 case $0 in
     *-clang)
