@@ -13,15 +13,13 @@ else
 fi
 
 COMMON_ARGS+=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET -static)
-COMMON_C_ARGS=(-static-libgcc)
-COMMON_CXX_ARGS=(-static-libstdc++ $COMMON_C_ARGS)
 
 case $0 in
     *-clang)
-        clang -std=c11 $COMMON_ARGS $COMMON_C_ARGS "$@"
+        clang -std=c11 $COMMON_ARGS "$@"
         ;;
     *-clang++)
-        clang++ -std=c++14 $COMMON_ARGS $COMMON_CXX_ARGS "$@"
+        clang++ -std=c++14 $COMMON_ARGS "$@"
         ;;
     *)
         echo "Unknown command ${0:t}"
