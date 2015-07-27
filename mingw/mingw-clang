@@ -4,12 +4,9 @@ set -euo pipefail
 TARGET=x86_64-w64-mingw32
 WINDOWS_TARGET=0x0603
 
-if [ ! -z ${WINDIR:-} ]; then
-    GCC_VERSION=6.0.0
-    GCC_ROOT=C:/mingw-w64-$GCC_VERSION
-    PATH=$(cygpath -u $GCC_ROOT)/bin:$PATH
-else
-    PATH=/opt/clang/bin:$PATH
+if (( ! $+commands[$TARGET-gcc] )); then
+    echo "Make sure $TARGET-gcc is in PATH"
+    exit 1
 fi
 
 COMMON_ARGS+=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET -static)
