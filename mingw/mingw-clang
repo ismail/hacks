@@ -8,7 +8,6 @@ local -a COMMON_ARGS
 if [ ! -z ${WINDIR:-} ]; then
     GCC_VERSION=6.0.0
     GCC_ROOT=C:/mingw-w64-$GCC_VERSION
-    PATH=$(cygpath -u $GCC_ROOT)/bin:$PATH
     COMMON_ARGS+=(--sysroot $GCC_ROOT)
 else
     PATH=/opt/clang/bin:$PATH
