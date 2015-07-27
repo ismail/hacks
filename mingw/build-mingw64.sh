@@ -72,7 +72,8 @@ rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
                       --enable-libgomp --enable-threads=win32 --disable-werror \
                       --disable-libvtv --with-arch=corei7 \
                       --with-tune=haswell --with-system-zlib --disable-nls \
-                      --without-included-gettext --enable-linker-build-id
+                      --without-included-gettext --enable-linker-build-id \
+                      --program-prefix=$TARGET-
 
 make -j$(nproc)
 make install
@@ -82,14 +83,14 @@ cd gdb-$GDB_VERSION
 rm -rf build; mkdir build; cd build
 ../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT \
              --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
-             --disable-shared --disable-nls
+             --disable-shared --disable-nls --program-prefix=$TARGET-
 make -j$(nproc)
 make install
 
 cd $INSTALL_ROOT
 cp $LOCAL_MINGW_ROOT/bin/{libexpat-1,zlib1}.dll bin
 rm -rf mingw libexec/gcc/$TARGET/$GCC_VERSION/install-tools
-rm bin/ld.bfd.exe $TARGET/bin/ld.bfd.exe
+rm bin/$TARGET-ld.bfd.exe bin/$TARGET-$TARGET-* $TARGET/bin/ld.bfd.exe 
 $TARGET-strip bin/* libexec/gcc/$TARGET/$GCC_VERSION/* || true
 cd ..
 
