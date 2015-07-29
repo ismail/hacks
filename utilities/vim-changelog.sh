@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-directory=ftp://ftp.vim.org/pub/vim/patches
+directory=http://ftp.vim.org/pub/vim/patches
 version=7.4
 
 echo "Updated to revision $2, fixes the following problems"
