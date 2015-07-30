@@ -1,6 +1,10 @@
 #!/usr/bin/env zsh
 set -uo pipefail
 
+alias scp='rsync --archive --compress-level=3 \
+           --copy-links --partial --inplace \
+           --progress --rsh=ssh -r'
+
 version=3.8
 src=~/src/llvm
 target=${1:-win64}

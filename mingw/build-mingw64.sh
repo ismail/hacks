@@ -1,6 +1,10 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
+alias scp='rsync --archive --compress-level=3 \
+           --copy-links --partial --inplace \
+           --progress --rsh=ssh -r'
+
 if [ -z ${1:-} ]; then
     BRANCH_NAME=master
     UPLOAD_DIRECTORY="6.x"
