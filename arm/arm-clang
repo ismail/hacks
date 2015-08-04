@@ -1,16 +1,28 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
-SYSROOT=/havana/binaries/linaro-arm-linux-gnueabihf-4.9
 TARGET=armv7a-unknown-linux-gnueabihf
-CFLAGS="-mfloat-abi=hard -march=armv7-a -mtune=cortex-a8 -mfpu=vfpv3-d16 -fuse-ld=gold"
+GCC_VERSION=4.9
+CFLAGS=("-mtune=cortex-a8 -mfpu=vfpv3-d16")
+
+if [ -z $COMSPEC ]; then
+    SYSROOT=/havana/binaries/linaro-arm-linux-gnueabihf-$GCC_VERSION
+    CFLAGS+=(-fuse-ld=gold)
+    PATH=/opt/clang/bin:$PATH
+else
+    SYSROOT=C:/linaro-arm-linux-gnueabihf-$GCC_VERSION
+    PATH=$(cygpath -u $SYSROOT/arm-linux-gnueabihf/bin):$PATH
+    CFLAGS+=(-I$SYSROOT/sysroot/usr/include -L$SYSROOT/arm-linux-gnueabihf/libc/usr/lib)
+fi
 
 case $0 in
     *clang)
-        CC=/opt/clang/bin/clang
+        CC=clang
+        CFLAGS+=(-std=c11)
         ;;
     *clang++)
-        CC=/opt/clang/bin/clang++
+        CC=clang++
+        CFLAGS+=(-std=c++14)
         ;;
 esac
 
-$CC -target $TARGET $CFLAGS --sysroot=$SYSROOT "$@"
+$CC -target $TARGET ${=CFLAGS} --sysroot=$SYSROOT "$@"
