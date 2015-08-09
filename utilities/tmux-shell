@@ -1,6 +1,5 @@
 #!/bin/sh
 
-unset TMUX
 export TERM=screen-256color-it
 PATH=/usr/bin:$PATH
 
