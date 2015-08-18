@@ -5,6 +5,27 @@ alias scp='rsync --archive --compress-level=3 \
            --copy-links --partial --inplace \
            --progress --rsh=ssh -r'
 
+retry-if-fails () {
+    retry=1 
+    timeout=10 
+    while [ $retry -le $timeout ]
+    do
+        eval $@
+        if [ $? -eq 0 ]
+        then
+            break
+        fi
+        sleeptime=$(( 2**$retry )) 
+        echo "Command failed, sleeping $sleeptime seconds before retrying."
+        sleep $sleeptime
+        let "retry += 1"
+    done
+    if [ $retry -ge $timeout ]
+    then
+        echo "Timeout reached while trying to run command."
+    fi
+}
+
 version=3.8
 src=~/src/llvm
 target=${1:-win64}
@@ -62,5 +83,5 @@ ninja package | tee -a ../build.log
 cd ..
 date +%s > .last_build_time
 rev="r$(git show | grep -oP "trunk@\d+" | cut -f2 -d"@")"
-scp dist/LLVM-*.exe i10z.com:/havana/llvm/$target/LLVM-$version-$rev-$target.exe
-ssh i10z.com ln -sf /havana/llvm/$target/LLVM-$version-$rev-$target.exe /havana/llvm/$target/latest.exe
+retry-if-fails scp dist/LLVM-*.exe i10z.com:/havana/llvm/$target/LLVM-$version-$rev-$target.exe
+retry-if-fails ssh i10z.com ln -sf /havana/llvm/$target/LLVM-$version-$rev-$target.exe /havana/llvm/$target/latest.exe
