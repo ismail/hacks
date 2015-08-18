@@ -39,8 +39,8 @@ rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
 ../configure --host=$TARGET --target=$TARGET \
              --prefix=$INSTALL_ROOT/x86_64-w64-mingw32 \
              --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
-             --enable-sdk=all \
-             --enable-secure-api --disable-lib32 --disable-shared
+             --enable-sdk=all --enable-secure-api --disable-lib32 \
+             --disable-shared
 make -j$(nproc)
 make install-strip
 
