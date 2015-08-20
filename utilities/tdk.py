@@ -20,7 +20,7 @@ def searchWord(word):
     postData = {'kelime' : word}
     req = Request(URL, urlencode(postData).encode("iso-8859-9"))
     result = urlopen(req).read()
-    results = soup(result).findAll('table',attrs={'id' : 'hor-minimalist-a'})
+    results = soup(result, "lxml").findAll('table',attrs={'id' : 'hor-minimalist-a'})
     if results:
         resultTable = results[0]
     else:

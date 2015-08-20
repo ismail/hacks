@@ -16,7 +16,7 @@ if __name__ == "__main__":
     request.add_header('User-Agent', ua)
     bytesIO = BytesIO(urlopen(request).read())
     data = GzipFile(fileobj=bytesIO, mode="rb").read()
-    bs = soup(data)
+    bs = soup(data, "lxml")
     resultTable = bs.findAll('div', attrs={"class" : "wx-timepart"})
 
     print("\n%s%8s%10s %19s\n" % ("Time", "\u2103", "Rain%", "Conditions"))
