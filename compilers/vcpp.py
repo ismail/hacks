@@ -22,7 +22,7 @@ def compileCode(code, opts=None):
         print("Error while trying to connect %s: %s" % (url, e))
         sys.exit(-1)
 
-    soup = BeautifulSoup(data)
+    soup = BeautifulSoup(data, "lxml")
     eventValidation = soup.find('input', attrs={'id': '__EVENTVALIDATION'}).get('value')
     viewState = soup.find('input', attrs={'id': '__VIEWSTATE'}).get('value')
 
@@ -55,7 +55,7 @@ def compileCode(code, opts=None):
         print("Error while trying to connect %s: %s" % (url, e))
         sys.exit(-1)
 
-    soup = BeautifulSoup(data)
+    soup = BeautifulSoup(data, "lxml")
     result = soup.find('textarea', attrs={'id': 'TextBoxOutputLatest'})
     print(result.contents[0])
 
