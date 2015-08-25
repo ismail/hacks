@@ -79,7 +79,7 @@ rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
                       --without-included-gettext --enable-linker-build-id \
                       --program-prefix=$TARGET-
 
-make -j$(nproc)
+make CFLAGS_FOR_TARGET="-Wno-error" -j$(nproc)
 make install
 
 cd ..
