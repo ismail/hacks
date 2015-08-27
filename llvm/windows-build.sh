@@ -83,5 +83,9 @@ ninja package | tee -a ../build.log
 cd ..
 date +%s > .last_build_time
 rev="r$(git show | grep -oP "trunk@\d+" | cut -f2 -d"@")"
+
+# Here we don't want to exit on error
+set +e
+
 retry-if-fails scp dist/LLVM-*.exe i10z.com:/havana/llvm/$target/LLVM-$version-$rev-$target.exe
 retry-if-fails ssh i10z.com ln -sf /havana/llvm/$target/LLVM-$version-$rev-$target.exe /havana/llvm/$target/latest.exe
