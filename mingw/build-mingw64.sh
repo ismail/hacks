@@ -19,7 +19,7 @@ fi
 SRC_ROOT=/havana/mingw-w64-build
 LOCAL_MINGW_ROOT=/usr/x86_64-w64-mingw32/sys-root/mingw
 TARGET=x86_64-w64-mingw32
-GDB_VERSION=7.9.1
+GDB_VERSION=7.10
 
 cd $SRC_ROOT
 pull mingw-w64
