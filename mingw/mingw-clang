@@ -9,6 +9,7 @@ if [ ! -z ${WINDIR:-} ]; then
     GCC_VERSION=5.2.1
     GCC_ROOT=C:/mingw-w64-$GCC_VERSION
     COMMON_ARGS+=(--sysroot $GCC_ROOT)
+    export PATH=$(cygpath -u $GCC_ROOT/bin):$PATH
 else
     PATH=/opt/clang/bin:$PATH
 fi
