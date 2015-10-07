@@ -1,9 +1,0 @@
-#!/bin/sh
-
-url=http://www.yurticikargo.com/_layouts/ArikanliHolding.YurticiKargo.WebSite/ajaxproxy-shipmentservices.aspx
-method=GetShipmentsByDocId
-
-curl $url/$method -H 'Content-Type: application/json; charset=UTF-8' \
-    --data-binary "{docId:$1,captcha:'999999'}" -s |
-    sed -e 's/\\//g' -e 's/^.\{6\}//' -e 's/.\{2\}$//' |
-    jq -C ".UniqeView"
