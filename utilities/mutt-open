@@ -8,5 +8,5 @@ cp $1 ${NEWFILE} 1>/dev/null 2>&1
 if [ -z $COMSPEC ]; then
     xdg-open ${NEWFILE} &> /dev/null
 else
-    start $(cygpath -w ${NEWFILE})
+    explorer $(cygpath -w ${NEWFILE})
 fi
