@@ -54,7 +54,7 @@ fi
 cd $src
 pull . tools/clang projects/{compiler-rt,openmp} | tee build.log
 # XXX: HACK for VS2015
-rm -f test/DebugInfo/PDB/pdbdump-symbol-format.test
+rm -f test/DebugInfo/PDB/DIA/pdbdump-symbol-format.test
 
 git log -1 --format="%h" > .newbuild
 git --git-dir=./tools/clang/.git log -1 --format="%h" >> .newbuild
