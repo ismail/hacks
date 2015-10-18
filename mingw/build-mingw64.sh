@@ -19,7 +19,6 @@ fi
 SRC_ROOT=/havana/mingw-w64-build
 LOCAL_MINGW_ROOT=/usr/x86_64-w64-mingw32/sys-root/mingw
 TARGET=x86_64-w64-mingw32
-GDB_VERSION=7.10
 
 cd $SRC_ROOT
 pull mingw-w64
@@ -74,25 +73,15 @@ rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
                       --disable-win32-registry --enable-checking=release \
                       --enable-languages=c,c++,fortran --enable-fully-dynamic-string \
                       --enable-libgomp --enable-threads=win32 --disable-werror \
-                      --disable-libvtv --with-arch=corei7 \
-                      --with-tune=haswell --with-system-zlib --disable-nls \
-                      --without-included-gettext --enable-linker-build-id \
+                      --disable-libvtv --with-arch=corei7 --with-system-zlib \
+                      --with-tune=haswell --disable-nls --enable-linker-build-id \
                       --program-prefix=$TARGET-
 
 make CFLAGS_FOR_TARGET="-Wno-error" -j$(nproc)
 make install
 
-cd ..
-cd gdb-$GDB_VERSION
-rm -rf build; mkdir build; cd build
-../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT \
-             --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
-             --disable-shared --disable-nls --program-prefix=$TARGET-
-make -j$(nproc)
-make install
-
 cd $INSTALL_ROOT
-cp $LOCAL_MINGW_ROOT/bin/{libexpat-1,zlib1}.dll bin
+cp $LOCAL_MINGW_ROOT/bin/zlib1.dll bin
 rm -rf mingw libexec/gcc/$TARGET/$GCC_VERSION/install-tools
 rm bin/$TARGET-ld.bfd.exe bin/$TARGET-$TARGET-* $TARGET/bin/ld.bfd.exe 
 $TARGET-strip bin/* libexec/gcc/$TARGET/$GCC_VERSION/* || true
