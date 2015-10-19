@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 TARGET=armv7a-unknown-linux-gnueabihf
-GCC_VERSION=4.9
+GCC_VERSION=5
 CFLAGS=("-mtune=cortex-a8 -mfpu=vfpv3-d16")
 
 if [ -z $COMSPEC ]; then
