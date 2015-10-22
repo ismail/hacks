@@ -52,7 +52,7 @@ if [ $time_diff -lt $wait_hours ]; then
 fi
 
 cd $src
-pull . tools/clang projects/{compiler-rt,openmp} | tee build.log
+pull . tools/{clang,lld} projects/{compiler-rt,openmp} | tee build.log
 # XXX: HACK for VS2015
 rm -f test/DebugInfo/PDB/DIA/pdbdump-symbol-format.test
 
