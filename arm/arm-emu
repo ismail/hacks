@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SYSROOT=/havana/binaries/linaro-arm-linux-gnueabihf-4.9
+SYSROOT=/havana/binaries/linaro-arm-linux-gnueabihf-5
 
 qemu-arm $SYSROOT/lib/ld-linux-armhf.so.3 --library-path $SYSROOT/usr/lib:$SYSROOT/lib:$PWD "$@"
 
