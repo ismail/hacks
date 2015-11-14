@@ -45,9 +45,9 @@ if __name__ == "__main__":
     if arglength > 1:
         i = 0
         while i < arglength - 1:
-            path = sys.argv[i+1]
+            path = os.path.expanduser(sys.argv[i+1])
             if os.path.isdir(path):
-                doPull(sys.argv[i+1])
+                doPull(path)
             i += 1
     else:
         doPull(".")
