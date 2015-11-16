@@ -19,6 +19,7 @@ fi
 SRC_ROOT=/havana/mingw-w64-build
 LOCAL_MINGW_ROOT=/usr/x86_64-w64-mingw32/sys-root/mingw
 TARGET=x86_64-w64-mingw32
+BINUTILS_VERSION=2.25
 
 cd $SRC_ROOT
 pull mingw-w64
@@ -61,7 +62,6 @@ ln -s ../isl-* isl
 ln -s ../mpfr-* mpfr
 ln -s ../mpc-* mpc
 ln -s ../gcc/* .
-ln -s ../binutils-*/* . || true
 cd ..
 
 rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
@@ -79,6 +79,15 @@ rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
 
 make CFLAGS_FOR_TARGET="-Wno-error" -j$(nproc)
 make install
+
+cd $SRC_ROOT/binutils-$BINUTILS_VERSION
+rm -rf build; mkdir build; cd build
+../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT \
+             --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
+             --disable-shared --disable-nls --program-prefix=$TARGET-
+make -j$(nproc)
+make install
+
 
 cd $INSTALL_ROOT
 cp $LOCAL_MINGW_ROOT/bin/zlib1.dll bin
