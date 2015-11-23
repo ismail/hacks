@@ -84,7 +84,8 @@ cd $SRC_ROOT/binutils-$BINUTILS_VERSION
 rm -rf build; mkdir build; cd build
 ../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT \
              --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
-             --disable-shared --disable-nls --program-prefix=$TARGET-
+             --disable-shared --disable-nls --program-prefix=$TARGET- \
+             --with-sysroot
 make -j$(nproc)
 make install
 
