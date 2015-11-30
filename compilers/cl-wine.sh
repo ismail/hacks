@@ -1,9 +1,8 @@
 #!/usr/bin/env zsh
 
-VCPATH=/havana/binaries/msvc2013
-export INCLUDE="$VCPATH/VC/include;$VCPATH/win8sdk/Include/shared/;$VCPATH/win8sdk/Include/um/;$VCPATH/win8sdk/Include/winrt/"
-export LIB="$VCPATH/VC/lib;$VCPATH/win8sdk/Lib/winv6.3/um/x86"
-export WINEDEBUG=-all
-export WINEDLLOVERRIDES="*msvcr120=n"
+VCPATH=/havana/binaries/msvc2015
+export INCLUDE="$PWD/VC/include;$PWD/win_sdk/Include/shared/;$PWD/win_sdk/Include/um/;$PWD/win_sdk/Include/winrt/"
+export LIB="$PWD/VC/lib;$PWD/win_sdk/Lib/winv6.3/um/x86"
+export WINEDLLOVERRIDES="*msvcr140=n"
 
 wine $VCPATH/VC/bin/cl.exe /EHsc- /nologo "$@"
