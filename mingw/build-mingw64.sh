@@ -73,9 +73,8 @@ rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
                       --disable-win32-registry --enable-checking=release \
                       --enable-languages=c,c++,fortran --enable-fully-dynamic-string \
                       --enable-libgomp --enable-threads=win32 --disable-werror \
-                      --disable-libvtv --with-arch=corei7 --with-system-zlib \
-                      --with-tune=haswell --disable-nls --enable-linker-build-id \
-                      --program-prefix=$TARGET-
+                      --disable-libvtv --with-tune=corei7-avx --with-system-zlib \
+                      --disable-nls --enable-linker-build-id --program-prefix=$TARGET-
 
 make CFLAGS_FOR_TARGET="-Wno-error" -j$(nproc)
 make install
