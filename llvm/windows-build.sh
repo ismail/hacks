@@ -61,7 +61,7 @@ git --git-dir=./tools/clang/.git log -1 --format="%h" >> .newbuild
 cmp -s .newbuild .oldbuild
 
 if [ $? = 0 ]; then
-    echo "No new build. Sleeping for 1 hour" | tee -a build.log
+    echo "No new build. Sleeping for 1 hour." | tee -a build.log
     sleep 1h
     exit 0
 fi
