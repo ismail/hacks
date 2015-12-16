@@ -46,7 +46,7 @@ current_time=$(date +%s)
 time_diff=$(( (current_time - last_build_time) / (60*60) ))
 
 if [ $time_diff -lt $wait_hours ]; then
-    extra_wait_time = $(( wait_hours - time_diff ))
+    extra_wait_time=$(( wait_hours - time_diff ))
     echo "Last successful build was less than $wait_hours hours ago, sleeping for $extra_wait_time hours."
     sleep ${extra_wait_time}h
     exit 0
