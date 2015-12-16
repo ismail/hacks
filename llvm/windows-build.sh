@@ -35,8 +35,8 @@ python_exe=C:/Python27/python.exe
 
 function cleanup {
     cd $src
-    mv -f .newbuild .oldbuild
-    mv build.log ~/llvm-latest-build.log
+    [ -f .newbuild ] && mv .newbuild .oldbuild
+    [ -f build.log ] && mv build.log ~/llvm-latest-build.log
 }
 
 trap cleanup EXIT
