@@ -72,6 +72,7 @@ set -e
 
 rm -f .last_build_time
 rm -rf dist; mkdir dist; cd dist
+start_time=$(date +%s)
 
 export CC="$(cygpath -m =cl.exe)"
 export CXX=$CC
@@ -83,7 +84,7 @@ $python_exe -u ./bin/llvm-lit.py -v tools/clang/test | tee -a ../build.log
 ninja package | tee -a ../build.log
 
 cd ..
-date +%s > .last_build_time
+echo $start_time > .last_build_time
 rev="r$(git show | grep -oP "trunk@\d+" | cut -f2 -d"@")"
 
 cp dist/LLVM-*.exe $USERPROFILE/Desktop/
