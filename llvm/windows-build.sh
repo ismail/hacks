@@ -30,7 +30,7 @@ retry-if-fails () {
 version=3.8
 src=~/src/llvm
 target=${1:-win64}
-wait_hours=24
+wait_hours=23
 python_exe=C:/Python27/python.exe
 
 function cleanup {
@@ -47,8 +47,10 @@ time_diff=$(( (current_time - last_build_time) / (60*60) ))
 
 if [ $time_diff -lt $wait_hours ]; then
     extra_wait_time=$(( wait_hours - time_diff ))
-    echo "Last successful build was less than $wait_hours hours ago, sleeping for $extra_wait_time hours."
+    jitter=$[${RANDOM}%60]
+    echo "Sleeping for $extra_wait_time hours, $jitter minutes until next build."
     sleep ${extra_wait_time}h
+    sleep ${jitter}m
     exit 0
 fi
 
