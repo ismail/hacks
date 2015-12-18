@@ -30,7 +30,7 @@ retry-if-fails () {
 version=3.8
 src=~/src/llvm
 target=${1:-win64}
-wait_hours=23
+wait_hours=24
 python_exe=C:/Python27/python.exe
 
 function cleanup {
