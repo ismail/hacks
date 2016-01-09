@@ -45,10 +45,10 @@ current_date=$(date "+%Y%m%d")
 
 if [ $current_date = $last_build_date ]; then
     wait_hours=$(( 24 - $(date +%H) ))
-    jitter=$[${RANDOM}%60]m
+    jitter=$[${RANDOM}%60]
     echo "Sleeping for $wait_hours hours, $jitter minutes".
     sleep ${wait_hours}h
-    sleep $[${RANDOM}%60]m
+    sleep ${jitter}m
 fi
 
 cd $src
