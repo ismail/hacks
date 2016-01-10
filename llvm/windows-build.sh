@@ -43,7 +43,7 @@ trap cleanup EXIT
 last_build_date=$(cat $src/.last_build_date 2> /dev/null)
 current_date=$(date "+%Y%m%d")
 
-if [ $current_date = $last_build_date ]; then
+if [ "x$current_date" = "x$last_build_date" ]; then
     wait_hours=$(( 24 - $(date +%H) ))
     jitter=$[${RANDOM}%60]
     echo "Sleeping for $wait_hours hours, $jitter minutes".
