@@ -30,7 +30,6 @@ retry-if-fails () {
 version=3.8
 src=~/src/llvm
 target=${1:-win64}
-wait_hours=24
 python_exe=C:/Python27/python.exe
 
 function cleanup {
@@ -41,15 +40,13 @@ function cleanup {
 
 trap cleanup EXIT
 
-last_build_time=$(cat $src/.last_build_time 2> /dev/null)
-current_time=$(date +%s)
-time_diff=$(( (current_time - last_build_time) / (60*60) ))
+last_build_date=$(cat $src/.last_build_date 2> /dev/null)
+current_date=$(date "+%Y%m%d")
 
-if [ $time_diff -lt $wait_hours ]; then
-    extra_wait_time=$(( wait_hours - time_diff ))
-    echo "Sleeping for $extra_wait_time hours until next build."
-    sleep ${extra_wait_time}h
-    exit 0
+if [ "x$current_date" = "x$last_build_date" ]; then
+    wait_hours=$(( 24 - $(date +%H) ))
+    echo "Sleeping for $wait_hours hours until next build."
+    sleep ${wait_hours}h
 fi
 
 cd $src
@@ -63,6 +60,7 @@ cmp -s .newbuild .oldbuild
 
 if [ $? = 0 ]; then
     echo "No new build. Sleeping for 1 hour." | tee -a build.log
+    rm -f .last_build_date
     sleep 1h
     exit 0
 fi
@@ -70,9 +68,8 @@ fi
 # We set here because cmp would exit early otherwise
 set -e
 
-rm -f .last_build_time
+rm -f .last_build_date
 rm -rf dist; mkdir dist; cd dist
-start_time=$(date +%s)
 
 export CC="$(cygpath -m =cl.exe)"
 export CXX=$CC
@@ -84,7 +81,7 @@ $python_exe -u ./bin/llvm-lit.py -v tools/clang/test | tee -a ../build.log
 ninja package | tee -a ../build.log
 
 cd ..
-echo $start_time > .last_build_time
+echo $(date "+%Y%m%d") > .last_build_date
 rev="r$(git show | grep -oP "trunk@\d+" | cut -f2 -d"@")"
 
 cp dist/LLVM-*.exe $USERPROFILE/Desktop/
