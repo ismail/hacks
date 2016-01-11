@@ -47,10 +47,8 @@ time_diff=$(( (current_time - last_build_time) / (60*60) ))
 
 if [ $time_diff -lt $wait_hours ]; then
     extra_wait_time=$(( wait_hours - time_diff ))
-    jitter=$[${RANDOM}%60]
-    echo "Sleeping for $extra_wait_time hours, $jitter minutes until next build."
+    echo "Sleeping for $extra_wait_time hours until next build."
     sleep ${extra_wait_time}h
-    sleep ${jitter}m
     exit 0
 fi
 
