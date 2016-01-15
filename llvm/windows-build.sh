@@ -44,7 +44,7 @@ last_build_date=$(cat $src/.last_build_date 2> /dev/null)
 current_date=$(date "+%Y%m%d")
 
 if [ "x$current_date" = "x$last_build_date" ]; then
-    wait_hours=$(( 24 - $(date +%H) ))
+    wait_hours=$(( 23 - $(date +%H) ))
     echo "Sleeping for $wait_hours hours until next build."
     sleep ${wait_hours}h
 fi
