@@ -15,6 +15,5 @@ ln -sf $curdir/utilities/pb pbpaste
 ln -sf $curdir/utilities/pull.py pull
 ln -sf $curdir/utilities/qc.py qc
 ln -sf $curdir/utilities/tmux-shell tmuxsh
-ln -sf $curdir/utilities/weather.py weather
 
 popd
