@@ -20,4 +20,4 @@ zparseopts  v=verbose -verbose=verbose
 
 [[ ! -z $verbose ]] && JQ_FLAGS=.
 
-curl -s -A "$UA" "$URL/?id=$ID&cardno=$CARDNO" | jq "$JQ_FLAGS"
+curl -s -A "$UA" "$URL/?id=$ID&cardno=$CARDNO" | jq -C "$JQ_FLAGS"
