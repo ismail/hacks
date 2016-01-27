@@ -19,7 +19,7 @@ fi
 SRC_ROOT=/havana/mingw-w64-build
 LOCAL_MINGW_ROOT=/usr/x86_64-w64-mingw32/sys-root/mingw
 TARGET=x86_64-w64-mingw32
-BINUTILS_VERSION=2.25
+BINUTILS_VERSION=2.26
 
 cd $SRC_ROOT
 pull mingw-w64
@@ -84,7 +84,7 @@ rm -rf build; mkdir build; cd build
 ../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT \
              --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
              --disable-shared --disable-nls --program-prefix=$TARGET- \
-             --with-sysroot
+             --with-sysroot --with-system-zlib
 make -j$(nproc)
 make install
 
