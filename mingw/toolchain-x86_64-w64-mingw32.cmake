@@ -1,4 +1,4 @@
-set(CMAKE_AR ar)
+set(CMAKE_AR x86_64-w64-mingw32-ar)
 SET(CMAKE_C_COMPILER x86_64-w64-mingw32-gcc)
 SET(CMAKE_CXX_COMPILER x86_64-w64-mingw32-g++)
 SET(CMAKE_RANLIB x86_64-w64-mingw32-ranlib)
