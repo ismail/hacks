@@ -50,7 +50,6 @@ if [ "x$current_date" = "x$last_build_date" ]; then
 fi
 
 cd $src
-git checkout -f
 pull . tools/{clang,clang/tools/extra,lld} projects/{compiler-rt,openmp} | tee build.log
 
 git log -1 --format="%h" > .newbuild
