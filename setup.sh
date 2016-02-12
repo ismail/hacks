@@ -6,7 +6,6 @@ cd $HOME
 mkdir -p bin
 pushd bin
 
-ln -sf $curdir/compilers/ccl.sh ccl
 ln -sf $curdir/compilers/vcpp.py vcpp
 ln -sf $curdir/utilities/ldd-windows
 ln -sf $curdir/utilities/mutt-open
