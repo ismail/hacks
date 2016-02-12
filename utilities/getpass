@@ -6,9 +6,13 @@ fi
 
 FILE_PATH="$HOME/.$1_pass"
 
+if [ -d /cygdrive ]; then
+    FILE_PATH=$(cygpath -u $FILE_PATH)
+fi
+
 if [ -e $FILE_PATH ]; then
     if grep -q "BEGIN PGP MESSAGE" $FILE_PATH; then
-        gpg -d $FILE_PATH(+cyg)
+        gpg -d $FILE_PATH
     else
         cat $FILE_PATH
     fi
