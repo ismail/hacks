@@ -72,7 +72,7 @@ rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
                       --disable-gcov-tool --disable-multilib --disable-nls \
                       --disable-win32-registry --enable-checking=release \
                       --enable-languages=c,c++,fortran --enable-fully-dynamic-string \
-                      --enable-libgomp --enable-threads=win32 --disable-werror \
+                      --enable-libgomp --enable-threads=posix --disable-werror \
                       --disable-libvtv --with-tune=corei7-avx \
                       --disable-nls --enable-linker-build-id --program-prefix=$TARGET-
 
