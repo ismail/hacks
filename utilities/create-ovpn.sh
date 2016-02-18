@@ -9,6 +9,8 @@ resolv-retry infinite
 nobind
 persist-key
 persist-tun
+fragment 1400
+mssfix
 
 ns-cert-type server
 auth SHA512
