@@ -41,7 +41,7 @@ rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
              --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
              --enable-sdk=all --enable-secure-api --disable-lib32 \
              --disable-shared
-make
+make -j2
 make install-strip
 
 cd ../mingw-w64-libraries/winpthreads
@@ -49,7 +49,7 @@ rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
 ../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT/x86_64-w64-mingw32 \
              --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
              --disable-shared
-make
+make -j2
 make install-strip
 
 mkdir -p $INSTALL_ROOT/mingw/include
@@ -76,7 +76,7 @@ rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
                       --disable-libvtv --with-tune=corei7-avx \
                       --disable-nls --enable-linker-build-id --program-prefix=$TARGET-
 
-make CFLAGS_FOR_TARGET="-Wno-error"
+make CFLAGS_FOR_TARGET="-Wno-error" -j2
 make install
 
 cd $SRC_ROOT/binutils-$BINUTILS_VERSION
@@ -85,7 +85,7 @@ rm -rf build; mkdir build; cd build
              --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
              --disable-shared --disable-nls --program-prefix=$TARGET- \
              --with-sysroot
-make
+make -j2
 make install
 
 
