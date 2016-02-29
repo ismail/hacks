@@ -7,11 +7,9 @@ geometry="127x59--6--9"
 exec /usr/bin/xterm \
      +bc \
      +cm \
-     +fbx \
+     -lc \
      +sb \
      -uc \
-     -wc \
-     -u8 \
      -fa $font \
      -fd $font \
      -fs $font_size \
