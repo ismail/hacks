@@ -16,7 +16,7 @@ else
     exit 1
 fi
 
-SRC_ROOT=/havana/mingw-w64-build
+SRC_ROOT=/ssd/mingw-w64-build
 LOCAL_MINGW_ROOT=/usr/x86_64-w64-mingw32/sys-root/mingw
 TARGET=x86_64-w64-mingw32
 BINUTILS_VERSION=2.26
@@ -41,7 +41,7 @@ rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
              --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
              --enable-sdk=all --enable-secure-api --disable-lib32 \
              --disable-shared
-make -j2
+make -j4
 make install-strip
 
 cd ../mingw-w64-libraries/winpthreads
@@ -49,7 +49,7 @@ rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
 ../configure --host=$TARGET --target=$TARGET --prefix=$INSTALL_ROOT/x86_64-w64-mingw32 \
              --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
              --disable-shared
-make -j2
+make -j4
 make install-strip
 
 mkdir -p $INSTALL_ROOT/mingw/include
@@ -85,7 +85,7 @@ rm -rf build; mkdir build; cd build
              --libdir=$INSTALL_ROOT/lib --libexecdir=$INSTALL_ROOT/libexec \
              --disable-shared --disable-nls --program-prefix=$TARGET- \
              --with-sysroot
-make -j2
+make -j4
 make install
 
 
