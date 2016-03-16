@@ -71,7 +71,7 @@ rm -rf dist; mkdir dist; cd dist
 
 export CC="$(cygpath -m =cl.exe)"
 export CXX=$CC
-cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DLLVM_USE_CRT_RELEASE=MT -DLLVM_ENABLE_TIMESTAMPS=ON -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_TARGETS_TO_BUILD="ARM;X86" -DPYTHON_EXECUTABLE=$python_exe -DCLANG_DEFAULT_OPENMP_RUNTIME=libomp -DLLVM_BUILD_TESTS=ON -DLLVM_LIT_TOOLS_DIR=C:/cygwin64/bin .. | tee -a ../build.log
+cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DLLVM_USE_CRT_RELEASE=MT -DLLVM_ENABLE_TIMESTAMPS=ON -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_TARGETS_TO_BUILD="ARM;X86" -DPYTHON_EXECUTABLE=$python_exe -DCLANG_DEFAULT_OPENMP_RUNTIME=libomp -DLLVM_BUILD_TESTS=ON -DLLVM_LIT_TOOLS_DIR=C:/cygwin64/bin .. | tee -a ../build.log
 
 ninja -j2 | tee -a ../build.log
 $python_exe -u ./bin/llvm-lit.py -v test | tee -a ../build.log

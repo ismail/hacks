@@ -73,7 +73,7 @@ rm -rf build-$GCC_VERSION; mkdir build-$GCC_VERSION; cd build-$GCC_VERSION
                       --disable-win32-registry --enable-checking=release \
                       --enable-languages=c,c++,fortran --enable-fully-dynamic-string \
                       --enable-libgomp --enable-threads=posix --disable-werror \
-                      --disable-libvtv --with-tune=corei7-avx \
+                      --disable-libvtv --with-tune=core-avx2 \
                       --disable-nls --enable-linker-build-id --program-prefix=$TARGET-
 
 make CFLAGS_FOR_TARGET="-Wno-error" -j2

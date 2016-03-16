@@ -14,4 +14,4 @@ exec /usr/bin/xterm \
      -fd $font \
      -fs $font_size \
      -geometry $geometry \
-     -e ~/bin/tmuxsh
+     "$@"
