@@ -14,7 +14,7 @@ else
     PATH=/opt/clang/bin:$PATH
 fi
 
-COMMON_ARGS+=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET -static)
+COMMON_ARGS+=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET -stdlib=libstdc++)
 
 case $0 in
     *-clang)
