@@ -11,10 +11,11 @@ if [ ! -z ${WINDIR:-} ]; then
     COMMON_ARGS+=(--sysroot $GCC_ROOT)
     export PATH=$(cygpath -u $GCC_ROOT/bin):$PATH
 else
+    COMMON_ARGS+=(-stdlib=libstdc++)
     PATH=/opt/clang/bin:$PATH
 fi
 
-COMMON_ARGS+=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET -stdlib=libstdc++)
+COMMON_ARGS+=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET)
 
 case $0 in
     *-clang)
