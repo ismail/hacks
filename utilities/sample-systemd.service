@@ -7,9 +7,7 @@ Before=systemd-user-sessions.service
 User=ismail
 Type=simple
 ExecStart=/home/ismail/bin/ngrok -log=/home/ismail/.ngrok.log -log-level=INFO -config /home/ismail/.ngrok start ssh
-TimeoutSec=0
-StandardOutput=tty
-SysVStartPriority=99
+StandardOutput=journal
 
 [Install]
 WantedBy=multi-user.target
