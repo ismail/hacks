@@ -11,7 +11,6 @@ if [ ! -z ${WINDIR:-} ]; then
     COMMON_ARGS+=(--sysroot $GCC_ROOT)
     export PATH=$(cygpath -u $GCC_ROOT/bin):$PATH
 else
-    COMMON_ARGS+=(-stdlib=libstdc++)
     PATH=/opt/clang/bin:$PATH
 fi
 
