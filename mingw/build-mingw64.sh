@@ -99,4 +99,4 @@ f=mingw-w64-$GCC_VERSION-r$REVISION
 7z a -t7z -m0=lzma2 -mx=9 -mmt$(nproc) -ms=on $f.7z mingw-w64-$GCC_VERSION
 scp $f.7z i10z.com:/havana/mingw-w64/$UPLOAD_DIRECTORY/
 ssh i10z.com ln -sf /havana/mingw-w64/$UPLOAD_DIRECTORY/$f.7z /havana/mingw-w64/$UPLOAD_DIRECTORY/latest.7z
-rm -rf $f $f.7z
+rm -rf mingw-w64-$GCC_VERSION $f.7z
