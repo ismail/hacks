@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# Placed under public domain.
 # 2006-2014 İsmail Dönmez <ismail@donmez.ws>
 
 from urllib.parse import urlencode

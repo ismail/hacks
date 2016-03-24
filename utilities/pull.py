@@ -3,7 +3,6 @@
 #
 # Laziness is virtue
 # Copyright 2007-2015 İsmail Dönmez
-# Licensed under public domain
 
 import sys
 import os
