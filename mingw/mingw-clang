@@ -4,6 +4,7 @@ set -euo pipefail
 TARGET=x86_64-w64-mingw32
 WINDOWS_TARGET=0x0603
 local -a COMMON_ARGS
+local -a CFLAGS CXXFLAGS WARNING_FLAGS
 
 if [ ! -z ${WINDIR:-} ]; then
     GCC_VERSION=6.0.0
@@ -12,16 +13,20 @@ if [ ! -z ${WINDIR:-} ]; then
     export PATH=$(cygpath -u $GCC_ROOT/bin):$PATH
 else
     PATH=/opt/clang/bin:$PATH
+    CXXFLAGS+=("-stdlib=libstdc++")
 fi
 
+CFLAGS+=("-std=c11")
+CXXFLAGS+=("-std=c++14")
+WARNING_FLAGS+=(-Weverything -Wno-c++98-compat)
 COMMON_ARGS+=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET)
 
 case $0 in
     *-clang)
-        clang -std=c11 $COMMON_ARGS "$@"
+        clang $CFLAGS $COMMON_ARGS $WARNING_FLAGS "$@"
         ;;
     *-clang++)
-        clang++ -std=c++14 $COMMON_ARGS "$@"
+        clang++ $CXXFLAGS $COMMON_ARGS $WARNING_FLAGS "$@"
         ;;
     *)
         echo "Unknown command ${0:t}"
