@@ -9,6 +9,7 @@ function prompt
 }
 
 function vs-set($arch)
+{
 	pushd 'c:\Program Files (x86)\Microsoft Visual Studio 14.0\VC'
 	cmd /c "vcvarsall.bat $arch&set" |
 	foreach {
