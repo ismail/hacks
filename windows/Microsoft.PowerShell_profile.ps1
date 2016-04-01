@@ -8,10 +8,9 @@ function prompt
     return " "
 }
 
-function ps-vs32
-{
+function vs-set($arch)
 	pushd 'c:\Program Files (x86)\Microsoft Visual Studio 14.0\VC'
-	cmd /c "vcvarsall.bat x86&set" |
+	cmd /c "vcvarsall.bat $arch&set" |
 	foreach {
   	if ($_ -match "=") {
     		$v = $_.split("="); set-item -force -path "ENV:\$($v[0])"  -value "$($v[1])"
@@ -20,16 +19,14 @@ function ps-vs32
 	popd
 }
 
+function ps-vs32
+{
+    vs-set x86
+}
+
 function ps-vs64
 {
-	pushd 'c:\Program Files (x86)\Microsoft Visual Studio 14.0\VC'
-	cmd /c "vcvarsall.bat amd64&set" |
-	foreach {
-  	if ($_ -match "=") {
-    		$v = $_.split("="); set-item -force -path "ENV:\$($v[0])"  -value "$($v[1])"
-  	}
-	}
-	popd
+    vs-set amd64
 }
 
 set-psreadlineoption -t parameter darkblue
