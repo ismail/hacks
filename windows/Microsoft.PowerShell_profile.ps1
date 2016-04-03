@@ -30,6 +30,12 @@ function ps-vs64
     vs-set amd64
 }
 
+$OutputEncoding = New-Object -typename System.Text.UTF8Encoding
+[Console]::OutputEncoding = New-Object -typename System.Text.UTF8Encoding
+
 set-psreadlineoption -t parameter darkblue
 set-psreadlineoption -t operator darkblue
 set-psreadlineoption -t string darkgreen
+
+$win32="i686-w64-mingw32"
+$win64="x86_64-w64-mingw32"
