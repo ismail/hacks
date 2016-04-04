@@ -36,6 +36,8 @@ $OutputEncoding = New-Object -typename System.Text.UTF8Encoding
 set-psreadlineoption -t parameter darkblue
 set-psreadlineoption -t operator darkblue
 set-psreadlineoption -t string darkgreen
+set-psreadlinekeyhandler -Key UpArrow -Function HistorySearchBackward
+set-psreadlinekeyhandler -Key DownArrow -Function HistorySearchForward
 
 $win32="i686-w64-mingw32"
 $win64="x86_64-w64-mingw32"
