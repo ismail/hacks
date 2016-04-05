@@ -82,6 +82,11 @@ cd ..
 echo $(date "+%Y%m%d") > .last_build_date
 rev="r$(git show | grep -oP "trunk@\d+" | cut -f2 -d"@")"
 
-cp dist/LLVM-*.exe $USERPROFILE/Desktop/
-retry-if-fails scp dist/LLVM-*.exe i10z.com:/havana/llvm/$target/LLVM-$version-$rev-$target.exe
+osslsigncode sign -certs ~/csr/IsmailDonmez.pem \
+                  -key ~/csr/IsmailDonmez.key -h sha512 \
+                  -t http://time.certum.pl -n "LLVM" \
+                  -i http://llvm.org -in dist/LLVM-*.exe \
+                  -out dist/LLVM-signed.exe
+
+retry-if-fails scp dist/LLVM-signed.exe i10z.com:/havana/llvm/$target/LLVM-$version-$rev-$target.exe
 retry-if-fails ssh i10z.com ln -sf /havana/llvm/$target/LLVM-$version-$rev-$target.exe /havana/llvm/$target/latest.exe
