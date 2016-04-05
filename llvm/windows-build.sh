@@ -30,7 +30,7 @@ retry-if-fails () {
 version=3.9
 src=~/src/llvm
 target=${1:-win64}
-python_exe=C:/Python27/python.exe
+python_exe="C:/Program Files/Python35/python.exe"
 
 function cleanup {
     cd $src
