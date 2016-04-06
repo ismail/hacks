@@ -83,7 +83,7 @@ echo $(date "+%Y%m%d") > .last_build_date
 rev="r$(git show | grep -oP "trunk@\d+" | cut -f2 -d"@")"
 
 osslsigncode sign -certs ~/csr/IsmailDonmez.pem \
-                  -key ~/csr/IsmailDonmez.key -h sha512 \
+                  -key ~/csr/IsmailDonmez.key -h sha256 \
                   -t http://time.certum.pl -n "LLVM" \
                   -i http://llvm.org -in dist/LLVM-*.exe \
                   -out dist/LLVM-signed.exe
