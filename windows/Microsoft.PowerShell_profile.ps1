@@ -20,12 +20,12 @@ function vs-set($arch)
 	popd
 }
 
-function ps-vs32
+function vs32
 {
     vs-set x86
 }
 
-function ps-vs64
+function vs64
 {
     vs-set amd64
 }
