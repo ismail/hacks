@@ -1,6 +1,5 @@
 #!/bin/sh
 
-export TERM=tmux-256color
 PATH=/usr/bin:$PATH
 
 cd ~
