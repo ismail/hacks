@@ -12,8 +12,8 @@ cleanup () {
 
 
 if [ -d /cygdrive ]; then
-	f=$(cygpath -w $f)
-	i=$(cygpath -w $i)
+    f=$(cygpath -w $f)
+    i=$(cygpath -w $i)
     chmod +x $f
 fi
 
