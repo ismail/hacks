@@ -19,6 +19,6 @@ fi
 
 cat /dev/stdin > $i
 
-clang++ -std=c++14 -Wall -Wextra -o $f $i
+clang++ -fno-color-diagnostics -std=c++14 -Wall -Wextra -o $f $i
 
 $f

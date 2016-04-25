@@ -6,11 +6,11 @@ alias scp='rsync --archive --compress-level=3 \
            --progress --rsh=ssh -r'
 
 if [ -z ${1:-} ]; then
-    BRANCH_NAME=master
+    BRANCH_NAME=gcc-6-branch
     UPLOAD_DIRECTORY="6.x"
-elif [ x${1:-} = "xstable" ]; then
-    BRANCH_NAME=gcc-5-branch
-    UPLOAD_DIRECTORY="5.x"
+elif [ x${1:-} = "xtrunk" ]; then
+    BRANCH_NAME=master
+    UPLOAD_DIRECTORY="7.x"
 else
     echo "Unknown build type: $1"
     exit 1
@@ -25,8 +25,8 @@ cd $SRC_ROOT
 pull mingw-w64
 
 pushd gcc
-git checkout -f $BRANCH_NAME
 git pull
+git checkout -f $BRANCH_NAME
 GCC_VERSION=$(cat gcc/BASE-VER)
 INSTALL_ROOT=/havana/mingw-w64-$GCC_VERSION
 REVISION=$(git show | grep -oP "($BRANCH_NAME|trunk)@\d+" | cut -f2 -d"@")
@@ -97,6 +97,8 @@ cd ..
 
 f=mingw-w64-$GCC_VERSION-r$REVISION
 7z a -t7z -m0=lzma2 -mx=9 -mmt$(nproc) -ms=on $f.7z mingw-w64-$GCC_VERSION
-scp $f.7z i10z.com:/havana/mingw-w64/$UPLOAD_DIRECTORY/
-ssh i10z.com ln -sf /havana/mingw-w64/$UPLOAD_DIRECTORY/$f.7z /havana/mingw-w64/$UPLOAD_DIRECTORY/latest.7z
+#scp $f.7z i10z.com:/havana/mingw-w64/$UPLOAD_DIRECTORY/
+#ssh i10z.com ln -sf /havana/mingw-w64/$UPLOAD_DIRECTORY/$f.7z /havana/mingw-w64/$UPLOAD_DIRECTORY/latest.7z
+cat ~/bin/7.sfx $f.7z > $7.exe
+
 rm -rf mingw-w64-$GCC_VERSION $f.7z
