@@ -40,5 +40,5 @@ set-psreadlineoption -BellStyle None
 set-psreadlinekeyhandler -Key UpArrow -Function HistorySearchBackward
 set-psreadlinekeyhandler -Key DownArrow -Function HistorySearchForward
 
-win32=i686-x86_64-w64-mingw32
-win64=x86_64-w64-mingw32
+$win32="i686-x86_64-w64-mingw32"
+$win64="x86_64-w64-mingw32"
