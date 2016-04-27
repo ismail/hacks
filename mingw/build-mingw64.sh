@@ -97,8 +97,8 @@ cd ..
 
 f=mingw-w64-$GCC_VERSION-r$REVISION
 7z a -t7z -m0=lzma2 -mx=9 -mmt$(nproc) -ms=on $f.7z mingw-w64-$GCC_VERSION
-#scp $f.7z i10z.com:/havana/mingw-w64/$UPLOAD_DIRECTORY/
-#ssh i10z.com ln -sf /havana/mingw-w64/$UPLOAD_DIRECTORY/$f.7z /havana/mingw-w64/$UPLOAD_DIRECTORY/latest.7z
 cat ~/bin/7z.sfx $f.7z > $f.7z.exe
+scp $f.7z.exe i10z.com:/havana/mingw-w64/$UPLOAD_DIRECTORY/
+ssh i10z.com ln -sf /havana/mingw-w64/$UPLOAD_DIRECTORY/$f.7z.exe /havana/mingw-w64/$UPLOAD_DIRECTORY/latest.7z.exe
 
-rm -rf mingw-w64-$GCC_VERSION $f.7z
+rm -rf mingw-w64-$GCC_VERSION $f.7z $f.7z.exe
