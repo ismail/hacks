@@ -6,25 +6,28 @@ alias scp='rsync --archive --compress-level=3 \
            --progress --rsh=ssh -r'
 
 retry-if-fails () {
-    set +e
-    retry=1 
-    timeout=10 
-    while [ $retry -le $timeout ]
-    do
+    [[ -o errexit ]] && errexit_set="1"; set +e
+    retry=0
+    timeout=10
+
+    while [ $retry -le $timeout ]; do
         eval $@
-        if [ $? -eq 0 ]
-        then
+        if [ $? -eq 0 ]; then
             break
         fi
-        sleeptime=$(( 2**$retry )) 
+
+        let "retry += 1"
+        if [ $retry -ge $timeout ]; then
+            echo "Timeout reached while trying to run command."
+            break
+        fi
+
+        sleeptime=$(( 2**$retry ))
         echo "Command failed, sleeping $sleeptime seconds before retrying."
         sleep $sleeptime
-        let "retry += 1"
     done
-    if [ $retry -ge $timeout ]
-    then
-        echo "Timeout reached while trying to run command."
-    fi
+
+    [[ $errexit_set = "1" ]] && set -e
 }
 
 version=3.9
