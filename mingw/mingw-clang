@@ -7,7 +7,7 @@ local -a COMMON_ARGS
 local -a CFLAGS CXXFLAGS WARNING_FLAGS
 
 if [ ! -z ${WINDIR:-} ]; then
-    GCC_VERSION=6.0.1
+    GCC_VERSION=6.1.1
     GCC_ROOT=C:/mingw-w64-$GCC_VERSION
     COMMON_ARGS+=(--sysroot $GCC_ROOT)
     export PATH=$(cygpath -u $GCC_ROOT/bin):$PATH
