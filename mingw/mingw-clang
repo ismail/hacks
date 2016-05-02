@@ -18,7 +18,7 @@ fi
 
 CFLAGS+=("-std=c11")
 CXXFLAGS+=("-std=c++14")
-WARNING_FLAGS+=(-Weverything -Wno-c++98-compat)
+WARNING_FLAGS+=(-Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic)
 COMMON_ARGS+=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET)
 
 case $0 in
