@@ -72,7 +72,7 @@ set -e
 rm -f .last_build_date
 rm -rf dist; mkdir dist; cd dist
 
-export CC="$(cygpath -m =cl.exe)"
+export CC="C:/Program Files/LLVM/bin/clang-cl.exe"
 export CXX=$CC
 cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DLLVM_USE_CRT_RELEASE=MT -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_TARGETS_TO_BUILD="ARM;X86" -DPYTHON_EXECUTABLE=$python_exe -DCLANG_DEFAULT_OPENMP_RUNTIME=libomp -DCMAKE_CL_SHOWINCLUDES_PREFIX="Note: including file: " -DLLVM_BUILD_TESTS=ON -DLLVM_LIT_TOOLS_DIR=C:/cygwin64/bin .. | tee -a ../build.log
 
@@ -93,3 +93,5 @@ osslsigncode sign -certs ~/csr/IsmailDonmez.pem \
 
 retry-if-fails scp dist/LLVM-signed.exe i10z.com:/havana/llvm/$target/LLVM-$version-$rev-$target.exe
 retry-if-fails ssh i10z.com ln -sf /havana/llvm/$target/LLVM-$version-$rev-$target.exe /havana/llvm/$target/latest.exe
+cp dist/LLVM-signed.exe ~/Desktop
+chmod +x ~/Desktop/LLVM-signed.exe
