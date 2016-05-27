@@ -16,7 +16,7 @@ else
     exit 1
 fi
 
-SRC_ROOT=/ssd/mingw-w64-build
+SRC_ROOT=/havana/mingw-w64-build
 LOCAL_MINGW_ROOT=/usr/x86_64-w64-mingw32/sys-root/mingw
 TARGET=x86_64-w64-mingw32
 BINUTILS_VERSION=2.26
