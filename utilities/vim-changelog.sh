@@ -3,7 +3,7 @@
 directory=http://ftp.vim.org/pub/vim/patches
 version=8.0
 
-echo "Updated to revision $2, fixes the following problems"
+echo "Updated to revision $(echo $2 | sed 's/^0*//'), fixes the following problems"
 for i in {$1..$2}; do
     curl $directory/$version/$version.$i -s | grep -v "Binary file (standard input) matches" | \
     tr -d '\n' | grep -oP "Problem:.*Solution:" | sed s,"Problem:    ","  * ", | sed s,"Solution:",, | \
