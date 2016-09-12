@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 directory=http://ftp.vim.org/pub/vim/patches
-version=7.4
+version=8.0
 
 echo "Updated to revision $2, fixes the following problems"
 for i in {$1..$2}; do
