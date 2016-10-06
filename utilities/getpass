@@ -11,7 +11,7 @@ if [ -d /cygdrive ]; then
 fi
 
 if [ -e $FILE_PATH ]; then
-    if grep -q "BEGIN PGP MESSAGE" $FILE_PATH; then
+    if [[ "$(head -n1 $FILE_PATH)" = "-----BEGIN PGP MESSAGE-----" ]]; then
         gpg -d $FILE_PATH
     else
         cat $FILE_PATH
