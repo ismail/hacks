@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-NEWFILE=/tmp/mutt_bak_${1:t}
+NEWFILE=/tmp/mutt_bak_$((RANDOM))_${1:t}
 rm ${NEWFILE} -f
 
 cp $1 ${NEWFILE} 1>/dev/null 2>&1
