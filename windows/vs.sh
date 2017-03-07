@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-VERSION=14.0
+VERSION=2017
 
 name=${0:t}
 case $name in
@@ -11,5 +11,5 @@ case $name in
         ;;
 esac
 
-cmd /c "C:/Program Files (x86)/Microsoft Visual Studio $VERSION/VC/vcvarsall.bat" "$ARCH" "&&" zsh "-i"
+cmd /c "C:/Program Files (x86)/Microsoft Visual Studio/$VERSION/Community/VC/Auxiliary/Build/vcvarsall.bat" "$ARCH" "&&" zsh "-i"
 

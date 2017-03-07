@@ -10,7 +10,7 @@ function prompt
 
 function vs-set($arch)
 {
-	pushd 'c:\Program Files (x86)\Microsoft Visual Studio 14.0\VC'
+	pushd 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build'
 	cmd /c "vcvarsall.bat $arch&set" |
 	foreach {
   	if ($_ -match "=") {
@@ -28,6 +28,11 @@ function vs32
 function vs64
 {
     vs-set amd64
+}
+
+function workon ( $venv )
+{
+    . "C:\Users\ismail\py-virtualenvironments\$venv\Scripts\Activate.ps1"
 }
 
 $OutputEncoding = New-Object -typename System.Text.UTF8Encoding
