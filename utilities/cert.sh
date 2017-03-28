@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-DAYS_TO_EXPIRE=7
+DAYS_TO_EXPIRE=14
 EMAIL=ismail@i10z.com
 KEYTYPE=rsa4096
 WEBROOT=/havana
@@ -23,3 +23,16 @@ function renew
 renew donmez.uk
 renew donmez.ws
 renew i10z.com
+
+echo -n "Installing certificates... "
+
+(
+cd ~/.lego/certificates
+for i in i10z.com donmez.uk donmez.ws; do
+    echo -n "$i "
+    cp $i.key $i.crt /etc/nginx/ssl/$i
+done
+)
+
+echo
+echo "Done. Please restart nginx."
