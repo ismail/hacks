@@ -7,7 +7,6 @@ CFLAGS=("-mtune=cortex-a8 -mfpu=vfpv3-d16")
 if [ -z $COMSPEC ]; then
     SYSROOT=/havana/binaries/linaro-arm-linux-gnueabihf-$GCC_VERSION
     CFLAGS+=(-fuse-ld=gold)
-    PATH=/opt/clang/bin:$PATH
 else
     SYSROOT=C:/linaro-arm-linux-gnueabihf-$GCC_VERSION
     PATH=$(cygpath -u $SYSROOT/arm-linux-gnueabihf/bin):$PATH
