@@ -11,6 +11,7 @@ filtered_tenses = ["Perfekt", "Präteritum"]
 def findKonjugation(string):
     req = Request("https://www.verbformen.de/konjugation/?w=%s" % quote(string) )
     s=soup(urlopen(req).read(), "lxml")
+    result = {}
 
     for table in s.findAll('section', attrs={'class': 'rBox rBoxWht'}):
         div_id = table.find('div', attrs={'id': 'indikativ'})
@@ -19,10 +20,15 @@ def findKonjugation(string):
             for column in table.findAll('div', attrs={'class': 'vTbl'}):
                 tense = column.find('h3').text
                 if tense in filtered_tenses:
-                    print(f"-> {tense}")
+                    result[tense] = []
                     for tr in column.findAll('tr'):
-                        print(tr.text)
-                    print("")
+                        result[tense].append(tr.text)
+            break
+
+    for tense in filtered_tenses:
+        print(f"\n\033[1m{tense}\033[0m")
+        print("\n".join(result[tense]))
+        print("")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -30,7 +36,7 @@ if __name__ == "__main__":
             while True:
                 words = input("Was möchten Sie konjugieren? > ")
                 findKonjugation(words)
-        except KeyboardInterrupt:
+        except (EOFError, KeyboardInterrupt):
             print("")
             sys.exit(0)
     else:
