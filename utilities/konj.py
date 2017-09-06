@@ -9,7 +9,7 @@ import sys
 filtered_tenses = ["Perfekt", "Präteritum"]
 
 def findKonjugation(string):
-    req = Request("https://www.verbformen.de/konjugation/?w=%s" % string )
+    req = Request("https://www.verbformen.de/konjugation/?w=%s" % quote(string) )
     s=soup(urlopen(req).read(), "lxml")
 
     for table in s.findAll('section', attrs={'class': 'rBox rBoxWht'}):
@@ -25,8 +25,7 @@ def findKonjugation(string):
                     print("")
 
 if __name__ == "__main__":
-    try:
-        findKonjugation(sys.argv[1])
-    except IndexError:
-        print("Please pass an argument.")
-
+    if len(sys.argv) < 2:
+        print("Please enter an argument.")
+    else:
+        findKonjugation(" ".join(sys.argv[1:]))
