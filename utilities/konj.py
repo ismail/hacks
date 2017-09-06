@@ -26,6 +26,12 @@ def findKonjugation(string):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Please enter an argument.")
+        try:
+            while True:
+                words = input("Was möchten Sie konjugieren? > ")
+                findKonjugation(words)
+        except KeyboardInterrupt:
+            print("")
+            sys.exit(0)
     else:
         findKonjugation(" ".join(sys.argv[1:]))
