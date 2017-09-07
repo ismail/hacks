@@ -25,10 +25,13 @@ def findKonjugation(string):
                         result[tense].append(tr.text)
             break
 
-    for tense in filtered_tenses:
-        print(f"\n\033[1m{tense}\033[0m")
-        print("\n".join(result[tense]))
-        print("")
+    if len(result) >= 2:
+        for tense in filtered_tenses:
+            print(f"\n\033[1m{tense}\033[0m")
+            print("\n".join(result[tense]))
+            print("")
+    else:
+        print("No result found.")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
