@@ -6,10 +6,11 @@ from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup as soup
 import sys
 
+url = "https://www.verbformen.de/konjugation/?w="
 filtered_tenses = ["Perfekt", "Präteritum"]
 
 def findKonjugation(string):
-    req = Request("https://www.verbformen.de/konjugation/?w=%s" % quote(string) )
+    req = Request(f"{url}{quote(string)}")
     s=soup(urlopen(req).read(), "lxml")
     result = {}
 
@@ -30,6 +31,7 @@ def findKonjugation(string):
             print(f"\n\033[1m{tense}\033[0m")
             print("\n".join(result[tense]))
             print("")
+        print(f"Originalquelle: {url}{quote(string)}\n")
     else:
         print("No result found.")
 
