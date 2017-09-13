@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup as soup
 import sys
 
 url = "https://www.verbformen.de/konjugation/?w="
-filtered_tenses = ["Perfekt", "Präteritum"]
+filtered_tenses = ["Präsens", "Perfekt", "Präteritum"]
 
 def findKonjugation(string):
     req = Request(f"{url}{quote(string)}")
