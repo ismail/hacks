@@ -11,5 +11,5 @@ case $name in
         ;;
 esac
 
-cmd /c "C:/Program Files (x86)/Microsoft Visual Studio/$VERSION/Community/VC/Auxiliary/Build/vcvarsall.bat" "$ARCH" "&&" zsh "-i"
+cmd /c "set" "VSCMD_START_DIR=%CD%" "&&" "C:/Program Files (x86)/Microsoft Visual Studio/$VERSION/Community/VC/Auxiliary/Build/vcvarsall.bat" "$ARCH" "&&" zsh "-i"
 

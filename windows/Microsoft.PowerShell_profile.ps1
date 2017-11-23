@@ -11,7 +11,7 @@ function prompt
 function vs-set($arch)
 {
 	pushd 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build'
-	cmd /c "vcvarsall.bat $arch&set" |
+	cmd /c "set VSCMD_START_DIR=%CD% && vcvarsall.bat $arch&set" |
 	foreach {
   	if ($_ -match "=") {
     		$v = $_.split("="); set-item -force -path "ENV:\$($v[0])"  -value "$($v[1])"
@@ -30,7 +30,7 @@ function vs64
     vs-set amd64
 }
 
-function workon ( $venv )
+function activate ( $venv )
 {
     . "C:\Users\ismail\py-virtualenvironments\$venv\Scripts\Activate.ps1"
 }
