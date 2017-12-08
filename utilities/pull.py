@@ -31,7 +31,7 @@ def doPull(directory):
 
     for path in vcDict.keys():
         if os.path.exists(path):
-            log(os.path.basename(directory))
+            log(os.path.abspath(directory))
             sys.stdout.flush()
             os.system(vcDict[path])
             break
