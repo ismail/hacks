@@ -42,6 +42,17 @@ if __name__ == "__main__":
     arglength = len(sys.argv)
 
     if arglength > 1:
+        if sys.argv[1] == "--force":
+            if arglength == 3:
+                os.chdir(sys.argv[2])
+
+            root = os.path.abspath(".")
+            paths = sorted(set([os.path.join(root, x[0]) for x in os.walk(root)]))
+            for path in paths:
+                doPull(path)
+
+            sys.exit(0)
+
         i = 0
         while i < arglength - 1:
             path = os.path.expanduser(sys.argv[i+1])
