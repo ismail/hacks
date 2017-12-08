@@ -6,17 +6,8 @@ WINDOWS_TARGET=0x0603
 local -a COMMON_ARGS
 local -a CFLAGS CXXFLAGS WARNING_FLAGS
 
-if [ ! -z ${WINDIR:-} ]; then
-    GCC_VERSION=6.1.1
-    GCC_ROOT=C:/mingw-w64-$GCC_VERSION
-    COMMON_ARGS+=(--sysroot $GCC_ROOT)
-    export PATH=$(cygpath -u $GCC_ROOT/bin):$PATH
-else
-    CXXFLAGS+=("-stdlib=libstdc++")
-fi
-
 CFLAGS+=("-std=c11")
-CXXFLAGS+=("-std=c++14")
+CXXFLAGS+=("-stdlib=libstdc++" "-std=c++14")
 WARNING_FLAGS+=(-Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic)
 COMMON_ARGS+=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET)
 
