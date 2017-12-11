@@ -7,7 +7,8 @@ from bs4 import BeautifulSoup
 from urllib import error, parse, request
 import sys
 
-url="http://webcompiler.cloudapp.net/"
+url = "http://webcompiler.cloudapp.net/"
+
 
 def compileCode(code, opts=None):
     req = request.Request(url)
@@ -22,7 +23,10 @@ def compileCode(code, opts=None):
         sys.exit(-1)
 
     soup = BeautifulSoup(data, "lxml")
-    eventValidation = soup.find('input', attrs={'id': '__EVENTVALIDATION'}).get('value')
+    eventValidation = soup.find(
+        'input', attrs={
+            'id': '__EVENTVALIDATION'
+        }).get('value')
     viewState = soup.find('input', attrs={'id': '__VIEWSTATE'}).get('value')
 
     params = parse.urlencode({
@@ -41,12 +45,11 @@ def compileCode(code, opts=None):
         "Content-type": "application/x-www-form-urlencoded",
         "Origin": "http://webcompiler.cloudapp.net",
         "Referer": "http://webcompiler.cloudapp.net/",
-        "User-Agent": "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko"
+        "User-Agent": "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0)"
     }
 
     req = request.Request("http://webcompiler.cloudapp.net/",
-                          params.encode("utf-8"),
-                          headers)
+                          params.encode("utf-8"), headers)
 
     try:
         data = request.urlopen(req).read()
