@@ -8,7 +8,7 @@ from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 import sys
 
-URL="http://www.tdk.gov.tr/index.php?option=com_gts&arama=gts&guid=TDK.GTS.546b3e9c2e0046.90953438"
+URL = "http://www.tdk.gov.tr/index.php?option=com_gts&arama=gts&guid=TDK.GTS.546b3e9c2e0046.90953438"
 
 try:
     from bs4 import BeautifulSoup as soup
@@ -16,8 +16,9 @@ except ImportError:
     print("Sisteminize öncelikle BeautifulSoup4 kurun.")
     sys.exit(1)
 
+
 def searchWord(word):
-    postData = {'kelime' : word}
+    postData = {'kelime': word}
     req = Request(URL, urlencode(postData).encode("iso-8859-9"))
 
     try:
@@ -26,7 +27,10 @@ def searchWord(word):
         print(e)
         sys.exit(-1)
 
-    results = soup(result, "lxml").findAll('table',attrs={'id' : 'hor-minimalist-a'})
+    results = soup(result, "lxml").findAll(
+        'table', attrs={
+            'id': 'hor-minimalist-a'
+        })
     if results:
         resultTable = results[0]
     else:
@@ -37,6 +41,7 @@ def searchWord(word):
         text = td.text.strip()
         text = text.replace('"', '\n"', 1)
         print("%s\n" % text)
+
 
 if __name__ == "__main__":
     if (len(sys.argv) != 2):

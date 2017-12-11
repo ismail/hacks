@@ -9,9 +9,10 @@ import sys
 url = "https://www.verbformen.de/konjugation/?w="
 filtered_tenses = ["Präsens", "Perfekt", "Präteritum"]
 
+
 def findKonjugation(string):
     req = Request(f"{url}{quote(string)}")
-    s=soup(urlopen(req).read(), "lxml")
+    s = soup(urlopen(req).read(), "lxml")
     result = {}
 
     for table in s.findAll('section', attrs={'class': 'rBox rBoxWht'}):
@@ -34,6 +35,7 @@ def findKonjugation(string):
         print(f"Originalquelle: {url}{quote(string)}\n")
     else:
         print("No result found.")
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
