@@ -42,7 +42,7 @@ if __name__ == "__main__":
     arglength = len(sys.argv)
 
     if arglength > 1:
-        if sys.argv[1] == "--force":
+        if sys.argv[1] in ["-r", "--recursive"]:
             if arglength == 3:
                 os.chdir(sys.argv[2])
 
