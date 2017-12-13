@@ -32,7 +32,7 @@ def findKonjugation(string):
             print(f"\n\033[1m{tense}\033[0m")
             print("\n".join(result[tense]))
             print("")
-        print(f"Originalquelle: {url}{quote(string)}\n")
+        print(f"Quelle: {url}{quote(string)}\n")
     else:
         print("No result found.")
 
