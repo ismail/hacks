@@ -1,4 +1,7 @@
-#!/usr/bin/env zsh
+#!/bin/sh
 
-echo performance | sudo tee -a /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor &> /dev/null
-
+if [[ $1 = "-r" ]]; then
+    sudo cpupower frequency-set -g powersave
+else
+    sudo cpupower frequency-set -g performance
+fi
