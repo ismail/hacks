@@ -1,0 +1,15 @@
+#!/bin/sh
+set -euo pipefail
+
+# Translations
+curl -s "https://linguee-api.herokuapp.com/api?q=$@&src=de&dst=en" | jq '[limit(4; .exact_matches[].translations[] | {Translation: .text, Examples: .examples})]'
+
+printf "\n\n"
+
+# Audio
+audios=$(curl -s "https://linguee-api.herokuapp.com/api?q=$@&src=de&dst=en" | jq -r '.exact_matches[].audio_links[].url_part')
+
+for audio in ${audios}; do
+    printf "https://www.linguee.de/mp3/${audio}.mp3\n"
+done
+
