@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup as soup
 import sys
 
 url = "https://www.verbformen.de/konjugation/?w="
-filtered_tenses = ["Präsens", "Perfekt", "Präteritum"]
+filtered_tenses = ["Präsens", "Perfekt", "Präteritum", "Plusquam"]
 
 
 def findKonjugation(string):
@@ -24,13 +24,13 @@ def findKonjugation(string):
                 if tense in filtered_tenses:
                     result[tense] = []
                     for tr in column.findAll('tr'):
-                        result[tense].append(tr.text)
+                        result[tense].append(tr.text.strip())
             break
 
     if len(result) >= 2:
         for tense in filtered_tenses:
-            print(f"\n\033[1m{tense}\033[0m")
-            print("\n".join(result[tense]))
+            print(f"\033[1m{tense}\033[0m")
+            print(" / ".join(result[tense]))
             print("")
         print(f"Quelle: {url}{quote(string)}\n")
     else:
