@@ -15,11 +15,13 @@ def findKonjugation(string):
     s = soup(urlopen(req).read(), "lxml")
     result = {}
 
+    for tense in filtered_tenses:
+        result[tense] = []
+
     for table in s.findAll('section', attrs={'class': 'rBox rBoxWht'}):
         for column in table.findAll('div', attrs={'class': 'vTbl'}):
             tense = column.find('h3').text
-            if tense in filtered_tenses:
-                result[tense] = []
+            if (tense in filtered_tenses) and not result[tense]:
                 for tr in column.findAll('tr'):
                     result[tense].append(tr.text.strip())
 
