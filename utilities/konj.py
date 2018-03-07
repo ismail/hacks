@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup as soup
 import sys
 
 url = "https://www.verbformen.de/konjugation/?w="
-filtered_tenses = ["Präsens", "Perfekt", "Präteritum", "Plusquam"]
+filtered_tenses = ["Imperativ", "Präsens", "Perfekt", "Präteritum", "Plusquam"]
 
 
 def findKonjugation(string):
@@ -16,16 +16,12 @@ def findKonjugation(string):
     result = {}
 
     for table in s.findAll('section', attrs={'class': 'rBox rBoxWht'}):
-        div_id = table.find('div', attrs={'id': 'indikativ'})
-
-        if div_id is not None:
-            for column in table.findAll('div', attrs={'class': 'vTbl'}):
-                tense = column.find('h3').text
-                if tense in filtered_tenses:
-                    result[tense] = []
-                    for tr in column.findAll('tr'):
-                        result[tense].append(tr.text.strip())
-            break
+        for column in table.findAll('div', attrs={'class': 'vTbl'}):
+            tense = column.find('h3').text
+            if tense in filtered_tenses:
+                result[tense] = []
+                for tr in column.findAll('tr'):
+                    result[tense].append(tr.text.strip())
 
     if len(result) >= 2:
         for tense in filtered_tenses:
