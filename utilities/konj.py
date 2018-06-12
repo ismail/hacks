@@ -25,7 +25,7 @@ def findKonjugation(string):
                 for tr in column.findAll('tr'):
                     result[tense].append(tr.text.strip())
 
-    if len(result) >= 2:
+    if result["Präsens"]:
         for tense in filtered_tenses:
             print(f"\033[1m{tense}\033[0m")
             print(" / ".join(result[tense]))
