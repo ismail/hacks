@@ -27,19 +27,13 @@ def log(string, isTTY=sys.stdout.isatty()):
         print(string)
 
 
-def doPull(directory):
-    currentDirectory = os.getcwd()
-    os.chdir(directory)
-
-    for path in vcDict.keys():
-        if os.path.exists(path):
-            log(os.path.abspath("."))
+def doPull(dest):
+    for key in vcDict.keys():
+        if os.path.exists(os.path.join(dest, key)):
+            log(os.path.abspath(dest))
             sys.stdout.flush()
-            os.system(vcDict[path])
+            os.system(vcDict[key])
             break
-
-    os.chdir(currentDirectory)
-
 
 if __name__ == "__main__":
     arglength = len(sys.argv)
