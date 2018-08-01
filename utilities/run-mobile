@@ -6,11 +6,11 @@ import sys
 mobile_emulation = {"deviceName": "iPhone X"}
 chrome_options = webdriver.ChromeOptions()
 
-chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+chrome_options.add_argument(f"app={sys.argv[1]}")
+chrome_options.add_argument("disable-notifications")
 chrome_options.add_argument("user-data-dir=selenium")
-chrome_options.add_argument("--disable-notifications")
-chrome_options.add_argument(f"--app={sys.argv[1]}")
 chrome_options.add_argument("window-size=376,814")
+chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
 
 driver = webdriver.Remote(
     command_executor='http://127.0.0.1:9515',
