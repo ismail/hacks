@@ -4,14 +4,23 @@ from selenium import webdriver
 from urllib.parse import urlparse
 import sys
 
-mobile_emulation = {"deviceName": "iPhone X"}
-chrome_options = webdriver.ChromeOptions()
 
-chrome_options.add_argument(f"app={sys.argv[1]}")
-chrome_options.add_argument(f"user-data-dir=selenium/{urlparse(sys.argv[1]).netloc}")
-chrome_options.add_argument("window-size=376,814")
-chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+def openPage(url):
+    chrome_options = webdriver.ChromeOptions()
+    data_directory = f"selenium/{urlparse(url).netloc}"
 
-driver = webdriver.Remote(
-    command_executor='http://127.0.0.1:9515',
-    desired_capabilities=chrome_options.to_capabilities())
+    chrome_options.add_argument(f"app={url}")
+    chrome_options.add_argument(f"user-data-directory={data_directory}")
+    chrome_options.add_argument("window-size=376,814")
+    chrome_options.add_experimental_option("mobileEmulation", {
+        "deviceName": "iPhone X"
+    })
+
+    webdriver.Remote(
+        command_executor='http://127.0.0.1:9515',
+        desired_capabilities=chrome_options.to_capabilities())
+
+
+if __name__ == "__main__":
+    for url in sys.argv[1:]:
+        openPage(url)
