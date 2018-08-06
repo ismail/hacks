@@ -10,7 +10,7 @@ def openPage(url):
     data_directory = f"selenium/{urlparse(url).netloc}"
 
     chrome_options.add_argument(f"app={url}")
-    chrome_options.add_argument(f"user-data-directory={data_directory}")
+    chrome_options.add_argument(f"user-data-dir={data_directory}")
     chrome_options.add_argument("window-size=376,814")
     chrome_options.add_experimental_option("mobileEmulation", {
         "deviceName": "iPhone X"
