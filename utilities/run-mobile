@@ -12,6 +12,7 @@ def openPage(url):
 
     chrome_options.add_argument(f"app={url}")
     chrome_options.add_argument(f"user-data-dir={data_directory}")
+    chrome_options.add_argument("window-size=375,812")
     chrome_options.add_experimental_option("mobileEmulation", {
         "deviceName": "iPhone X"
     })
