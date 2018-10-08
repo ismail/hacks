@@ -10,4 +10,4 @@ curl -s https://www.deutschepost.de/sendung/simpleQueryResult.html \
         --data "form.sendungsnummer=$2" \
         --data "form.einlieferungsdatum_tag=$day" \
         --data "form.einlieferungsdatum_monat=$month" \
-        --data "form.einlieferungsdatum_jahr=$year" | grep -E "Die Sendung|zur Sendung" | sed 's/^  *//g'
+        --data "form.einlieferungsdatum_jahr=$year" | grep -m1 -E "Die Sendung|zur Sendung|nicht vorgenommen" | sed 's/^  *//g'
