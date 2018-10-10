@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from pathlib import Path 
+from pathlib import Path
 from selenium import webdriver
 from urllib.parse import urlparse
 import sys
@@ -10,12 +10,12 @@ def openPage(url):
     chrome_options = webdriver.ChromeOptions()
     data_directory = f"{Path.home()}/selenium/{urlparse(url).netloc}"
 
+    chrome_options.binary_location = "/usr/bin/google-chrome-beta"
     chrome_options.add_argument(f"app={url}")
     chrome_options.add_argument(f"user-data-dir={data_directory}")
     chrome_options.add_argument("window-size=375,812")
-    chrome_options.add_experimental_option("mobileEmulation", {
-        "deviceName": "iPhone X"
-    })
+    chrome_options.add_experimental_option("mobileEmulation",
+                                           {"deviceName": "iPhone X"})
 
     webdriver.Remote(
         command_executor='http://127.0.0.1:9515',
