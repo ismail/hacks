@@ -14,13 +14,22 @@ def openPage(url):
     chrome_options.add_argument(f"app={url}")
     chrome_options.add_argument(f"user-data-dir={data_directory}")
     chrome_options.add_argument("window-size=375,812")
-    chrome_options.add_experimental_option("mobileEmulation",
-                                           {"deviceName": "iPhone X"})
+
+    # iPhone XS
+    mobile_emulation = {
+        "deviceMetrics": {
+            "width": 375,
+            "height": 812,
+            "pixelRatio": 3.0
+        },
+        "userAgent":
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 12_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Mobile/15E148 Safari/604.1"
+    }
+    chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
 
     webdriver.Remote(
         command_executor='http://127.0.0.1:9515',
         desired_capabilities=chrome_options.to_capabilities())
-
 
 if __name__ == "__main__":
     for url in sys.argv[1:]:
