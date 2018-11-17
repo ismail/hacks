@@ -32,18 +32,15 @@ function vs64
 
 function activate ( $venv )
 {
-    . "C:\Users\ismail\py-virtualenvironments\$venv\Scripts\Activate.ps1"
+    . "C:\Users\ismail\Documents\python\$venv\Scripts\Activate.ps1"
 }
 
-$OutputEncoding = New-Object -typename System.Text.UTF8Encoding
-[Console]::OutputEncoding = New-Object -typename System.Text.UTF8Encoding
+[console]::OutputEncoding = [Text.Encoding]::Utf8
 
-set-psreadlineoption -t parameter darkblue
-set-psreadlineoption -t operator darkblue
-set-psreadlineoption -t string darkgreen
 set-psreadlineoption -BellStyle None
 set-psreadlinekeyhandler -Key UpArrow -Function HistorySearchBackward
 set-psreadlinekeyhandler -Key DownArrow -Function HistorySearchForward
+set-psreadlineoption -Colors @{Parameter = 'darkblue'; Operator='darkblue'; String='darkgreen'}
 
 $win32="i686-x86_64-w64-mingw32"
 $win64="x86_64-w64-mingw32"
