@@ -8,7 +8,7 @@ import sys
 
 def openPage(url):
     chrome_options = webdriver.ChromeOptions()
-    data_directory = f"{Path.home()}/selenium/{urlparse(url).netloc.strip('www')}"
+    data_directory = f"{Path.home()}/selenium/{urlparse(url).netloc.strip('www.')}"
 
     chrome_options.binary_location = "/usr/bin/google-chrome-beta"
     chrome_options.add_argument(f"app={url}")
