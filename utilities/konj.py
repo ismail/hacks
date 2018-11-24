@@ -11,8 +11,15 @@ filtered_tenses = ["Imperativ", "Präsens", "Perfekt", "Präteritum", "Plusquam"
 
 
 def findKonjugation(string):
-    req = Request(f"{url}{quote(string)}")
-    s = soup(urlopen(req).read(), "lxml")
+    req = Request(
+        f"{url}{quote(string)}",
+        data=None,
+        headers={
+            'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'
+        })
+    req.add_header('Referer', 'https://www.verbformen.de/konjugation/')
+    s = soup(urlopen(req).read(), "html.parser")
     result = {}
 
     for tense in filtered_tenses:
