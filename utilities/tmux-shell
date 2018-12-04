@@ -4,4 +4,4 @@ TERM=tmux-256color
 PATH=/usr/bin:$PATH
 
 cd ~
-tmux -u -2 attach || tmux -u -2 new
+tmux -u -2 "$@" attach || tmux -u -2 "$@" new
