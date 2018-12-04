@@ -3,6 +3,7 @@
 from pathlib import Path
 from selenium import webdriver
 from urllib.parse import urlparse
+import os
 import sys
 
 
@@ -12,7 +13,12 @@ def openPage(url):
 
     chrome_options.add_argument(f"app={url}")
     chrome_options.add_argument(f"user-data-dir={data_directory}")
-    chrome_options.add_argument("window-size=386,812")
+
+    # On Windows there seems to be a pixel size problem?
+    if os.name == 'nt':
+        chrome_options.add_argument("window-size=386,812")
+    else:
+        chrome_options.add_argument("window-size=375,812")
 
     # iPhone XS
     mobile_emulation = {
