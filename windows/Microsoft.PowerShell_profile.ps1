@@ -36,6 +36,7 @@ function activate ( $venv )
 }
 
 [console]::OutputEncoding = [Text.Encoding]::Utf8
+$env:LC_ALL='C.UTF-8'
 
 set-psreadlineoption -BellStyle None
 set-psreadlinekeyhandler -Key UpArrow -Function HistorySearchBackward
