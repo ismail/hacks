@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# 2006-2014 İsmail Dönmez <ismail@donmez.ws>
+# 2006-2018 İsmail Dönmez <ismail@i10z.com>
 
 from urllib.parse import urlencode
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 import sys
 
-URL = "http://www.tdk.gov.tr/index.php?option=com_gts&arama=gts&guid=TDK.GTS.546b3e9c2e0046.90953438"
+URL = "http://www.tdk.gov.tr/index.php?option=com_gts&arama=gts&guid=TDK.GTS.5c0c46a6e84254.12880563"
 
 try:
     from bs4 import BeautifulSoup as soup
