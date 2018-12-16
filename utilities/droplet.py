@@ -30,6 +30,8 @@ users:
     groups: sudo
     shell: /bin/zsh
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh-authorized-keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII/lONWgiw1sqUDUTP6IeQwxR0k0oUFEGEQIIn1SdFr3 ismail@xps13
 
 resolv_conf:
   nameservers:
@@ -37,9 +39,6 @@ resolv_conf:
     - '1.0.0.1'
     - '2606:4700:4700::1111'
     - '2606:4700:4700::1001'
-
-ssh_authorized_keys:
-    - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII/lONWgiw1sqUDUTP6IeQwxR0k0oUFEGEQIIn1SdFr3 ismail@xps13
 
 runcmd:
   - su - ismail -c 'mkdir /home/ismail/github; cd /home/ismail/github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
