@@ -34,8 +34,8 @@ users:
 
 runcmd:
   - su - ismail -c 'mkdir /home/ismail/github; cd /home/ismail/github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
-  - su - ismail -c /home/ismail/github/config/setup.sh
-  - su - ismail -c /home/ismail/github/hacks/setup.sh
+  - su - ismail -c 'cd /home/ismail/github/config; ./setup.sh'
+  - su - ismail -c 'cd /home/ismail/github/hacks; ./setup.sh'
 '''
 
 
