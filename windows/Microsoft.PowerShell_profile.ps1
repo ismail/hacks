@@ -35,6 +35,11 @@ function activate ( $venv )
     . "C:\Users\ismail\Documents\python\$venv\Scripts\Activate.ps1"
 }
 
+function ssh-forget
+{
+    ssh -oStrictHostKeyChecking=accept-new -oUserKnownHostsFile=nul $args
+}
+
 [console]::OutputEncoding = [Text.Encoding]::Utf8
 chcp 65001 >$nul
 $env:LC_ALL='C.UTF-8'
