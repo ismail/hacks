@@ -17,10 +17,10 @@ runcmd:
   - apt-get update
   - apt-get dist-upgrade -y
   - apt-get install -y git-core golang-go unrar youtube-dl zsh
-  - 'mkdir /home/ismail/github; cd /home/ismail/github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
-  - /home/ismail/github/config/setup.sh
-  - /home/ismail/github/hacks/setup.sh
-  - /home/ismail/bin/update-dns.sh
+  - 'mkdir $HOME/github; cd $HOME/github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
+  - $HOME/github/config/setup.sh
+  - $HOME/github/hacks/setup.sh
+  - $HOME/bin/update-dns.sh
 '''
 
 
