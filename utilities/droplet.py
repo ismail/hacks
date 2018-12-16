@@ -17,7 +17,11 @@ runcmd:
   - /home/ismail/bin/update-dns.sh
   - apt-get update
   - apt-get dist-upgrade -y
-  - apt-get install -y golang-go
+  - apt-get install -y git-core golang-go zsh
+  - 'mkdir /home/ismail/github; cd /home/ismail/github; git clone git@github.com:ismail/hacks.git; git clone git@github.com:ismail/config.git'
+  - /home/ismail/github/config/setup.sh
+  - /home/ismail/github/hacks/setup.sh
+  - /home/ismail/bin/update-dns.sh
 '''
 
 
@@ -31,13 +35,13 @@ def create(manager):
     region = "fra1"
     droplet_name = f"auto-{region}-{calendar.timegm(time.gmtime())}"
     droplet_size = "s-1vcpu-1gb"
-    snapshot_id = str(manager.get_images(private=True)[0].id)
+    image_name = "ubuntu-18-10-x64"
 
     droplet = digitalocean.Droplet(
         token=api_token,
         name=droplet_name,
         region=region,
-        image=snapshot_id,
+        image=image_name,
         size_slug=droplet_size,
         ssh_keys=keys,
         ipv6=True,
