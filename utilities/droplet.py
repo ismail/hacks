@@ -32,9 +32,9 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII/lONWgiw1sqUDUTP6IeQwxR0k0oUFEGEQIIn1SdFr3 ismail@xps13
 
 runcmd:
-  - 'mkdir /home/ismail/github; cd /home/ismail/github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
-  - /home/ismail/github/config/setup.sh
-  - /home/ismail/github/hacks/setup.sh
+  - su - ismail -c 'mkdir /home/ismail/github; cd /home/ismail/github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
+  - su - ismail -c /home/ismail/github/config/setup.sh
+  - su - ismail -c /home/ismail/github/hacks/setup.sh
 '''
 
 
