@@ -14,11 +14,10 @@ user_data = '''
 #cloud-config
 
 runcmd:
-  - /home/ismail/bin/update-dns.sh
   - apt-get update
   - apt-get dist-upgrade -y
-  - apt-get install -y git-core golang-go zsh
-  - 'mkdir /home/ismail/github; cd /home/ismail/github; git clone git@github.com:ismail/hacks.git; git clone git@github.com:ismail/config.git'
+  - apt-get install -y git-core golang-go unrar youtube-dl zsh
+  - 'mkdir /home/ismail/github; cd /home/ismail/github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
   - /home/ismail/github/config/setup.sh
   - /home/ismail/github/hacks/setup.sh
   - /home/ismail/bin/update-dns.sh
