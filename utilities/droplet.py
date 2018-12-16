@@ -84,12 +84,11 @@ def create(manager):
     print(
         f"Droplet is active, IPv4: {droplet.ip_address}, IPv6: [{str(ipaddress.ip_address(droplet.ip_v6_address))}]"
     )
-    print("To update dynamic DNS: ")
-    print(
-        f'curl "https://dyn.dns.he.net/nic/update" -d "hostname=autobahn.i10z.com" -d "password=$env:DNS_HE_KEY" -d "myip={droplet.ip_address}"'
+    os.system(
+        f'curl "https://dyn.dns.he.net/nic/update" -d "hostname=autobahn.i10z.com" -d "password={os.getenv("DNS_HE_KEY")}" -d "myip={droplet.ip_address}"'
     )
-    print(
-        f'curl "https://dyn.dns.he.net/nic/update" -d "hostname=autobahn.i10z.com" -d "password=$env:DNS_HE_KEY" -d "myip={droplet.ip_v6_address}"'
+    os.system(
+        f'curl "https://dyn.dns.he.net/nic/update" -d "hostname=autobahn.i10z.com" -d "password={os.getenv("DNS_HE_KEY")}" -d "myip={droplet.ip_v6_address}"'
     )
 
 
