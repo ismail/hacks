@@ -13,14 +13,28 @@ api_token = os.getenv("DIGITALOCEAN_API_KEY")
 user_data = '''
 #cloud-config
 
+package_update:  true
+package_upgrade: true
+
+packages:
+  - git-core
+  - golang-go
+  - unrar
+  - youtube-dl
+  - zsh
+
+users:
+  - name: ismail
+    groups: sudo
+    shell: /bin/zsh
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh-authorized-keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII/lONWgiw1sqUDUTP6IeQwxR0k0oUFEGEQIIn1SdFr3 ismail@xps13
+
 runcmd:
-  - apt-get update
-  - apt-get dist-upgrade -y
-  - apt-get install -y git-core golang-go unrar youtube-dl zsh
-  - 'mkdir $HOME/github; cd $HOME/github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
-  - $HOME/github/config/setup.sh
-  - $HOME/github/hacks/setup.sh
-  - $HOME/bin/update-dns.sh
+  - 'mkdir /home/ismail/github; cd /home/ismail/github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
+  - /home/ismail/github/config/setup.sh
+  - /home/ismail/github/hacks/setup.sh
 '''
 
 
