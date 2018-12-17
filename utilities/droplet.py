@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-import calendar
-from datetime import timezone, datetime
 import digitalocean
 import ipaddress
 import time
@@ -56,7 +54,7 @@ def create(manager):
 
     keys = manager.get_all_sshkeys()
     region = "fra1"
-    droplet_name = f"auto-{region}-{calendar.timegm(time.gmtime())}"
+    droplet_name = f"auto-{region}-{int(time.mktime(time.gmtime()))}"
     droplet_size = "s-1vcpu-1gb"
     image_name = "ubuntu-18-10-x64"
     domain_name = "i10z.com"
