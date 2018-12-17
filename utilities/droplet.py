@@ -119,9 +119,14 @@ def status(manager):
         return
 
     for droplet in droplets:
+        creation_time = time.mktime(
+            time.strptime(droplet.created_at, '%Y-%m-%dT%H:%M:%SZ'))
+        time_now = time.time()
+        minutes = (time_now - creation_time) / 60
         print(
             f"Droplet: {droplet.name} Status: {droplet.status} Created at: {droplet.created_at}"
         )
+        print(f"Running for {minutes} minutes.")
 
 
 if __name__ == "__main__":
