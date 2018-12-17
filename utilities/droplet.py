@@ -58,6 +58,8 @@ def create(manager):
     droplet_name = f"auto-{region}-{calendar.timegm(time.gmtime())}"
     droplet_size = "s-1vcpu-1gb"
     image_name = "ubuntu-18-10-x64"
+    domain_name = "i10z.com"
+    subdomain = "autobahn"
 
     droplet = digitalocean.Droplet(
         token=api_token,
@@ -81,14 +83,21 @@ def create(manager):
         time.sleep(60)
 
     droplet.load()
+
+    print("Updating DNS records.")
+    records = [
+        record for record in manager.get_domain(domain_name).get_records()
+        if record.type in ["A", "AAAA"] if record.name == subdomain
+    ]
+    for r in records:
+        if r.type == "A":
+            r.data = droplet.ip_address
+        elif r.type == "AAAA":
+            r.data = droplet.ip_v6_address
+        r.save()
+
     print(
         f"Droplet is active, IPv4: {droplet.ip_address}, IPv6: [{str(ipaddress.ip_address(droplet.ip_v6_address))}]"
-    )
-    os.system(
-        f'curl "https://dyn.dns.he.net/nic/update" -d "hostname=autobahn.i10z.com" -d "password={os.getenv("DNS_HE_KEY")}" -d "myip={droplet.ip_address}"'
-    )
-    os.system(
-        f'curl "https://dyn.dns.he.net/nic/update" -d "hostname=autobahn.i10z.com" -d "password={os.getenv("DNS_HE_KEY")}" -d "myip={droplet.ip_v6_address}"'
     )
 
 
