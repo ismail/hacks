@@ -18,9 +18,9 @@ package_upgrade: true
 package_reboot_if_required: true
 
 packages:
+  - bmon
   - git-core
   - golang-go
-  - zsh
 
 users:
   - name: ismail
@@ -38,9 +38,12 @@ resolv_conf:
     - '2606:4700:4700::1001'
 
 runcmd:
-  - su - ismail -c 'mkdir /home/ismail/github; cd /home/ismail/github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
-  - su - ismail -c 'cd /home/ismail/github/config; ./setup.sh'
-  - su - ismail -c 'cd /home/ismail/github/hacks; ./setup.sh'
+  - apt-get install -y zsh
+  - su - ismail -c 'mkdir github; cd github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
+  - su - ismail -c 'cd github/config; ./setup.sh; cd ../hacks; ./setup.sh'
+  - su - ismail -c 'go get -u github.com/ncw/rclone; strip go/bin/rclone; ln -s ~/go/bin/rclone ~/bin/rclone'
+  - su - ismail -c 'curl -L https://yt-dl.org/downloads/latest/youtube-dl -o bin/youtube-dl; chmod +x bin/youtube-dl'
+  - su - ismail -c 'curl -O https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz; tar xvf ffmpeg-git-amd64-static.tar.xz; mv ffmpeg-git*/ffmpeg bin; rm -rf ffmpeg*'
 '''
 
 
