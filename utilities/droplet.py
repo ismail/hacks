@@ -55,7 +55,7 @@ runcmd:
   - su - ismail -c 'echo "export PATH=~/.local/bin:~/go/bin:\$PATH" > ~/.zshrc-local'
   - su - ismail -c 'mkdir github; mkdir ship'
   - su - ismail -c 'cd github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
-  - su - ismail -c 'export TERM=xterm-256color; cd github/config; ./setup.sh; cd ../hacks; ./setup.sh'
+  - su - ismail -c 'cd github/config; ./setup.sh; cd ../hacks; ./setup.sh'
   - su - ismail -c 'go get -u github.com/ncw/rclone; strip go/bin/rclone'
   - su - ismail -c 'curl -sL https://yt-dl.org/downloads/latest/youtube-dl -o bin/youtube-dl; chmod +x bin/youtube-dl'
   - su - ismail -c 'curl -sO https://rarlab.com/rar/rarlinux-x64-5.6.1.tar.gz; tar xf rarlinux-x64-5.6.1.tar.gz; mv rar/rar rar/unrar bin; rm -rf rar*'
