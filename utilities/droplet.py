@@ -23,6 +23,14 @@ packages:
   - golang-go
   - php
   - php-curl
+  - tree
+
+write_files:
+  - encoding: gz+b64
+    content: H4sIAHLUGFwAA0utKMgvKlEIcAzxsK3T18vJT07M0U/KzLOq00/PBzNUQHJcAJisJaEoAAAA
+    owner: ismail:ismail
+    path: /home/ismail/.zshrc_local
+    permissions: '0600'
 
 users:
   - name: ismail
@@ -44,7 +52,7 @@ runcmd:
   - su - ismail -c 'mkdir github; mkdir ship'
   - su - ismail -c 'cd github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
   - su - ismail -c 'cd github/config; ./setup.sh; cd ../hacks; ./setup.sh'
-  - su - ismail -c 'go get -u github.com/ncw/rclone; strip go/bin/rclone; ln -s ~/go/bin/rclone ~/bin/rclone'
+  - su - ismail -c 'go get -u github.com/ncw/rclone; strip go/bin/rclone'
   - su - ismail -c 'curl -sL https://yt-dl.org/downloads/latest/youtube-dl -o bin/youtube-dl; chmod +x bin/youtube-dl'
   - su - ismail -c 'curl -sO https://rarlab.com/rar/rarlinux-x64-5.6.1.tar.gz; tar xf rarlinux-x64-5.6.1.tar.gz; mv rar/rar rar/unrar bin; rm -rf rar*'
   - su - ismail -c 'curl -sO https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz; tar xf ffmpeg-git-amd64-static.tar.xz; mv ffmpeg-git*/ffmpeg bin; rm -rf ffmpeg*'
