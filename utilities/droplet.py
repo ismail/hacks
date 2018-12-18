@@ -23,14 +23,21 @@ packages:
   - golang-go
   - php
   - php-curl
+  - tmux
   - tree
 
 write_files:
-  - encoding: gz+b64
-    content: H4sIAHLUGFwAA0utKMgvKlEIcAzxsK3T18vJT07M0U/KzLOq00/PBzNUQHJcAJisJaEoAAAA
+  - content: |
+        export PATH=~/.local/bin:~/go/bin:$PATH
     owner: ismail:ismail
     path: /home/ismail/.zshrc_local
     permissions: '0600'
+
+  - content: |
+        deb http://apt.llvm.org/cosmic/ llvm-toolchain-cosmic main
+    owner: root:root
+    path: /etc/apt/sources.list.d/clang.list
+    permissions: '0644'
 
 users:
   - name: ismail
@@ -48,7 +55,8 @@ resolv_conf:
     - '2606:4700:4700::1001'
 
 runcmd:
-  - apt-get install -y zsh
+  - wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
+  - apt-get install -y zsh clang-8
   - su - ismail -c 'mkdir github; mkdir ship'
   - su - ismail -c 'cd github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
   - su - ismail -c 'cd github/config; ./setup.sh; cd ../hacks; ./setup.sh'
