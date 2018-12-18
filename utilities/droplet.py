@@ -20,8 +20,6 @@ package_reboot_if_required: true
 packages:
   - git-core
   - golang-go
-  - unrar
-  - youtube-dl
   - zsh
 
 users:
