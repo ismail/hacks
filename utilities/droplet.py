@@ -21,6 +21,8 @@ packages:
   - bmon
   - git-core
   - golang-go
+  - php
+  - php-curl
 
 users:
   - name: ismail
@@ -39,7 +41,8 @@ resolv_conf:
 
 runcmd:
   - apt-get install -y zsh
-  - su - ismail -c 'mkdir github; cd github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
+  - su - ismail -c 'mkdir github; mkdir ship'
+  - su - ismail -c 'cd github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
   - su - ismail -c 'cd github/config; ./setup.sh; cd ../hacks; ./setup.sh'
   - su - ismail -c 'go get -u github.com/ncw/rclone; strip go/bin/rclone; ln -s ~/go/bin/rclone ~/bin/rclone'
   - su - ismail -c 'curl -sL https://yt-dl.org/downloads/latest/youtube-dl -o bin/youtube-dl; chmod +x bin/youtube-dl'
