@@ -25,14 +25,9 @@ packages:
   - php-curl
   - tmux
   - tree
+  - zsh
 
 write_files:
-  - content: |
-        export PATH=~/.local/bin:~/go/bin:$PATH
-    owner: ismail:ismail
-    path: /home/ismail/.zshrc_local
-    permissions: '0600'
-
   - content: |
         deb http://apt.llvm.org/cosmic/ llvm-toolchain-cosmic main
     owner: root:root
@@ -55,11 +50,12 @@ resolv_conf:
     - '2606:4700:4700::1001'
 
 runcmd:
-  - wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
-  - apt-get install -y zsh clang-8
+  - 'wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -'
+  - apt-get update; apt-get install -y clang-8
+  - su - ismail -c 'echo "export PATH=~/.local/bin:~/go/bin:\$PATH" > ~/.zshrc-local'
   - su - ismail -c 'mkdir github; mkdir ship'
   - su - ismail -c 'cd github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
-  - su - ismail -c 'cd github/config; ./setup.sh; cd ../hacks; ./setup.sh'
+  - su - ismail -c 'export TERM=xterm-256color; cd github/config; ./setup.sh; cd ../hacks; ./setup.sh'
   - su - ismail -c 'go get -u github.com/ncw/rclone; strip go/bin/rclone'
   - su - ismail -c 'curl -sL https://yt-dl.org/downloads/latest/youtube-dl -o bin/youtube-dl; chmod +x bin/youtube-dl'
   - su - ismail -c 'curl -sO https://rarlab.com/rar/rarlinux-x64-5.6.1.tar.gz; tar xf rarlinux-x64-5.6.1.tar.gz; mv rar/rar rar/unrar bin; rm -rf rar*'
