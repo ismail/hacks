@@ -100,6 +100,7 @@ def create(manager):
         size_slug=droplet_size,
         ssh_keys=keys,
         ipv6=True,
+        monitoring=True,
         private_networking=False,
         user_data=user_data,
         backups=False)
