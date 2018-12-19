@@ -20,7 +20,7 @@ packages:
   - bmon
   - git-core
   - golang-go
-  - php
+  - php-cli
   - php-curl
   - tmux
   - tree
