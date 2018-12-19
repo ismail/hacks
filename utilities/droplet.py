@@ -20,6 +20,7 @@ packages:
   - bmon
   - git-core
   - golang-go
+  - ncdu
   - php-cli
   - php-curl
   - tmux
@@ -27,6 +28,17 @@ packages:
   - zsh
 
 write_files:
+  - content: |
+        options rotate timeout:1
+
+        nameserver 1.1.1.1
+        nameserver 1.0.0.1
+        nameserver 2606:4700:4700::1111
+        nameserver 2606:4700:4700::1001
+    owner: root:root
+    path: /etc/resolv.conf.cf
+    permissions: '0644'
+
   - content: |
         deb http://apt.llvm.org/cosmic/ llvm-toolchain-cosmic main
     owner: root:root
@@ -42,6 +54,7 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII/lONWgiw1sqUDUTP6IeQwxR0k0oUFEGEQIIn1SdFr3 ismail@xps13
 
 runcmd:
+  - rm /etc/resolv.conf; mv /etc/resolv.conf.cf /etc/resolv.conf; chattr +i /etc/resolv.conf
   - 'wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -'
   - apt-get update; apt-get install -y clang-8
   - su - ismail -c 'echo "export PATH=~/.local/bin:~/go/bin:\$PATH" > ~/.zshrc-local'
