@@ -12,7 +12,6 @@ api_token = os.getenv("DIGITALOCEAN_API_KEY")
 user_data = '''
 #cloud-config
 
-manage-resolv-conf: true
 package_update:  true
 package_upgrade: true
 package_reboot_if_required: true
@@ -41,13 +40,6 @@ users:
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
     ssh-authorized-keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII/lONWgiw1sqUDUTP6IeQwxR0k0oUFEGEQIIn1SdFr3 ismail@xps13
-
-resolv_conf:
-  nameservers:
-    - '1.1.1.1'
-    - '1.0.0.1'
-    - '2606:4700:4700::1111'
-    - '2606:4700:4700::1001'
 
 runcmd:
   - 'wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -'
