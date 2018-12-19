@@ -16,10 +16,17 @@ package_update:  true
 package_upgrade: true
 package_reboot_if_required: true
 
+apt_sources:
+  - source: deb http://apt.llvm.org/cosmic/ llvm-toolchain-cosmic main
+    filename: llvm-dev.list
+    keyid: 15CF4D18AF4F7421
+
 packages:
   - bmon
+  - clang-8
   - git-core
   - golang-go
+  - lld-8
   - ncdu
   - php-cli
   - php-curl
@@ -40,10 +47,21 @@ write_files:
     permissions: '0644'
 
   - content: |
-        deb http://apt.llvm.org/cosmic/ llvm-toolchain-cosmic main
-    owner: root:root
-    path: /etc/apt/sources.list.d/clang.list
-    permissions: '0644'
+        #!/bin/bash
+
+        cd ~
+        echo "export PATH=~/.local/bin:~/go/bin:\$PATH" > ~/.zshrc-local
+        mkdir github; mkdir ship
+        (cd github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git)
+        (cd github/config; ./setup.sh; cd ../hacks; ./setup.sh)
+
+        go get -u github.com/ncw/rclone; strip go/bin/rclone
+        curl -sL https://yt-dl.org/downloads/latest/youtube-dl -o bin/youtube-dl; chmod +x bin/youtube-dl
+        curl -sO https://rarlab.com/rar/rarlinux-x64-5.6.1.tar.gz; tar xf rarlinux-x64-5.6.1.tar.gz; mv rar/rar rar/unrar bin; rm -rf rar*
+        curl -sO https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz; tar xf ffmpeg-git-amd64-static.tar.xz; mv ffmpeg-git*/ffmpeg bin; rm -rf ffmpeg*
+    owner: ismail:ismail
+    path: /etc/autosetup.sh
+    permissions: '0755'
 
 users:
   - name: ismail
@@ -55,16 +73,7 @@ users:
 
 runcmd:
   - rm /etc/resolv.conf; mv /etc/resolv.conf.cf /etc/resolv.conf; chattr +i /etc/resolv.conf
-  - 'wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -'
-  - apt-get update; apt-get install -y clang-8
-  - su - ismail -c 'echo "export PATH=~/.local/bin:~/go/bin:\$PATH" > ~/.zshrc-local'
-  - su - ismail -c 'mkdir github; mkdir ship'
-  - su - ismail -c 'cd github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git'
-  - su - ismail -c 'cd github/config; ./setup.sh; cd ../hacks; ./setup.sh'
-  - su - ismail -c 'go get -u github.com/ncw/rclone; strip go/bin/rclone'
-  - su - ismail -c 'curl -sL https://yt-dl.org/downloads/latest/youtube-dl -o bin/youtube-dl; chmod +x bin/youtube-dl'
-  - su - ismail -c 'curl -sO https://rarlab.com/rar/rarlinux-x64-5.6.1.tar.gz; tar xf rarlinux-x64-5.6.1.tar.gz; mv rar/rar rar/unrar bin; rm -rf rar*'
-  - su - ismail -c 'curl -sO https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz; tar xf ffmpeg-git-amd64-static.tar.xz; mv ffmpeg-git*/ffmpeg bin; rm -rf ffmpeg*'
+  - su - ismail -c '/etc/autosetup.sh'
 '''
 
 
