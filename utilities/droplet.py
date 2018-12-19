@@ -12,6 +12,7 @@ api_token = os.getenv("DIGITALOCEAN_API_KEY")
 user_data = '''
 #cloud-config
 
+hostname: "autobahn"
 package_update:  true
 package_upgrade: true
 package_reboot_if_required: true
