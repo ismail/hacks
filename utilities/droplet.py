@@ -51,7 +51,7 @@ write_files:
         #!/bin/bash
 
         cd ~
-        echo "export PATH=~/.local/bin:~/go/bin:\$PATH" > ~/.zshrc-local
+        echo 'export PATH=~/.local/bin:~/go/bin:$PATH' > ~/.zshrc-local
         mkdir github; mkdir ship
         (cd github; git clone https://github.com/ismail/hacks.git; git clone https://github.com/ismail/config.git)
         (cd github/config; ./setup.sh; cd ../hacks; ./setup.sh)
