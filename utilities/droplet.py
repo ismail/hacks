@@ -17,10 +17,14 @@ package_update:  true
 package_upgrade: true
 package_reboot_if_required: true
 
+ssh_import_id: [wireguard]
+
 apt_sources:
   - source: deb http://apt.llvm.org/cosmic/ llvm-toolchain-cosmic main
     filename: llvm-dev.list
     keyid: 15CF4D18AF4F7421
+
+  - source: "ppa:wireguard/wireguard"
 
 packages:
   - bmon
@@ -33,6 +37,7 @@ packages:
   - php-curl
   - tmux
   - tree
+  - wireguard
   - zsh
 
 write_files:
