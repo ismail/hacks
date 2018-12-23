@@ -35,6 +35,7 @@ packages:
   - ncdu
   - php-cli
   - php-curl
+  - qrencode
   - tmux
   - tree
   - wireguard
