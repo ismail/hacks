@@ -23,6 +23,7 @@ apt_sources:
     keyid: 15CF4D18AF4F7421
 
 packages:
+  - aria2
   - bmon
   - clang-8
   - git-core
