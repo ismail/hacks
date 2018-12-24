@@ -61,7 +61,7 @@ write_files:
             (cd github/config; ./setup.sh; cd ../hacks; ./setup.sh)
         fi
 
-        [ ! -f ~/.zshrc-local ] && (echo 'export PATH=~/.local/bin:~/go/bin:$PATH' > ~/.zshrc-local)
+        [ ! -f ~/.zshrc-local ] && (echo 'export PATH=~/.local/bin:~/go/bin:$PATH\nalias pdown="aria2c -x 16 -s 16"' > ~/.zshrc-local)
         [ ! -f bin/youtube-dl ] && (curl -sL https://yt-dl.org/downloads/latest/youtube-dl -o bin/youtube-dl; chmod +x bin/youtube-dl)
         [ ! -f bin/rar ] && (curl -sO https://rarlab.com/rar/rarlinux-x64-5.6.1.tar.gz; tar xf rarlinux-x64-5.6.1.tar.gz; mv rar/rar rar/unrar bin; rm -rf rar*)
 
