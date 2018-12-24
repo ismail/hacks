@@ -27,6 +27,7 @@ packages:
   - clang-8
   - git-core
   - golang-go
+  - jq
   - lld-8
   - ncdu
   - php-cli
