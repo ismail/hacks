@@ -36,6 +36,7 @@ packages:
   - qrencode
   - tmux
   - tree
+  - unzip
   - zsh
 
 write_files:
