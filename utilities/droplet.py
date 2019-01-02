@@ -33,6 +33,7 @@ packages:
   - ncdu
   - php-cli
   - php-curl
+  - ripgrep
   - qrencode
   - tmux
   - tree
