@@ -1,3 +1,7 @@
+function fsharpi {
+    dotnet "C:\Program Files\dotnet\sdk\$(dotnet --version)\FSharp\fsi.exe"
+}
+
 function prompt {
     $p = Get-Location;
     $p = $p -replace "C:\\Users\\ismail", "~";
@@ -11,7 +15,7 @@ function ssh-forget {
     ssh -oStrictHostKeyChecking=accept-new -oUserKnownHostsFile=nul $args
 }
 function vs-set($arch) {
-    pushd 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build'
+    pushd 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build'
     cmd /c "set VSCMD_START_DIR=%CD% && vcvarsall.bat $arch&set" |
         foreach {
         if ($_ -match "=") {
