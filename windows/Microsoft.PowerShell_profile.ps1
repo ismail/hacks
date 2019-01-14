@@ -1,3 +1,7 @@
+function emax {
+    emacsclientw.exe -c $args
+}
+
 function fsharpi {
     dotnet "C:\Program Files\dotnet\sdk\$(dotnet --version)\FSharp\fsi.exe"
 }
