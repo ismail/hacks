@@ -25,11 +25,11 @@ apt_sources:
 packages:
   - aria2
   - bmon
-  - clang-8
+  - clang-9
   - git-core
   - golang-go
   - jq
-  - lld-8
+  - lld-9
   - ncdu
   - php-cli
   - php-curl
