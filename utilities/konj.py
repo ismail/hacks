@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import urllib.error
 from urllib.parse import urlencode, quote
 from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup as soup
 import sys
 
 url = "https://www.verbformen.de/konjugation/?w="
-filtered_tenses = ["Imperativ", "Präsens", "Perfekt", "Präteritum", "Plusquam"]
+filtered_tenses = [
+    "Präsens", "Präteritum", "Perfekt", "Imperativ", "Konjunktiv I",
+    "Konjunktiv II", "Plusquam."
+]
 
 
 def findKonjugation(string):
@@ -16,16 +20,21 @@ def findKonjugation(string):
         data=None,
         headers={
             'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
         })
     req.add_header('Referer', 'https://www.verbformen.de/konjugation/')
-    s = soup(urlopen(req).read(), "html.parser")
-    result = {}
 
+    try:
+        s = soup(urlopen(req).read(), "html.parser")
+    except urllib.error.HTTPError as e:
+        print("Error while searching: %s" % e)
+        sys.exit(1)
+
+    result = {}
     for tense in filtered_tenses:
         result[tense] = []
 
-    for table in s.findAll('section', attrs={'class': 'rBox rBoxWht'}):
+    for table in s.findAll('div', attrs={'class': 'rAufZu'}):
         for column in table.findAll('div', attrs={'class': 'vTbl'}):
             tense = column.find('h3').text
             if (tense in filtered_tenses) and not result[tense]:
