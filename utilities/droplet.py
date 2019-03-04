@@ -65,7 +65,7 @@ write_files:
 
         [ ! -f ~/.zshrc-local ] && (echo 'export PATH=~/.local/bin:~/go/bin:$PATH' > ~/.zshrc-local)
         [ ! -f bin/youtube-dl ] && (curl -sL https://yt-dl.org/downloads/latest/youtube-dl -o bin/youtube-dl; chmod +x bin/youtube-dl)
-        [ ! -f bin/rar ] && (curl -sO https://rarlab.com/rar/rarlinux-x64-5.6.1.tar.gz; tar xf rarlinux-x64-5.6.1.tar.gz; mv rar/rar rar/unrar bin; rm -rf rar*)
+        [ ! -f bin/rar ] && (curl -sO https://rarlab.com/rar/rarlinux-x64-5.7.0.tar.gz; tar xf rarlinux-x64-5.7.0.tar.gz; mv rar/rar rar/unrar bin; rm -rf rar*)
 
         go get -u github.com/ncw/rclone; strip go/bin/rclone
         curl -sO https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz; tar xf ffmpeg-git-amd64-static.tar.xz; mv ffmpeg-git*/ffmpeg bin; rm -rf ffmpeg*
