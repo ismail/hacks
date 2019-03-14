@@ -8,16 +8,21 @@ import subprocess
 @click.command()
 @click.option("--directory", default="Temp", help="Target Directory")
 @click.option("--dry-run", is_flag=True, help="Simulate but not execute")
+@click.option("--list-remotes", is_flag=True, help="List configured remotes")
 @click.option("--remote", default="google", help="The remote service")
 @click.argument('args', nargs=-1)
-def upload(directory, dry_run, remote, args):
+def upload(directory, dry_run, list_remotes, remote, args):
+
+    if list_remotes:
+        subprocess.Popen(["rclone", "listremotes"]).communicate()
+        return
+
     if not args:
         ctx = click.get_current_context()
         click.echo(ctx.get_help())
         ctx.exit()
 
     base_command = ["rclone", "copy", "--progress"]
-
     if dry_run:
         base_command.insert(0, "echo")
 
