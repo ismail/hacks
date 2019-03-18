@@ -37,9 +37,12 @@ def upload(directory, dry_run, list_remotes, remote, scramble, args):
         if not scramble:
             command = base_command + [arg, f'{remote}:/{directory}']
         else:
-            scrambled_name = ''.join(random.choices(string.ascii_lowercase + string.digits, k=32))
+            scrambled_name = ''.join(
+                random.choices(string.ascii_lowercase + string.digits, k=32))
             extension = arg.split(".")[-1]
-            command = base_command + [arg, f'{remote}:/{directory}/{scrambled_name}.{extension}']
+            command = base_command + [
+                arg, f'{remote}:/{directory}/{scrambled_name}.{extension}'
+            ]
 
         subprocess.Popen(command).communicate()
 
