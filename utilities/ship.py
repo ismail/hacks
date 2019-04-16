@@ -2,19 +2,21 @@
 # -*- coding: utf-8 -*-
 
 import click
+import os
 import random
 import string
 import subprocess
 
 
 @click.command()
+@click.option("--delete", is_flag=True, help="Remove the file after upload")
 @click.option("--directory", default="Temp", help="Target Directory")
 @click.option("--dry-run", is_flag=True, help="Simulate but not execute")
 @click.option("--list-remotes", is_flag=True, help="List configured remotes")
 @click.option("--remote", default="google", help="The remote service")
 @click.option("--scramble", is_flag=True, help="Scramble file names")
 @click.argument('args', nargs=-1)
-def upload(directory, dry_run, list_remotes, remote, scramble, args):
+def upload(delete, directory, dry_run, list_remotes, remote, scramble, args):
 
     if list_remotes:
         subprocess.Popen(["rclone", "listremotes"]).communicate()
@@ -44,7 +46,11 @@ def upload(directory, dry_run, list_remotes, remote, scramble, args):
                 arg, f'{remote}:/{directory}/{scrambled_name}.{extension}'
             ]
 
-        subprocess.Popen(command).communicate()
+        child = subprocess.Popen(command)
+        child.communicate()
+
+        if (child.returncode == 0) and delete:
+            os.unlink(arg)
 
 
 if __name__ == "__main__":
