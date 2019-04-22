@@ -37,10 +37,7 @@ def upload(delete, directory, dry_run, list_remotes, remote, scramble, args):
 
     for arg in args:
         if not scramble:
-            if os.path.isdir(arg):
-                command = base_command + [arg, f'{remote}:/{directory}/{arg}']
-            else:
-                command = base_command + [arg, f'{remote}:/{directory}']
+            command = base_command + [arg, f'{remote}:/{directory}']
         else:
             scrambled_name = ''.join(
                 random.choices(string.ascii_lowercase + string.digits, k=32))
