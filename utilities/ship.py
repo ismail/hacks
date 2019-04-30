@@ -4,6 +4,7 @@
 import click
 import os
 import random
+import shutil
 import string
 import subprocess
 
@@ -50,7 +51,10 @@ def upload(delete, directory, dry_run, list_remotes, remote, scramble, args):
         child.communicate()
 
         if (child.returncode == 0) and delete:
-            os.unlink(arg)
+            if os.path.isdir(arg):
+                shutil.rmtree(arg)
+            else:
+                os.unlink(arg)
 
 
 if __name__ == "__main__":
