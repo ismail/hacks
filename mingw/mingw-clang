@@ -7,7 +7,7 @@ local -a COMMON_ARGS
 local -a CFLAGS CXXFLAGS WARNING_FLAGS
 
 CFLAGS+=("-std=c11")
-CXXFLAGS+=("-stdlib=libstdc++" "-std=c++14")
+CXXFLAGS+=("-fno-exceptions" "-stdlib=libstdc++" "-std=c++17")
 WARNING_FLAGS+=(-Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic)
 COMMON_ARGS+=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET)
 
