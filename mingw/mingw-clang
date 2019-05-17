@@ -9,7 +9,7 @@ local -a CFLAGS CXXFLAGS WARNING_FLAGS
 CFLAGS+=("-std=c11")
 CXXFLAGS+=("-fno-exceptions" "-stdlib=libstdc++" "-std=c++17")
 WARNING_FLAGS+=(-Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic)
-COMMON_ARGS+=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET)
+COMMON_ARGS+=(-target $TARGET -DWINVER=$WINDOWS_TARGET -D_WIN32_WINNT=$WINDOWS_TARGET -fuse-ld=lld)
 
 case $0 in
     *-clang)
