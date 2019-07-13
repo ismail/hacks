@@ -1,47 +1,41 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# 2006-2018 İsmail Dönmez <ismail@i10z.com>
+# 2019 İsmail Dönmez <ismail@i10z.com>
 
 from urllib.parse import urlencode
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 import sys
+import json
 
-URL = "http://www.tdk.gov.tr/index.php?option=com_gts&arama=gts&guid=TDK.GTS.5c0c46a6e84254.12880563"
-
-try:
-    from bs4 import BeautifulSoup as soup
-except ImportError:
-    print("Sisteminize öncelikle BeautifulSoup4 kurun.")
-    sys.exit(1)
-
+URL = "http://sozluk.gov.tr/gts"
 
 def searchWord(word):
-    postData = {'kelime': word}
-    req = Request(URL, urlencode(postData).encode("iso-8859-9"))
-
     try:
-        result = urlopen(req).read()
+        parameters = {'ara': word}
+        url = '{}?{}'.format(URL, urlencode(parameters))
+        results = json.loads(urlopen(url).read())
     except HTTPError as e:
         print(e)
         sys.exit(-1)
 
-    results = soup(result, "lxml").findAll(
-        'table', attrs={
-            'id': 'hor-minimalist-a'
-        })
-    if results:
-        resultTable = results[0]
-    else:
-        print("%s sözlükte bulunamadı." % word)
-        sys.exit(0)
+    if "error" in results:
+        print(results["error"])
+        return
 
-    for td in resultTable.findAll('td'):
-        text = td.text.strip()
-        text = text.replace('"', '\n"', 1)
-        print("%s\n" % text)
-
+    for result in results:
+        for meaning in result["anlamlarListe"]:
+            print(f'• {meaning["anlam"]}')
+            try:
+                for example in meaning["orneklerListe"]:
+                    print(f"\t→ {example['ornek']}", end='')
+                    if example['yazar_id'] != '0':
+                        print(f" — {example['yazar'][0]['tam_adi']}")
+                    else:
+                        print()
+            except KeyError:
+                pass
 
 if __name__ == "__main__":
     if (len(sys.argv) != 2):
