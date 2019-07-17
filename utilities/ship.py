@@ -11,7 +11,7 @@ import subprocess
 
 @click.command()
 @click.option("--delete", is_flag=True, help="Remove the file after upload")
-@click.option("--directory", default="Temp", help="Target Directory")
+@click.option("--directory", default="", help="Target Directory")
 @click.option("--dry-run", is_flag=True, help="Simulate but not execute")
 @click.option("--list-remotes", is_flag=True, help="List configured remotes")
 @click.option("--remote", default="google", help="The remote service")
