@@ -14,7 +14,7 @@ import subprocess
 @click.option("--directory", default="", help="Target Directory")
 @click.option("--dry-run", is_flag=True, help="Simulate but not execute")
 @click.option("--list-remotes", is_flag=True, help="List configured remotes")
-@click.option("--remote", default="google", help="The remote service")
+@click.option("--remote", required=True, help="The remote service")
 @click.option("--scramble", is_flag=True, help="Scramble file names")
 @click.argument('args', nargs=-1)
 def upload(delete, directory, dry_run, list_remotes, remote, scramble, args):
