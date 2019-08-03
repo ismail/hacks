@@ -28,7 +28,7 @@ def upload(delete, directory, dry_run, list_remotes, remote, scramble, args):
         click.echo(ctx.get_help())
         ctx.exit()
 
-    user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36"
+    user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.10 Safari/537.36"
     if not scramble:
         base_command = [
             "rclone", "--user-agent", user_agent, "copy", "--progress"
