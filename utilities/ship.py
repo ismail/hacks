@@ -14,7 +14,7 @@ import subprocess
 @click.option("--directory", default="", help="Target Directory")
 @click.option("--dry-run", is_flag=True, help="Simulate but not execute")
 @click.option("--list-remotes", is_flag=True, help="List configured remotes")
-@click.option("--remote", required=True, help="The remote service")
+@click.option("--remote", help="The remote service")
 @click.option("--scramble", is_flag=True, help="Scramble file names")
 @click.argument('args', nargs=-1)
 def upload(delete, directory, dry_run, list_remotes, remote, scramble, args):
@@ -27,6 +27,10 @@ def upload(delete, directory, dry_run, list_remotes, remote, scramble, args):
         ctx = click.get_current_context()
         click.echo(ctx.get_help())
         ctx.exit()
+
+    if not remote:
+        print("Required argument --remote is missing.")
+        return
 
     user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.10 Safari/537.36"
     if not scramble:
