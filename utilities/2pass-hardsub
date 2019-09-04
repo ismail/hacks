@@ -1,0 +1,85 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import click
+import os
+
+
+@click.command()
+@click.option("--bitrate",
+              required=True,
+              type=float,
+              help="Required bitrate in MB/s")
+@click.option("--subtitle",
+              multiple=True,
+              help="External subtitles to be included")
+@click.option("--sub-index",
+              required=True,
+              type=int,
+              help="Selected subtitle index")
+@click.option("--picture",
+              is_flag=True,
+              default=False,
+              help="The subtitle is picture based (sub, sup, ...)")
+@click.option("--font-name",
+              default="Tahoma",
+              help="Font for text subtitles, default is Tahoma")
+@click.option("--film", required=True, help="File to encode")
+@click.option("--output", required=True, help="Output file")
+def encode(bitrate, subtitle, sub_index, picture, font_name, film, output):
+
+    command_pass1 = ["ffmpeg", "-hide_banner", "-i", f"\"{film}\""]
+    command_pass2 = ["ffmpeg", "-hide_banner", "-i", f"\"{film}\""]
+
+    codec_parameters = [
+        "-map", "0:v", "-map", "0:a", "-c:v", "libx264", "-tune", "film",
+        "-crf", "18", "-profile:v", "high", "-level", "4.2", "-b:v",
+        "%dM" % bitrate
+    ]
+
+    if not picture and (len(subtitle) > 1):
+        print("You can only select one text subtitle.")
+        sys.exit(-1)
+
+    if picture:
+        for sub in subtitle:
+            command_pass1.extend(["-i", f"\"{sub}\""])
+            command_pass2.extend(["-i", f"\"{sub}\""])
+
+        command_pass1.extend(
+            ["-filter_complex",
+             "[0:v][%d:s]overlay" % sub_index])
+        command_pass2.extend(
+            ["-filter_complex",
+             "[0:v][%d:s]overlay" % sub_index])
+    else:
+        if len(subtitle):
+            subfile = subtitle[0]
+        else:
+            subfile = film
+
+        command_pass1.extend([
+            "-vf",
+            f"subtitles=\"{subfile}\":si={sub_index}:force_style='FontName={font_name}'"
+        ])
+
+    command_pass1.extend(codec_parameters)
+    command_pass2.extend(codec_parameters)
+
+    command_pass1.extend(
+        ["-an", "-pass", "1", "-f", "rawvideo", "-y", "/dev/null"])
+
+    command_pass2.extend(
+        ["-pass", "2", "-y", "-c:a", "libfdk_aac", "-b:a", "384k", output])
+
+    with open("pass1.sh", "w") as f:
+        f.write(" ".join(command_pass1))
+        os.chmod("pass1.sh", 0o755)
+
+    with open("pass2.sh", "w") as f:
+        f.write(" ".join(command_pass2))
+        os.chmod("pass2.sh", 0o755)
+
+
+if __name__ == "__main__":
+    encode()
