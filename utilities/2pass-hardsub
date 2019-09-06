@@ -19,8 +19,8 @@ import os
 @click.option("--sample", is_flag=True, help="Do a test 60 seconds encoding.")
 @click.option("--sample-start",
               type=str,
-              default="05:00:00",
-              help="Starting point for the sample, default 05:00:00")
+              default="0:05:00",
+              help="Starting point for the sample, default 0:05:00")
 @click.option("--sample-length",
               type=str,
               default="60",
@@ -102,7 +102,7 @@ def encode(audio_bitrate, audio_codec, video_bitrate, sample, sample_start,
         ["-an", "-nostdin", "-pass", "1", "-f", "rawvideo", "-y", "/dev/null"])
 
     command_pass2.extend([
-        "nostdin", "-pass", "2", "-y", "-c:a", audio_codec, "-b:a",
+        "-nostdin", "-pass", "2", "-y", "-c:a", audio_codec, "-b:a",
         audio_bitrate, f"\"{output}\""
     ])
 
