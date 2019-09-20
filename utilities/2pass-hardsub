@@ -45,8 +45,8 @@ def encode(audio_bitrate, audio_codec, video_bitrate, sample, sample_start,
            sample_length, subtitle, sub_index, picture, font_name, film,
            output):
 
-    command_pass1 = ["ffmpeg", "-hide_banner"]
-    command_pass2 = ["ffmpeg", "-hide_banner"]
+    command_pass1 = ["ffmpeg"]
+    command_pass2 = ["ffmpeg"]
 
     if sample:
         # Need to put -ss before -i for fast seeking
