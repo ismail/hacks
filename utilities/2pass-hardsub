@@ -106,6 +106,10 @@ def encode(audio_bitrate, audio_codec, video_bitrate, sample, sample_start,
         audio_bitrate, f"\"{output}\""
     ])
 
+    # Remove the leftovers
+    command_pass2.extend(
+        ["\nrm -vf ffmpeg2pass-0.log ffmpeg2pass-0.log.mbtree\n"])
+
     with open("pass1.sh", "w") as f:
         f.write(" ".join(command_pass1))
         os.chmod("pass1.sh", 0o755)
