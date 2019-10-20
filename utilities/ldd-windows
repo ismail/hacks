@@ -1,6 +1,0 @@
-#!/bin/sh
-
-if [[ ! -z $1 ]]; then
-    llvm-objdump -p "$1" | awk  '/DLL.*dll$/ { print $3 }' | sort -f
-fi
-
