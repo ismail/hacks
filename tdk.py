@@ -52,9 +52,13 @@ def searchWord(word):
     for result in results:
         for meaning in result['anlamlarListe']:
             index += 1
-            print(
-                f"{index}. ({meaning['ozelliklerListe'][0]['tam_adi']}) {meaning['anlam']}"
-            )
+
+            try:
+                word_type = meaning['ozelliklerListe'][0]['tam_adi']
+                print(f"{index}. ({word_type}) {meaning['anlam']}")
+            except KeyError:
+                print(f"{index}. {meaning['anlam']}")
+
             try:
                 for example in meaning['orneklerListe']:
                     print(f"\t→ {example['ornek']}", end='')
