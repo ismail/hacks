@@ -22,6 +22,10 @@ def searchWord(word):
         print(e)
         sys.exit(-1)
 
+    if debug:
+        import pprint
+        pprint.pprint(results)
+
     if "error" in results:
         print(results["error"])
         return
@@ -35,14 +39,14 @@ def searchWord(word):
         headline.append(f"({pronunciation})")
 
     if other_languages:
+        # Looks like there is mac-roman encoded stuff inside?!
+        # 0x90 0x00EA # LATIN SMALL LETTER E WITH CIRCUMFLEX
+        other_languages = other_languages.replace('\x90', 'ê')
+
         headline.append(other_languages)
 
     if len(headline):
         print(f"{', '.join(headline)}\n")
-
-    if debug:
-        import pprint
-        pprint.pprint(results)
 
     index = 0
     for result in results:
