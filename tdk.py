@@ -10,6 +10,7 @@ import sys
 import json
 
 URL = "http://sozluk.gov.tr/gts"
+debug = 0
 
 
 def searchWord(word):
@@ -39,9 +40,17 @@ def searchWord(word):
     if len(headline):
         print(f"{', '.join(headline)}\n")
 
+    if debug:
+        import pprint
+        pprint.pprint(results)
+
+    index = 0
     for result in results:
         for meaning in result['anlamlarListe']:
-            print(f"• {meaning['anlam']}")
+            index += 1
+            print(
+                f"{index}. ({meaning['ozelliklerListe'][0]['tam_adi']}) {meaning['anlam']}"
+            )
             try:
                 for example in meaning['orneklerListe']:
                     print(f"\t→ {example['ornek']}", end='')
@@ -52,8 +61,13 @@ def searchWord(word):
             except KeyError:
                 pass
 
+        if 'atasozu' in result:
+            print("\nAtasözleri:")
+            for saying in result['atasozu']:
+                print(f"• {saying['madde']}")
+
     if combinations:
-        print(f"\nBirleşik Kelimeler: {combinations}")
+        print(f"\nBirleşik Kelimeler:\n{combinations}")
 
 
 if __name__ == "__main__":
