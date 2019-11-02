@@ -11,6 +11,7 @@ import json
 
 URL = "http://sozluk.gov.tr/gts"
 
+
 def searchWord(word):
     try:
         parameters = {'ara': word}
@@ -24,11 +25,25 @@ def searchWord(word):
         print(results["error"])
         return
 
+    pronunciation = results[0]['telaffuz']
+    other_languages = results[0]['lisan']
+    combinations = results[0]['birlesikler']
+    headline = []
+
+    if pronunciation:
+        headline.append(f"({pronunciation})")
+
+    if other_languages:
+        headline.append(other_languages)
+
+    if len(headline):
+        print(f"{', '.join(headline)}\n")
+
     for result in results:
-        for meaning in result["anlamlarListe"]:
-            print(f'• {meaning["anlam"]}')
+        for meaning in result['anlamlarListe']:
+            print(f"• {meaning['anlam']}")
             try:
-                for example in meaning["orneklerListe"]:
+                for example in meaning['orneklerListe']:
                     print(f"\t→ {example['ornek']}", end='')
                     if example['yazar_id'] != '0':
                         print(f" — {example['yazar'][0]['tam_adi']}")
@@ -36,6 +51,10 @@ def searchWord(word):
                         print()
             except KeyError:
                 pass
+
+    if combinations:
+        print(f"\nBirleşik Kelimeler: {combinations}")
+
 
 if __name__ == "__main__":
     if (len(sys.argv) != 2):
