@@ -6,8 +6,11 @@
 from urllib.parse import urlencode
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
-import sys
+from textwrap import wrap
+
 import json
+import sys
+
 
 URL = "http://sozluk.gov.tr/gts"
 debug = 0
@@ -75,7 +78,9 @@ def searchWord(word):
                 print(f"• {saying['madde']}")
 
     if combinations:
-        print(f"\nBirleşik Kelimeler:\n{combinations}")
+        print(f"\nBirleşik Kelimeler:\n")
+        for combination in wrap(combinations, 80):
+            print(combination)
 
 
 if __name__ == "__main__":
