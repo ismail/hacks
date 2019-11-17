@@ -52,6 +52,7 @@ def searchWord(word):
         print(f"{', '.join(headline)}\n")
 
     index = 0
+    sayings = []
     for result in results:
         for meaning in result['anlamlarListe']:
             index += 1
@@ -73,9 +74,12 @@ def searchWord(word):
                 pass
 
         if 'atasozu' in result:
-            print("\nAtasözleri:")
-            for saying in result['atasozu']:
-                print(f"• {saying['madde']}")
+            sayings.extend(result['atasozu'])
+
+    if len(sayings):
+        print("\nAtasözleri:")
+        for saying in sayings:
+            print(f"• {saying['madde']}")
 
     if combinations:
         print(f"\nBirleşik Kelimeler:\n")
