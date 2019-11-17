@@ -25,7 +25,7 @@ def findKonjugation(string):
     req.add_header('Referer', 'https://www.verbformen.de/konjugation/')
 
     try:
-        s = soup(urlopen(req).read(), "html.parser")
+        s = soup(urlopen(req).read(), "lxml")
     except urllib.error.HTTPError as e:
         print("Error while searching: %s" % e)
         sys.exit(1)
