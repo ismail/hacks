@@ -76,7 +76,7 @@ def searchWord(word):
         if 'atasozu' in result:
             sayings.extend(result['atasozu'])
 
-    if len(sayings):
+    if sayings:
         print("\nAtasözleri:")
         for saying in sayings:
             print(f"• {saying['madde']}")
