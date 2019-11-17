@@ -20,7 +20,7 @@ def findKonjugation(string):
         data=None,
         headers={
             'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36'
         })
     req.add_header('Referer', 'https://www.verbformen.de/konjugation/')
 
