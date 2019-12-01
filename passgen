@@ -4,4 +4,8 @@ CHARACTER_SET="[:alnum:]!\"#$%&\'\(\)*+,-./:;<=>?@[\]^_\`{\|}~"
 LENGTH=30
 
 [[ ! -z $1 ]] && LENGTH=$1
-< /dev/urandom tr -dc $CHARACTER_SET | head -c$LENGTH; echo
+[[ ! -z $2 ]] && CHARACTER_SET=$2
+
+for i in {1..20}; do
+    < /dev/urandom tr -dc $CHARACTER_SET | head -c$LENGTH; echo
+done
