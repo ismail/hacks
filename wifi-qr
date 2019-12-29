@@ -1,0 +1,6 @@
+#!/bin/bash
+
+AP=$1
+PASSWORD=$2
+
+qrencode -t ANSIUTF8 "WIFI:T:WPA;S:$AP;P:$PASSWORD;;"
