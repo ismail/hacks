@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+set -euo errexit
+
+[[ -e $1 ]] && qpdf --pages $1 1-z -- --empty ${1:r}_clean.pdf
