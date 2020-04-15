@@ -1,0 +1,16 @@
+#!/bin/zsh
+set -euo pipefail
+
+PARAMS=($(echo $@ | perl -pe 's|-gencode arch=\w+_\d{2},code=\w+_\d{2}||g') -Wno-unknown-cuda-version)
+LINKER_FLAGS=()
+LLVM_PATH=/data/binaries/llvm
+
+if [[ $PARAMS != *" -c "* ]]; then
+    LINKER_FLAGS=(-Wl,-rpath,$LLVM_PATH/lib/x86_64-unknown-linux-gnu/c++/ -L/usr/local/cuda/lib64/ -lcudart_static -ldl -lrt -lpthread)
+else
+    PARAMS+=('--cuda-gpu-arch=sm_61')
+fi
+
+$LLVM_PATH/bin/clang++ \
+                      $PARAMS \
+                      $LINKER_FLAGS
