@@ -26,6 +26,8 @@ import sys
               type=str,
               default="60",
               help="Length of encoding sample in seconds, default 60")
+# This is a multiple because for a picture based subtitle,
+# you'd have a sub and an idx file
 @click.option("--subtitle",
               multiple=True,
               help="External subtitles to be included")
@@ -93,6 +95,10 @@ def encode(audio_bitrate, audio_codec, video_bitrate, sample, sample_start,
         if picture or len(subtitle) or (sub_index != None):
             print("Subtitle hardcoding is not supported with CUDA.")
             sys.exit(1)
+        else:
+            codec_parameters.extend(["-map", "0:s?", "-c:s", "copy"])
+            if file.endswith(".mp4"):
+                codec_parameters.extend(["-c:s", "mov_text"])
     elif picture:
         for sub in subtitle:
             command_pass1.extend(["-i", f"\"{sub}\""])
