@@ -5,6 +5,7 @@ import click
 import os
 import sys
 
+
 @click.command()
 @click.option("--audio-bitrate",
               default="384k",
@@ -29,7 +30,7 @@ import sys
               multiple=True,
               help="External subtitles to be included")
 @click.option("--sub-index",
-              required=True,
+              required=False,
               type=int,
               help="Selected subtitle index")
 @click.option("--picture",
@@ -39,38 +40,60 @@ import sys
 @click.option("--font-name",
               default="Tahoma",
               help="Font for text subtitles, default is Tahoma")
-@click.option("--film", required=True, help="File to encode")
+@click.option("--cuda",
+              is_flag=True,
+              default=False,
+              help="Enable CUDA encoding/decoding")
+@click.option("--file", required=True, help="File to encode")
 @click.option("--output", required=True, help="Output file")
 def encode(audio_bitrate, audio_codec, video_bitrate, sample, sample_start,
-           sample_length, subtitle, sub_index, picture, font_name, film,
+           sample_length, subtitle, sub_index, picture, font_name, cuda, file,
            output):
 
     command_pass1 = ["ffmpeg"]
     command_pass2 = ["ffmpeg"]
+
+    if cuda:
+        command_pass1.extend(
+            ["-hwaccel", "cuda", "-hwaccel_output_format", "cuda"])
+        command_pass2.extend(
+            ["-hwaccel", "cuda", "-hwaccel_output_format", "cuda"])
 
     if sample:
         # Need to put -ss before -i for fast seeking
         command_pass1.extend(["-ss", sample_start])
         command_pass2.extend(["-ss", sample_start])
 
-    command_pass1.extend(["-i", f"\"{film}\""])
-    command_pass2.extend(["-i", f"\"{film}\""])
+    command_pass1.extend(["-i", f"\"{file}\""])
+    command_pass2.extend(["-i", f"\"{file}\""])
 
     if sample:
         command_pass1.extend(["-t", sample_length])
         command_pass2.extend(["-t", sample_length])
 
+    if cuda:
+        encoder = "h264_nvenc"
+    else:
+        encoder = "libx264"
+
     codec_parameters = [
-        "-map", "0:v", "-map", "0:a", "-c:v", "libx264", "-tune", "film",
-        "-crf", "18", "-profile:v", "high", "-level", "4.2", "-b:v",
-        video_bitrate
+        "-map", "0:v", "-map", "0:a", "-c:v", f"{encoder}", "-profile:v",
+        "high", "-level", "4.2", "-b:v", video_bitrate
     ]
+
+    if not cuda:
+        # x264 only options
+        codec_parameters.extend(["-tune", "film", "-crf", "18"])
 
     if not picture and (len(subtitle) > 1):
         print("You can only select one text subtitle.")
         sys.exit(-1)
 
-    if picture:
+    if cuda:
+        if picture or len(subtitle) or (sub_index != None):
+            print("Subtitle hardcoding is not supported with CUDA.")
+            sys.exit(1)
+    elif picture:
         for sub in subtitle:
             command_pass1.extend(["-i", f"\"{sub}\""])
             command_pass2.extend(["-i", f"\"{sub}\""])
@@ -80,10 +103,14 @@ def encode(audio_bitrate, audio_codec, video_bitrate, sample, sample_start,
                 ["-filter_complex",
                  "[0:v][%d:s]overlay" % sub_index])
     else:
+        if (sub_index == None):
+            print("Please specify a subtitle index with --sub-index")
+            sys.exit(1)
+
         if len(subtitle):
             subfile = subtitle[0]
         else:
-            subfile = film
+            subfile = file
 
         command_pass1.extend([
             "-vf",
