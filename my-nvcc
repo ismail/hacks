@@ -8,7 +8,7 @@ import sys
 LLVM_PATH = "/data/binaries/llvm"
 compileFlags = ["--cuda-gpu-arch=sm_61"]
 linkerFlags = [
-    f"-Wl,-rpath,{LLVM_PATH}/lib/x86_64-unknown-linux-gnu/c++/",
+    f"-Wl,-rpath,{LLVM_PATH}/lib/x86_64-unknown-linux-gnu/c++/,-rpath,{LLVM_PATH}/lib",
     "-L/usr/local/cuda/lib64/", "-lcudart_static", "-ldl", "-lrt", "-lpthread"
 ]
 
