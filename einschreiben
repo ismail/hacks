@@ -11,4 +11,4 @@ curl -N -s https://www.deutschepost.de/sendung/simpleQueryResult.html \
         --data "form.einlieferungsdatum_tag=$day" \
         --data "form.einlieferungsdatum_monat=$month" \
         --data "form.einlieferungsdatum_jahr=$year" | grep -m1 -E "Die Sendung|zur Sendung|Einlieferungsdatum|nicht vorgenommen" \
-        | sed 's/^  *//g' | sed -e 's/<[^>]*>//g'
+        | sed 's/^  *//g' | sed -e 's/<[^>]*>//g' | recode html...UTF-8
