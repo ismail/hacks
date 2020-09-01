@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 CHARACTER_SET="[:alnum:]!\"#$%&\'\(\)*+,-./:;<=>?@[\]^_\`{\|}~"
 LENGTH=30

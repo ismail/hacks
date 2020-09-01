@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 [[ -z "$1" ]] && echo "Pass a hostname argument." && exit 0
 

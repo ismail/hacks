@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 TERM=tmux-256color
 PATH=/usr/bin:$PATH
