@@ -77,7 +77,9 @@ quotes = {
     """:
     "Isaac Asimov",
     "I would never belong to any club that would have me as a member.":
-    "Groucho Marx"
+    "Groucho Marx",
+    "Every time I find the meaning of life, they change it.":
+    "Reinhold Niebuhr"
 }
 
 end = """
