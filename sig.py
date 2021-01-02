@@ -79,7 +79,9 @@ quotes = {
     "I would never belong to any club that would have me as a member.":
     "Groucho Marx",
     "Every time I find the meaning of life, they change it.":
-    "Reinhold Niebuhr"
+    "Reinhold Niebuhr",
+    "What is youth? A dream. What is love? The dream's content.":
+    "Søren Kierkegaard, Either/Or: A Fragment of Life"
 }
 
 end = """
