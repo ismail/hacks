@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import random
+import numpy as np
 import re
 
 quotes = {
@@ -90,7 +90,7 @@ end = """
 SUSE Software Solutions Germany GmbH, Maxfeldstrasse 5, 90409 Nuernberg, Germany
 GF: Felix Imendörffer (HRB 36809, AG Nürnberg)"""
 
-quote, author = random.choice(list(quotes.items()))
+quote, author = np.random.default_rng().choice(list(quotes.items()))
 quote = quote.strip()
 quote = re.sub(r"\n[ ]+", r"\n", quote, flags=re.UNICODE)
 
