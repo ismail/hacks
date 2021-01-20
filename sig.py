@@ -81,7 +81,9 @@ quotes = {
     "Every time I find the meaning of life, they change it.":
     "Reinhold Niebuhr",
     "What is youth? A dream. What is love? The dream's content.":
-    "Søren Kierkegaard, Either/Or: A Fragment of Life"
+    "Søren Kierkegaard, Either/Or: A Fragment of Life",
+    "I've finally stopped getting dumber.":
+    "The epitaph on Paul Erdős's grave"
 }
 
 end = """
