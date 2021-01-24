@@ -83,7 +83,12 @@ quotes = {
     "What is youth? A dream. What is love? The dream's content.":
     "Søren Kierkegaard, Either/Or: A Fragment of Life",
     "I've finally stopped getting dumber.":
-    "The epitaph on Paul Erdős's grave"
+    "The epitaph on Paul Erdős's grave",
+    """
+    Sometimes I go about in pity for myself, and all the while,
+    a great wind carries me across the sky.
+    """:
+    "Ojibwe saying"
 }
 
 end = """
