@@ -88,7 +88,24 @@ quotes = {
     Sometimes I go about in pity for myself, and all the while,
     a great wind carries me across the sky.
     """:
-    "Ojibwe saying"
+    "Ojibwe saying",
+    """
+    A designer knows that they have achieved perfection not when there is nothing left to add,
+    but when there is nothing left to take away.
+    """:
+    "de Saint-Exupery's Law of Design",
+    """
+    "Better" is the enemy of "good".
+    """:
+    "Edison's Law",
+    "Half of everything you hear in a classroom is crap. Education is figuring out which half is which.":
+    "Larrabee's Law",
+    "When the hardware is working perfectly, the really important visitors don't show up.":
+    "Atkin's Law of Demonstrations",
+    "A good plan violently executed now is better than a perfect plan next week.":
+    "Patton's Law of Program Planning",
+    "Do what you can, where you are, with what you have.":
+    "Roosevelt's Law of Task Planning"
 }
 
 end = """
