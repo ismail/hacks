@@ -105,7 +105,9 @@ quotes = {
     "A good plan violently executed now is better than a perfect plan next week.":
     "Patton's Law of Program Planning",
     "Do what you can, where you are, with what you have.":
-    "Roosevelt's Law of Task Planning"
+    "Roosevelt's Law of Task Planning",
+    "It is difficult to get a man to understand something when his salary depends on his not understanding it.":
+    "Upton Sinclair"
 }
 
 end = """
