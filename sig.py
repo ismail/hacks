@@ -107,7 +107,9 @@ quotes = {
     "Do what you can, where you are, with what you have.":
     "Roosevelt's Law of Task Planning",
     "It is difficult to get a man to understand something when his salary depends on his not understanding it.":
-    "Upton Sinclair"
+    "Upton Sinclair",
+    "You always make your own fun. If you don’t make it yourself, it ain’t fun, it’s entertainment.":
+    "David Mamet - State and Main"
 }
 
 end = """
