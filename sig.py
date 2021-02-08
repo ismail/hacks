@@ -115,7 +115,9 @@ quotes = {
     "Denken tut weh.":
     "Georg Simmel",
     "All money is a matter of belief. When the world loses faith, the currency becomes worthless paper.":
-    "Adam Smith"
+    "Adam Smith",
+    "Der Mensch kann wohl tun, was er will, aber er kann nicht wollen, was er will.":
+    "Arthur Schopenhauer"
 }
 
 end = """
