@@ -8,7 +8,7 @@ quotes = {
     "In ancient times cats were worshipped as gods; they have not forgotten this.":
     "Terry Pratchett",
     "You will become way less concerned with what other people think of you when you realize how seldom they do.":
-    "David Foster Wallace, Infinite Jest",
+    "David Foster Wallace - Infinite Jest",
     """
     Entrenched in both ancient and modern cultural tradition,
     the pursuit of happiness is a popular preoccupation around the world.
@@ -109,7 +109,13 @@ quotes = {
     "It is difficult to get a man to understand something when his salary depends on his not understanding it.":
     "Upton Sinclair",
     "You always make your own fun. If you don't make it yourself, it ain't fun, it's entertainment.":
-    "David Mamet - State and Main"
+    "David Mamet - State and Main",
+    "Attention is the rarest and purest form of generosity.":
+    "Simone Weil",
+    "Denken tut weh.":
+    "Georg Simmel",
+    "All money is a matter of belief. When the world loses faith, the currency becomes worthless paper.":
+    "Adam Smith"
 }
 
 end = """
