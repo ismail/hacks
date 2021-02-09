@@ -23,7 +23,7 @@ quotes = {
     "Nothing is true, everything is permitted.":
     "Hasan-i Sabbāh",
     "If there is no God, then everything is permitted.":
-    "Dmitri Karamazov",
+    "Fyodor Dostoevsky - Brothers Karamazov",
     """
     If it weren't for the fact that the TV set and the refrigerator are so far apart,
     some of us wouldn't get any exercise at all.
@@ -81,7 +81,7 @@ quotes = {
     "Every time I find the meaning of life, they change it.":
     "Reinhold Niebuhr",
     "What is youth? A dream. What is love? The dream's content.":
-    "Søren Kierkegaard, Either/Or: A Fragment of Life",
+    "Søren Kierkegaard - Either/Or: A Fragment of Life",
     "I've finally stopped getting dumber.":
     "The epitaph on Paul Erdős's grave",
     """
