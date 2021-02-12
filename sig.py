@@ -119,7 +119,9 @@ quotes = {
     "Der Mensch kann wohl tun, was er will, aber er kann nicht wollen, was er will.":
     "Arthur Schopenhauer",
     "Unglücklich das Land, das Helden nötig hat.":
-    "Bertolt Brecht"
+    "Bertolt Brecht",
+    "The heart has its reasons, which reason does not know… We know truth, not only by the reason, but also by the heart.":
+    "Blaise Pascal"
 }
 
 end = """
