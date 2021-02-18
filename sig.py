@@ -121,7 +121,12 @@ quotes = {
     "Unglücklich das Land, das Helden nötig hat.":
     "Bertolt Brecht",
     "The heart has its reasons, which reason does not know… We know truth, not only by the reason, but also by the heart.":
-    "Blaise Pascal"
+    "Blaise Pascal",
+    """
+    When you are dead, you do not know you are dead. It's only painful & difficult for others.
+    The same applies when you are stupid.
+    """:
+    "Ricky Gervais"
 }
 
 end = """
