@@ -126,7 +126,9 @@ quotes = {
     When you are dead, you do not know you are dead. It's only painful & difficult for others.
     The same applies when you are stupid.
     """:
-    "Ricky Gervais"
+    "Ricky Gervais",
+    "People use statistics as a drunk uses a lamppost — for support rather than illumination":
+    "A. E. Housman"
 }
 
 end = """
