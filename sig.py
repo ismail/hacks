@@ -127,7 +127,7 @@ quotes = {
     The same applies when you are stupid.
     """:
     "Ricky Gervais",
-    "People use statistics as a drunk uses a lamppost — for support rather than illumination":
+    "People use statistics as a drunk uses a lamppost — for support rather than illumination.":
     "A. E. Housman"
 }
 
