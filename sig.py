@@ -128,7 +128,9 @@ quotes = {
     """:
     "Ricky Gervais",
     "People use statistics as a drunk uses a lamppost — for support rather than illumination.":
-    "A. E. Housman"
+    "A. E. Housman",
+    "Das Schönste und Tiefste, was der Mensch erleben kann, ist das Gefühl des Geheimnisvollen.":
+    "Albert Einstein"
 }
 
 end = """
