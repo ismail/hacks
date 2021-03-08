@@ -20,7 +20,7 @@ def findKonjugation(string):
         data=None,
         headers={
             'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36'
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4421.0 Safari/537.36 Edg/90.0.810.1'
         })
     req.add_header('Referer', 'https://www.verbformen.de/konjugation/')
 
@@ -36,7 +36,8 @@ def findKonjugation(string):
 
     for table in s.findAll('div', attrs={'class': 'rAufZu'}):
         for column in table.findAll('div', attrs={'class': 'vTbl'}):
-            tense = column.find('h3').text
+            header = column.find('h2') or column.find('h3')
+            tense = header.text
             if (tense in filtered_tenses) and not result[tense]:
                 for tr in column.findAll('tr'):
                     result[tense].append(tr.text.strip())
