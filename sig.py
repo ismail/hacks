@@ -132,7 +132,9 @@ quotes = {
     "Das Schönste und Tiefste, was der Mensch erleben kann, ist das Gefühl des Geheimnisvollen.":
     "Albert Einstein",
     "The tree which moves some to tears of joy is in the eyes of others only a green thing which stands in the way... As a man is, so he sees.":
-    "William Blake"
+    "William Blake",
+    "The mind is a wonderful servant but a terrible master.":
+    ""
 }
 
 end = """
@@ -143,4 +145,7 @@ quote, author = np.random.default_rng().choice(list(quotes.items()))
 quote = quote.strip()
 quote = re.sub(r"\n[ ]+", r"\n", quote, flags=re.UNICODE)
 
-print(f"{quote.strip()}\n\n— {author}\n{end}")
+print(f"{quote.strip()}\n")
+if author:
+    print(f"— {author}")
+print(f"{end}")
