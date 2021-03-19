@@ -5,9 +5,11 @@ blob_aarch64=':aarch64:M::\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x0
 
 binfmt="/proc/sys/fs/binfmt_misc"
 
-if [ -e $binfmt/arm ]; then
-    echo -1 | tee $binfmt/arm &> /dev/null
-fi
+for i in arm aarch64; do
+    if [ -e $binfmt/$i ]; then
+        echo -1 | tee $binfmt/$i &> /dev/null
+    fi
+done
 
 echo "$blob_arm:/usr/bin/emu:" | tee $binfmt/register > /dev/null
 echo "$blob_aarch64:/usr/bin/emu:CF" | tee $binfmt/register > /dev/null
