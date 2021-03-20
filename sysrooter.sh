@@ -71,3 +71,5 @@ mount -l | grep "$TARGET/dev" &>/dev/null || sudo mount --bind /dev $TARGET/dev
 
 # Install bash and some other required packages
 run_zypper in bash glibc-locale-base terminfo
+
+sudo umount -l $TARGET/dev
