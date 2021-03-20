@@ -21,7 +21,10 @@ fi
 ARCH=$1
 QEMU_SUFFIX=$1
 REPOURL=http://download.opensuse.org/ports/$ARCH/tumbleweed/repo/oss
-TARGET=$HOME/$ARCH.sysroot
+ROOT=/usr/lib/sysroots
+TARGET=$ROOT/$ARCH
+
+sudo mkdir -p $ROOT
 
 if [ "$ARCH" = "armv7hl" ]; then
     QEMU_SUFFIX=arm
@@ -70,6 +73,6 @@ sudo mkdir -p $TARGET/dev
 mount -l | grep "$TARGET/dev" &>/dev/null || sudo mount --bind /dev $TARGET/dev
 
 # Install bash and some other required packages
-run_zypper in bash glibc-locale-base terminfo
+run_zypper in bash glibc-locale-base terminfo coreutils-single python3
 
 sudo umount -l $TARGET/dev
