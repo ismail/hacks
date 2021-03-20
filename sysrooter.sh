@@ -6,6 +6,18 @@ if [ $(whoami) = "root" ]; then
     exit -1
 fi
 
+# Sanity checks
+if [ $# -lt 1 -o $# -gt 2 -o $# -eq 2 -a "${2:-}" != "--shell" ]; then
+    echo "Usage: $0 <arch> --shell"
+    echo "Supported architectures: armv7hl, aarch64"
+    exit 0
+fi
+
+if [ "$1" != "armv7hl" -a "$1" != "aarch64" ]; then
+    echo "$1 is not supported, supported architectures: armv7hl, aarch64"
+    exit 0
+fi
+
 ARCH=$1
 QEMU_SUFFIX=$1
 REPOURL=http://download.opensuse.org/ports/$ARCH/tumbleweed/repo/oss
@@ -22,7 +34,7 @@ cat << EOF > $conf
 arch=$ARCH
 EOF
 
-if [ $# -eq 2 -a "$2" == "--shell" ]; then
+if [ $# -eq 2 -a "${2:-}" == "--shell" ]; then
     sudo chroot $TARGET
     exit 0
 fi
@@ -32,8 +44,16 @@ function run_zypper {
     sudo ZYPP_CONF=$conf zypper --non-interactive --no-gpg-checks --root $TARGET "$@"
 }
 
-# Clean up
-sudo rm -rf $TARGET/{bin,boot,etc,home,lib,mnt,opt,root,run,sbin,srv,tmp,usr,var}
+if [ -e $TARGET ]; then
+    read -p "$TARGET already exists do you want to re-create it? (y/n) "
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        # Clean up
+        sudo rm -rf $TARGET/{bin,boot,etc,home,lib,mnt,opt,root,run,sbin,srv,tmp,usr,var}
+    else
+        echo "Ok, exiting..."
+        exit 0
+    fi
+fi
 
 # Add default OSS repo
 run_zypper ar $REPOURL repo-oss
