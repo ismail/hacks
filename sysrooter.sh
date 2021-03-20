@@ -7,8 +7,13 @@ if [[ $(whoami) = "root" ]]; then
 fi
 
 ARCH=$1
+QEMU_SUFFIX=$1
 REPOURL=http://download.opensuse.org/ports/$ARCH/tumbleweed/repo/oss
 TARGET=$HOME/$ARCH.sysroot
+
+if [[ "$ARCH" = "armv7hl" ]]; then
+    QEMU_SUFFIX=arm
+fi
 
 # Create a fake zypp.conf
 conf=$(mktemp)
@@ -31,7 +36,7 @@ run_zypper ref
 
 # Copy emulation binaries
 sudo mkdir -p $TARGET/usr/bin
-sudo cp /usr/bin/emu /usr/bin/qemu-$ARCH $TARGET/usr/bin
+sudo cp /usr/bin/emu /usr/bin/qemu-$QEMU_SUFFIX $TARGET/usr/bin
 
 # Create bind mounts
 sudo mkdir -p $TARGET/{dev,proc,sys}
