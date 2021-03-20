@@ -63,8 +63,8 @@ run_zypper ref
 sudo mkdir -p $TARGET/usr/bin
 sudo cp /usr/bin/emu /usr/bin/qemu-$QEMU_SUFFIX $TARGET/usr/bin
 
-# Create bind mounts
-sudo mkdir -p $TARGET/{dev,proc,sys}
+# Create /dev for bind mount
+sudo mkdir -p $TARGET/dev
 
 # zypper mounts /proc itself
 mount -l | grep "$TARGET/dev" &>/dev/null || sudo mount --bind /dev $TARGET/dev
