@@ -1,7 +1,7 @@
-#!/usr/bin/zsh
+#!/usr/bin/bash
 set -euo errexit
 
-if [[ $(whoami) = "root" ]]; then
+if [ $(whoami) = "root" ]; then
     echo "Don't run this script as root."
     exit -1
 fi
@@ -11,7 +11,7 @@ QEMU_SUFFIX=$1
 REPOURL=http://download.opensuse.org/ports/$ARCH/tumbleweed/repo/oss
 TARGET=$HOME/$ARCH.sysroot
 
-if [[ "$ARCH" = "armv7hl" ]]; then
+if [ "$ARCH" = "armv7hl" ]; then
     QEMU_SUFFIX=arm
 fi
 
@@ -21,6 +21,11 @@ cat << EOF > $conf
 [main]
 arch=$ARCH
 EOF
+
+if [ $# -eq 2 -a "$2" == "--shell" ]; then
+    sudo chroot $TARGET
+    exit 0
+fi
 
 # Shortcut
 function run_zypper {
