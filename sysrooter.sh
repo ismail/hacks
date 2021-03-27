@@ -9,13 +9,14 @@ fi
 # Sanity checks
 if [ $# -lt 1 -o $# -gt 2 -o $# -eq 2 -a "${2:-}" != "--shell" ]; then
     echo "Usage: $0 <arch> --shell"
-    echo "Supported architectures: armv7hl, aarch64, ppc64, ppc64le"
+    echo "Supported architectures: armv7hl, aarch64, ppc64, ppc64le, riscv64"
     exit 0
 fi
 
 if [ "$1" != "armv7hl" -a "$1" != "aarch64" -a \
-     "$1" != "ppc64"   -a "$1" != "ppc64le" ]; then
-    echo "$1 is not supported, supported architectures: armv7hl, aarch64, ppc64, ppc64le"
+     "$1" != "ppc64"   -a "$1" != "ppc64le" -a \
+     "$1" != "riscv64" ]; then
+    echo "$1 is not supported, supported architectures: armv7hl, aarch64, ppc64, ppc64le, riscv64"
     exit 0
 fi
 
@@ -24,6 +25,8 @@ QEMU_SUFFIX=$1
 
 if [[ "$ARCH" == ppc* ]]; then
     REPOURL=http://download.opensuse.org/ports/ppc/tumbleweed/repo/oss
+elif [[ "$ARCH" == riscv* ]]; then
+    REPOURL=http://download.opensuse.org/ports/riscv/tumbleweed/repo/oss
 else
     REPOURL=http://download.opensuse.org/ports/$ARCH/tumbleweed/repo/oss
 fi
