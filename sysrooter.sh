@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 set -euo errexit
 
 if [ $(whoami) = "root" ]; then
@@ -74,17 +74,21 @@ fi
 run_zypper ar $REPOURL repo-oss
 run_zypper ref
 
+# Ubuntu...
+[[ -f /usr/bin/qemu-$QEMU_SUFFIX-static ]] && QEMU_SUFFIX="$QEMU_SUFFIX"-static
+
 # Copy emulation binaries
 sudo mkdir -p $TARGET/usr/bin
 sudo cp /usr/bin/emu /usr/bin/qemu-$QEMU_SUFFIX $TARGET/usr/bin
 
-# Create /dev for bind mount
-sudo mkdir -p $TARGET/dev
+# Create /dev, /proc for bind mount
+sudo mkdir -p $TARGET/dev $TARGET/proc
 
-# zypper mounts /proc itself
 mount -l | grep "$TARGET/dev" &>/dev/null || sudo mount --bind /dev $TARGET/dev
+mount -l | grep "$TARGET/proc" &>/dev/null || sudo mount --bind /proc $TARGET/proc
 
 # Install bash and some other required packages
 run_zypper in bash glibc-locale-base terminfo coreutils-single python3
 
 sudo umount -l $TARGET/dev
+sudo umount -l $TARGET/proc
