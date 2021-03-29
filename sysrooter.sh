@@ -76,7 +76,7 @@ if [[ "$ARCH" == ppc* ]]; then
 elif [[ "$ARCH" == riscv* ]]; then
     REPOURL="$BASE_URL"/riscv/"$DISTRO_PATH"/repo/oss
 elif [[ "$ARCH" = s390x ]]; then
-    REPOURL="$BASE_URL"/ports/zsystems/"$DISTRO_PATH"/repo/oss
+    REPOURL="$BASE_URL"/zsystems/"$DISTRO_PATH"/repo/oss
 else
     REPOURL="$BASE_URL"/"$ARCH"/"$DISTRO_PATH"/repo/oss
 fi
