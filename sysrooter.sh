@@ -6,35 +6,80 @@ if [ $(whoami) = "root" ]; then
     exit -1
 fi
 
-# Sanity checks
-if [ $# -lt 1 -o $# -gt 2 -o $# -eq 2 -a "${2:-}" != "--shell" ]; then
-    echo "Usage: $0 <arch> --shell"
-    echo "Supported architectures: armv7hl, aarch64, ppc64, ppc64le, riscv64, s390x"
-    exit 0
+ARCH=''
+QEMU_SUFFIX=''
+CHROOT=0
+DISTRO_PATH="tumbleweed"
+DISTRO_NAME="tumbleweed"
+LEAP_VERSION="15.2"
+ROOT="/usr/lib/sysroots"
+BASE_URL="http://download.opensuse.org/ports/"
+
+declare -A arches=([armv7hl]=1 [aarch64]=1 [ppc64]=1 \
+                   [ppc64le]=1 [risvc64]=1 [s390x]=1)
+
+usage() {
+    echo "Usage: $0 -a|--arch <arch> -s|--shell --leap"
+    echo "Supported architectures: ${!arches[@]}"
+    exit 1
+}
+
+run_zypper() {
+    sudo ZYPP_CONF=$conf zypper --non-interactive --no-gpg-checks --root $TARGET "$@"
+}
+
+opts=$(getopt -l "arch:,shell,leap,help" -o "a:s:l:h" -- "$@")
+eval set --$opts
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -a|--arch)
+            ARCH=$2
+            QEMU_SUFFIX=$ARCH
+            shift 2
+            ;;
+        -s|--shell)
+            CHROOT=1
+            shift 1
+            ;;
+        -l|--leap)
+            DISTRO_PATH="/distribution/leap/$LEAP_VERSION/"
+            DISTRO_NAME="leap"
+            shift 1
+            ;;
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+[[ -z $ARCH ]] && echo "--arch is a required argument." && usage && exit 1
+
+if [[ -z ${arches[$ARCH]} ]]; then
+    echo "$1 is not supported, supported architectures: ${arches[@]}"
+    exit 1
 fi
 
-if [ "$1" != "armv7hl" -a "$1" != "aarch64" -a \
-     "$1" != "ppc64"   -a "$1" != "ppc64le" -a \
-     "$1" != "riscv64" -a "$1" != "s390x" ]; then
-    echo "$1 is not supported, supported architectures: armv7hl, aarch64, ppc64, ppc64le, riscv64, s390x"
-    exit 0
-fi
+TARGET=$ROOT/$ARCH-$DISTRO_NAME
 
-ARCH=$1
-QEMU_SUFFIX=$1
+if [[ $CHROOT -eq 1 ]]; then
+    [[ ! -d $TARGET ]] && echo "$TARGET does not exist" && exit 1
+    sudo chroot $TARGET && exit 0
+fi
 
 if [[ "$ARCH" == ppc* ]]; then
-    REPOURL=http://download.opensuse.org/ports/ppc/tumbleweed/repo/oss
+    REPOURL="$BASE_URL"/ppc/"$DISTRO_PATH"/repo/oss
 elif [[ "$ARCH" == riscv* ]]; then
-    REPOURL=http://download.opensuse.org/ports/riscv/tumbleweed/repo/oss
+    REPOURL="$BASE_URL"/riscv/"$DISTRO_PATH"/repo/oss
 elif [[ "$ARCH" = s390x ]]; then
-    REPOURL=http://download.opensuse.org/ports/zsystems/tumbleweed/repo/oss
+    REPOURL="$BASE_URL"/ports/zsystems/"$DISTRO_PATH"/repo/oss
 else
-    REPOURL=http://download.opensuse.org/ports/$ARCH/tumbleweed/repo/oss
+    REPOURL="$BASE_URL"/"$ARCH"/"$DISTRO_PATH"/repo/oss
 fi
-
-ROOT=/usr/lib/sysroots
-TARGET=$ROOT/$ARCH
 
 sudo mkdir -p $ROOT
 
@@ -48,16 +93,6 @@ cat << EOF > $conf
 [main]
 arch=$ARCH
 EOF
-
-if [ $# -eq 2 -a "${2:-}" == "--shell" ]; then
-    sudo chroot $TARGET
-    exit 0
-fi
-
-# Shortcut
-function run_zypper {
-    sudo ZYPP_CONF=$conf zypper --non-interactive --no-gpg-checks --root $TARGET "$@"
-}
 
 if [ -e $TARGET ]; then
     read -p "$TARGET already exists do you want to re-create it? (y/n) "
@@ -88,7 +123,7 @@ mount -l | grep "$TARGET/dev" &>/dev/null || sudo mount --bind /dev $TARGET/dev
 mount -l | grep "$TARGET/proc" &>/dev/null || sudo mount --bind /proc $TARGET/proc
 
 # Install bash and some other required packages
-run_zypper in bash glibc-locale-base terminfo coreutils-single python3
+run_zypper in bash glibc-locale-base terminfo coreutils python3
 
 sudo umount -l $TARGET/dev
 sudo umount -l $TARGET/proc
