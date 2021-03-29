@@ -73,9 +73,11 @@ fi
 
 if [[ "$ARCH" == ppc* ]]; then
     REPOURL="$BASE_URL"/ppc/"$DISTRO_PATH"/repo/oss
-elif [[ "$ARCH" == riscv* ]]; then
+elif [[ "$ARCH" == riscv64 ]]; then
+    [[ $DISTRO_NAME = "leap" ]] && echo "Leap doesn't support riscv64." && exit 1
     REPOURL="$BASE_URL"/riscv/"$DISTRO_PATH"/repo/oss
 elif [[ "$ARCH" = s390x ]]; then
+    [[ $DISTRO_NAME = "leap" ]] && echo "Leap doesn't support s390x." && exit 1
     REPOURL="$BASE_URL"/zsystems/"$DISTRO_PATH"/repo/oss
 else
     REPOURL="$BASE_URL"/"$ARCH"/"$DISTRO_PATH"/repo/oss
