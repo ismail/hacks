@@ -60,7 +60,7 @@ done
 [[ -z $ARCH ]] && echo "--arch is a required argument." && usage && exit 1
 
 if [[ -z ${arches[$ARCH]} ]]; then
-    echo "$1 is not supported, supported architectures: ${arches[@]}"
+    echo "$1 is not supported, supported architectures: ${!arches[@]}"
     exit 1
 fi
 
