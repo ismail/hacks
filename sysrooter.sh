@@ -115,7 +115,7 @@ fi
 
 # Add default OSS repo
 run_zypper ar $REPOURL repo-oss
-run_zypper --no-gpg-checks --gpg-auto-import-keys ref
+run_zypper --gpg-auto-import-keys ref
 
 # Ubuntu...
 [[ -f /usr/bin/qemu-$QEMU_SUFFIX-static ]] && QEMU_SUFFIX="$QEMU_SUFFIX"-static
