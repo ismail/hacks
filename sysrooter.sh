@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 set -euo errexit
 
+usage() {
+    echo "Usage: $0 -a|--arch <arch> -s|--shell --leap"
+    echo "Supported architectures: ${!arches[@]}"
+    exit 1
+}
+
+run_zypper() {
+    sudo ZYPP_CONF=$conf zypper --non-interactive --root $TARGET "$@"
+}
+
 if [ $(whoami) = "root" ]; then
     echo "Don't run this script as root."
     exit -1
@@ -13,20 +23,10 @@ DISTRO_PATH="tumbleweed"
 DISTRO_NAME="tumbleweed"
 LEAP_VERSION="15.2"
 ROOT="/usr/lib/sysroots"
-BASE_URL="http://download.opensuse.org/ports/"
+BASE_URL="https://mirrorcache.opensuse.org/ports/"
 
 declare -A arches=([armv7hl]=1 [aarch64]=1 [ppc64]=1 \
                    [ppc64le]=1 [riscv64]=1 [s390x]=1)
-
-usage() {
-    echo "Usage: $0 -a|--arch <arch> -s|--shell --leap"
-    echo "Supported architectures: ${!arches[@]}"
-    exit 1
-}
-
-run_zypper() {
-    sudo ZYPP_CONF=$conf zypper --non-interactive --no-gpg-checks --root $TARGET "$@"
-}
 
 opts=$(getopt -l "arch:,shell,leap,help" -o "a:s:l:h" -- "$@")
 eval set --$opts
@@ -65,6 +65,12 @@ if [[ -z ${arches[$ARCH]} ]]; then
 fi
 
 TARGET=$ROOT/$ARCH-$DISTRO_NAME
+
+cleanup() {
+    sudo umount -l $TARGET/dev || true
+    sudo umount -l $TARGET/proc || true
+}
+trap cleanup EXIT
 
 if [[ $CHROOT -eq 1 ]]; then
     [[ ! -d $TARGET ]] && echo "$TARGET does not exist" && exit 1
@@ -109,7 +115,7 @@ fi
 
 # Add default OSS repo
 run_zypper ar $REPOURL repo-oss
-run_zypper ref
+run_zypper --no-gpg-checks --gpg-auto-import-keys ref
 
 # Ubuntu...
 [[ -f /usr/bin/qemu-$QEMU_SUFFIX-static ]] && QEMU_SUFFIX="$QEMU_SUFFIX"-static
@@ -127,5 +133,4 @@ mount -l | grep "$TARGET/proc" &>/dev/null || sudo mount --bind /proc $TARGET/pr
 # Install bash and some other required packages
 run_zypper in bash glibc-locale-base terminfo coreutils python3
 
-sudo umount -l $TARGET/dev
-sudo umount -l $TARGET/proc
+
