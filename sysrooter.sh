@@ -65,6 +65,7 @@ if [[ -z ${arches[$ARCH]:-} ]]; then
 fi
 
 TARGET=$ROOT/$ARCH-$DISTRO_NAME
+[[ $DISTRO_NAME = "leap" ]] && TARGET=$TARGET-$LEAP_VERSION
 
 cleanup() {
     sudo umount -l $TARGET/dev || true
