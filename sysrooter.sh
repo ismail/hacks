@@ -23,7 +23,7 @@ DISTRO_PATH="tumbleweed"
 DISTRO_NAME="tumbleweed"
 LEAP_VERSION="15.2"
 ROOT="/usr/lib/sysroots"
-BASE_URL="https://mirrorcache.opensuse.org/ports/"
+BASE_URL="https://mirrorcache.opensuse.org/ports"
 
 declare -A arches=([armv7hl]=1 [aarch64]=1 [ppc64]=1 \
                    [ppc64le]=1 [riscv64]=1 [s390x]=1)
