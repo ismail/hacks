@@ -115,7 +115,7 @@ if [ -e $TARGET ]; then
 fi
 
 # Add default OSS repo
-run_zypper ar $REPOURL repo-oss
+run_zypper ar -f $REPOURL repo-oss
 run_zypper --gpg-auto-import-keys ref
 
 # Ubuntu...
