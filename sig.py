@@ -150,8 +150,7 @@ quotes = {
     Go and spread seeds on the tops of mountains —
     may the birds not die of starvation in a Muslim country.
     """:
-    "Umar ibn Abd al-Aziz (the 8th Caliph of the Umayyad Caliphate)",
-    """
+    "Umar ibn Abd al-Aziz (the 8th Caliph of the Umayyad Caliphate)"
 }
 
 end = """
