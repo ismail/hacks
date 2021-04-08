@@ -140,7 +140,18 @@ quotes = {
     "The tree which moves some to tears of joy is in the eyes of others only a green thing which stands in the way... As a man is, so he sees.":
     "William Blake",
     "The mind is a wonderful servant but a terrible master.":
-    ""
+    "",
+    """
+    Âyinesi iştir kişinin lâfa bakılmaz
+    Şahsın görünür rütbe-i aklı eserinde
+    """:
+    "Ziya Paşa",
+    """
+    Go and spread seeds on the tops of mountains —
+    may the birds not die of starvation in a Muslim country.
+    """:
+    "Umar ibn Abd al-Aziz (the 8th Caliph of the Umayyad Caliphate)",
+    """
 }
 
 end = """
