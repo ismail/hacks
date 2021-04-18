@@ -150,12 +150,12 @@ quotes = {
     Go and spread seeds on the tops of mountains —
     may the birds not die of starvation in a Muslim country.
     """:
-    "Umar ibn Abd al-Aziz (the 8th Caliph of the Umayyad Caliphate)"
+    "Umar ibn Abd al-Aziz (the 8th Caliph of the Umayyad Caliphate)",
+    "When the facts change, I change my mind. What do you do, sir?":
+    "John Maynard Keynes"
 }
 
-end = """
-SUSE Software Solutions Germany GmbH, Maxfeldstrasse 5, 90409 Nuernberg, Germany
-GF: Felix Imendörffer (HRB 36809, AG Nürnberg)"""
+end = """"""
 
 quote, author = np.random.default_rng().choice(list(quotes.items()))
 quote = quote.strip()
