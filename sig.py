@@ -155,7 +155,16 @@ quotes = {
     "John Maynard Keynes"
 }
 
-end = """"""
+end = """
+Ismail Dönmez
+Senior Software Engineer
+
+EB - Driving the future of software
+Elektrobit Automotive GmbH, Am Wolfsmantel 46, 91058 Erlangen, Germany
+Managing Director: Maria Anhalt
+Chairperson of Supervisory Board: Dr. Frank Rabe
+Register Court Fürth HRB 4886
+"""
 
 quote, author = np.random.default_rng().choice(list(quotes.items()))
 quote = quote.strip()
