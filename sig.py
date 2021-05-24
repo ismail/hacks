@@ -152,7 +152,12 @@ quotes = {
     """:
     "Umar ibn Abd al-Aziz (the 8th Caliph of the Umayyad Caliphate)",
     "When the facts change, I change my mind. What do you do, sir?":
-    "John Maynard Keynes"
+    "John Maynard Keynes",
+    """
+    Of all ridiculous things the most ridiculous seems to me, to be busy
+    — to be a man who is brisk about his food and his work.
+    """:
+    "Søren Kierkegaard"
 }
 
 end = """
