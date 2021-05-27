@@ -21,9 +21,9 @@ QEMU_SUFFIX=''
 CHROOT=0
 DISTRO_PATH="tumbleweed"
 DISTRO_NAME="tumbleweed"
-LEAP_VERSION="15.2"
+LEAP_VERSION="15.3"
 ROOT="/usr/lib/sysroots"
-BASE_URL="https://mirrorcache.opensuse.org/ports"
+BASE_URL="https://mirrorcache.opensuse.org"
 
 declare -A arches=([armv7hl]=1 [aarch64]=1 [ppc64]=1 \
                    [ppc64le]=1 [riscv64]=1 [s390x]=1)
@@ -78,16 +78,21 @@ if [[ $CHROOT -eq 1 ]]; then
     sudo chroot $TARGET && exit 0
 fi
 
-if [[ "$ARCH" == ppc* ]]; then
-    REPOURL="$BASE_URL"/ppc/"$DISTRO_PATH"/repo/oss
-elif [[ "$ARCH" == riscv64 ]]; then
-    [[ $DISTRO_NAME = "leap" ]] && echo "Leap doesn't support riscv64." && exit 1
-    REPOURL="$BASE_URL"/riscv/"$DISTRO_PATH"/repo/oss
-elif [[ "$ARCH" = s390x ]]; then
-    [[ $DISTRO_NAME = "leap" ]] && echo "Leap doesn't support s390x." && exit 1
-    REPOURL="$BASE_URL"/zsystems/"$DISTRO_PATH"/repo/oss
+if [[ $DISTRO_NAME = "leap" ]]; then
+    [[ $ARCH = "riscv64" ]] && echo "Leap doesn't support riscv64." && exit 1
+    [[ $ARCH = "s390x" ]] && echo "Leap doesn't support s390x." && exit 1
+
+    REPOURL="$BASE_URL/distribution/leap/15.3/repo/oss"
 else
-    REPOURL="$BASE_URL"/"$ARCH"/"$DISTRO_PATH"/repo/oss
+    if [[ "$ARCH" == ppc* ]]; then
+        REPOURL="$BASE_URL"/ports/ppc/"$DISTRO_PATH"/repo/oss
+    elif [[ "$ARCH" == riscv64 ]]; then
+        REPOURL="$BASE_URL"/ports/riscv/"$DISTRO_PATH"/repo/oss
+    elif [[ "$ARCH" = s390x ]]; then
+        REPOURL="$BASE_URL"/ports/zsystems/"$DISTRO_PATH"/repo/oss
+    else
+        REPOURL="$BASE_URL"/ports/"$ARCH"/"$DISTRO_PATH"/repo/oss
+    fi
 fi
 
 sudo mkdir -p $ROOT
