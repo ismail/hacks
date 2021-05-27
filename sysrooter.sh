@@ -23,7 +23,7 @@ DISTRO_PATH="tumbleweed"
 DISTRO_NAME="tumbleweed"
 LEAP_VERSION="15.3"
 ROOT="/usr/lib/sysroots"
-BASE_URL="https://mirrorcache.opensuse.org"
+BASE_URL="http://download.opensuse.org"
 
 declare -A arches=([armv7hl]=1 [aarch64]=1 [ppc64]=1 \
                    [ppc64le]=1 [riscv64]=1 [s390x]=1)
@@ -138,5 +138,3 @@ mount -l | grep "$TARGET/proc" &>/dev/null || sudo mount --bind /proc $TARGET/pr
 
 # Install bash and some other required packages
 run_zypper in bash glibc-locale-base terminfo coreutils python3
-
-
