@@ -121,6 +121,14 @@ fi
 
 # Add default OSS repo
 run_zypper ar -f $REPOURL repo-oss
+
+# Update repos for Leap
+if [[ $DISTRO_NAME = "leap" ]]; then
+    for repo in backports oss sle; do
+        run_zypper ar -f $BASE_URL/update/leap/$LEAP_VERSION/$repo update-$repo
+    done
+fi
+
 run_zypper --gpg-auto-import-keys ref
 
 # Ubuntu...
