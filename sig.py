@@ -166,7 +166,7 @@ Senior Software Engineer
 
 EB - Driving the future of software
 Elektrobit Automotive GmbH, Am Wolfsmantel 46, 91058 Erlangen, Germany
-Managing Director: Maria Anhalt
+Managing Directors: Maria Anhalt, Christian Reinhard
 Chairperson of Supervisory Board: Dr. Frank Rabe
 Register Court Fürth HRB 4886
 """
