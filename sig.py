@@ -157,7 +157,12 @@ quotes = {
     Of all ridiculous things the most ridiculous seems to me, to be busy
     — to be a man who is brisk about his food and his work.
     """:
-    "Søren Kierkegaard"
+    "Søren Kierkegaard",
+    """
+    When information goes ‘in one ear and out the other,’
+    it’s often because it doesn’t have anything to stick to.
+    """:
+    "Joshua Foer"
 }
 
 end = """
