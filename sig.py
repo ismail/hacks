@@ -160,9 +160,14 @@ quotes = {
     "Søren Kierkegaard",
     """
     When information goes ‘in one ear and out the other,’
-    it’s often because it doesn’t have anything to stick to.
+    it's often because it doesn’t have anything to stick to.
     """:
-    "Joshua Foer"
+    "Joshua Foer",
+    """
+    The real problem of humanity is the following: we have Paleolithic emotions,
+    medieval institutions, and godlike technology.
+    """:
+    "Edward O. Wilson"
 }
 
 end = """
