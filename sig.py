@@ -167,7 +167,12 @@ quotes = {
     The real problem of humanity is the following: we have Paleolithic emotions,
     medieval institutions, and godlike technology.
     """:
-    "Edward O. Wilson"
+    "Edward O. Wilson",
+    """
+     I heard a Californian student in Heidelberg say, in one of his calmest moods,
+     that he would rather decline two drinks than one German adjective.
+    """:
+    "Mark Twain"
 }
 
 end = """
