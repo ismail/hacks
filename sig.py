@@ -172,7 +172,9 @@ quotes = {
      I heard a Californian student in Heidelberg say, in one of his calmest moods,
      that he would rather decline two drinks than one German adjective.
     """:
-    "Mark Twain"
+    "Mark Twain",
+    "Nothing is more unbearable, once one has it, than freedom.":
+    "James Baldwin"
 }
 
 end = """
