@@ -174,7 +174,13 @@ quotes = {
     """:
     "Mark Twain",
     "Nothing is more unbearable, once one has it, than freedom.":
-    "James Baldwin"
+    "James Baldwin",
+    """
+    The trouble with fighting for human freedom is that one spends most of one's time
+    defending scoundrels. For it is against scoundrels that oppressive laws are first aimed,
+    and oppression must be stopped at the beginning if it is to be stopped at all.
+    """:
+    "H. L. Mencken"
 }
 
 end = """
