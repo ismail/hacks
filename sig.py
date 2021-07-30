@@ -180,7 +180,12 @@ quotes = {
     defending scoundrels. For it is against scoundrels that oppressive laws are first aimed,
     and oppression must be stopped at the beginning if it is to be stopped at all.
     """:
-    "H. L. Mencken"
+    "H. L. Mencken",
+    """
+    Failure sharpens people's awareness of their own fallibility, their own common humanity,
+    and deepens their understanding of those in others.
+    """:
+    "Bryan Magee"
 }
 
 end = """
