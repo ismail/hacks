@@ -9,6 +9,8 @@ curl -N -s https://www.deutschepost.de/sendung/simpleQueryResult.html \
         -H 'Content-Type: application/x-www-form-urlencoded' \
         -H 'Referer: https://www.deutschepost.de/sendung/simpleQuery.html' \
         --data "form.sendungsnummer=$1" \
+	--data "form.postedDate=$2" \
+	--data "form.checkPostedDate=true" \
         --data "form.einlieferungsdatum_tag=$day" \
         --data "form.einlieferungsdatum_monat=$month" \
         --data "form.einlieferungsdatum_jahr=$year" | grep -m1 -E "Die Sendung|zur Sendung|Einlieferungsdatum|nicht vorgenommen" \
