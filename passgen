@@ -7,5 +7,5 @@ LENGTH=30
 [[ ! -z $2 ]] && CHARACTER_SET=$2
 
 for i in {1..20}; do
-    < /dev/urandom tr -dc $CHARACTER_SET | head -c$LENGTH; echo
+    < /dev/urandom LC_ALL=C tr -dc $CHARACTER_SET | head -c$LENGTH; echo
 done
