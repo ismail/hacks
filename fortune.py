@@ -190,9 +190,6 @@ quotes = {
     "Blaise Pascal"
 }
 
-end = """
-"""
-
 quote, author = random.choice(list(quotes.items()))
 quote = quote.strip()
 quote = re.sub(r"\n[ ]+", r"\n", quote, flags=re.UNICODE)
@@ -200,4 +197,3 @@ quote = re.sub(r"\n[ ]+", r"\n", quote, flags=re.UNICODE)
 print(f"{quote.strip()}\n")
 if author:
     print(f"— {author}")
-print(f"{end}")
