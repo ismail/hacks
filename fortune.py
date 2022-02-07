@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import numpy as np
+import random
 import re
 
 quotes = {
@@ -185,21 +185,15 @@ quotes = {
     Failure sharpens people's awareness of their own fallibility, their own common humanity,
     and deepens their understanding of those in others.
     """:
-    "Bryan Magee"
+    "Bryan Magee",
+    "All of humanity’s problems stem from man’s inability to sit quietly in a room alone.":
+    "Blaise Pascal"
 }
 
 end = """
-Ismail Dönmez
-Senior Software Engineer
-
-EB - Driving the future of software
-Elektrobit Automotive GmbH, Am Wolfsmantel 46, 91058 Erlangen, Germany
-Managing Directors: Maria Anhalt, Christian Reinhard
-Chairperson of Supervisory Board: Dr. Frank Rabe
-Register Court Fürth HRB 4886
 """
 
-quote, author = np.random.default_rng().choice(list(quotes.items()))
+quote, author = random.choice(list(quotes.items()))
 quote = quote.strip()
 quote = re.sub(r"\n[ ]+", r"\n", quote, flags=re.UNICODE)
 
