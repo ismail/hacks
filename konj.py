@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+from bs4 import BeautifulSoup as soup
+from rich.console import Console
+from rich.table import Table
 import urllib.error
 from urllib.parse import urlencode, quote
 from urllib.request import urlopen, Request
-from bs4 import BeautifulSoup as soup
 import sys
 
 url = "https://www.verbformen.de/konjugation/?w="
-filtered_tenses = [
-    "Präsens", "Präteritum", "Perfekt", "Imperativ", "Konjunktiv I",
-    "Konjunktiv II", "Plusquam."
-]
+filtered_tenses = ["Präsens", "Präteritum", "Perfekt"]
 
 
 def findKonjugation(string):
@@ -19,10 +18,10 @@ def findKonjugation(string):
         f"{url}{quote(string)}",
         data=None,
         headers={
-            'User-Agent':
-            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4421.0 Safari/537.36 Edg/90.0.810.1'
-        })
-    req.add_header('Referer', 'https://www.verbformen.de/konjugation/')
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.109 Safari/537.36"
+        },
+    )
+    req.add_header("Referer", "https://www.verbformen.de/konjugation/")
 
     try:
         s = soup(urlopen(req).read(), "lxml")
@@ -34,19 +33,28 @@ def findKonjugation(string):
     for tense in filtered_tenses:
         result[tense] = []
 
-    for table in s.findAll('div', attrs={'class': 'rAufZu'}):
-        for column in table.findAll('div', attrs={'class': 'vTbl'}):
-            header = column.find('h2') or column.find('h3')
+    for table in s.findAll("div", attrs={"class": "rAufZu"}):
+        for column in table.findAll("div", attrs={"class": "vTbl"}):
+            header = column.find("h2") or column.find("h3")
             tense = header.text
             if (tense in filtered_tenses) and not result[tense]:
-                for tr in column.findAll('tr'):
+                for tr in column.findAll("tr"):
                     result[tense].append(tr.text.strip())
 
     if result["Präsens"]:
+        table = Table()
+
         for tense in filtered_tenses:
-            print(f"\033[1m{tense}\033[0m")
-            print(" / ".join(result[tense]))
-            print("")
+            table.add_column(tense, justify="left", style="magenta", no_wrap=True)
+
+        for i in range(0, len(result["Präsens"])):
+            row = []
+            for tense in filtered_tenses:
+                row.append(result[tense][i])
+            table.add_row(*row)
+
+        console = Console()
+        console.print(table)
         print(f"Quelle: {url}{quote(string)}\n")
     else:
         print("No result found.")
