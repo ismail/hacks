@@ -1,9 +1,0 @@
-#!/usr/bin/bash
-
-dropbox stop
-
-cd ~/.dropbox-dist/dropbox-lnx.x86_64-*/images/hicolor/16x16/
-rm -rf status
-ln -sf ~/src/dropbox-status-icons/light-icons/ status
-
-dropbox start
