@@ -18,24 +18,30 @@ debug = 0
 
 def searchWord(word):
     try:
-        parameters = {'ara': word}
-        url = '{}?{}'.format(URL, urlencode(parameters))
-        results = json.loads(urlopen(url).read())
+        req = Request(
+            URL,
+            data={b"ara": bytes(word, "utf-8")},
+            headers={
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36"
+            },
+        )
+        results = json.loads(urlopen(req).read())
     except HTTPError as e:
         print(e)
         sys.exit(-1)
 
     if debug:
         import pprint
+
         pprint.pprint(results)
 
     if "error" in results:
         print(results["error"])
         return
 
-    pronunciation = results[0]['telaffuz']
-    other_languages = results[0]['lisan']
-    combinations = results[0]['birlesikler']
+    pronunciation = results[0]["telaffuz"]
+    other_languages = results[0]["lisan"]
+    combinations = results[0]["birlesikler"]
     headline = []
 
     if pronunciation:
@@ -44,7 +50,7 @@ def searchWord(word):
     if other_languages:
         # Looks like there is mac-roman encoded stuff inside?!
         # 0x90 0x00EA # LATIN SMALL LETTER E WITH CIRCUMFLEX
-        other_languages = other_languages.replace('\x90', 'ê')
+        other_languages = other_languages.replace("\x90", "ê")
 
         headline.append(other_languages)
 
@@ -54,27 +60,27 @@ def searchWord(word):
     index = 0
     sayings = []
     for result in results:
-        for meaning in result['anlamlarListe']:
+        for meaning in result["anlamlarListe"]:
             index += 1
 
             try:
-                word_type = meaning['ozelliklerListe'][0]['tam_adi']
+                word_type = meaning["ozelliklerListe"][0]["tam_adi"]
                 print(f"{index}. ({word_type}) {meaning['anlam']}")
             except KeyError:
                 print(f"{index}. {meaning['anlam']}")
 
             try:
-                for example in meaning['orneklerListe']:
-                    print(f"\t→ {example['ornek']}", end='')
-                    if example['yazar_id'] != '0':
+                for example in meaning["orneklerListe"]:
+                    print(f"\t→ {example['ornek']}", end="")
+                    if example["yazar_id"] != "0":
                         print(f" — {example['yazar'][0]['tam_adi']}")
                     else:
                         print()
             except KeyError:
                 pass
 
-        if 'atasozu' in result:
-            sayings.extend(result['atasozu'])
+        if "atasozu" in result:
+            sayings.extend(result["atasozu"])
 
     if sayings:
         print("\nAtasözleri:")
@@ -88,7 +94,7 @@ def searchWord(word):
 
 
 if __name__ == "__main__":
-    if (len(sys.argv) != 2):
+    if len(sys.argv) != 2:
         print("Aramak için bir sözcük girin.")
     else:
         searchWord(sys.argv[1])
