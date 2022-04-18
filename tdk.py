@@ -19,9 +19,10 @@ debug = 0
 
 def searchWord(word):
     try:
+        parameters = {"ara": word}
+        url = "{}?{}".format(URL, urlencode(parameters))
         req = Request(
-            URL,
-            data={b"ara": bytes(word, "utf-8")},
+            url,
             headers={
                 "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36"
             },
