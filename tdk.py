@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# 2019 İsmail Dönmez <ismail@i10z.com>
+# 2022 İsmail Dönmez <ismail@i10z.com>
 
 from urllib.parse import urlencode
 from urllib.request import urlopen, Request
@@ -9,6 +9,7 @@ from urllib.error import HTTPError
 from textwrap import wrap
 
 import json
+import pprint
 import sys
 
 
@@ -31,8 +32,6 @@ def searchWord(word):
         sys.exit(-1)
 
     if debug:
-        import pprint
-
         pprint.pprint(results)
 
     if "error" in results:
