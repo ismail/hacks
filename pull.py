@@ -7,17 +7,16 @@
 import sys
 import os
 
-vcDict = \
-    {
-        ".gclient": "gclient sync",
-        ".git/refs/remotes/git-svn": "git svn rebase",
-        ".git": "git pull",
-        ".svn": "svn up",
-        ".hg": "hg pull -u -v",
-        "CVS": "cvs -q -z3 update -dPA",
-        ".bzr": "bzr pull",
-        ".osc": "osc up",
-    }
+vcDict = {
+    ".gclient": "gclient sync",
+    ".git/refs/remotes/git-svn": "git svn rebase",
+    ".git": "git pull",
+    ".svn": "svn up",
+    ".hg": "hg pull -u -v",
+    "CVS": "cvs -q -z3 update -dPA",
+    ".bzr": "bzr pull",
+    ".osc": "osc up",
+}
 
 
 def log(string, isTTY=sys.stdout.isatty()):
@@ -50,8 +49,7 @@ if __name__ == "__main__":
                 os.chdir(sys.argv[2])
 
             root = os.path.abspath(".")
-            paths = sorted(
-                set([os.path.join(root, x[0]) for x in os.walk(root)]))
+            paths = sorted(set([os.path.join(root, x[0]) for x in os.walk(root)]))
             for path in paths:
                 doPull(path)
 
