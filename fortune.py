@@ -118,14 +118,17 @@ quotes = {
     medieval institutions, and godlike technology.
     """: "Edward O. Wilson",
     """
-     I heard a Californian student in Heidelberg say, in one of his calmest moods,
-     that he would rather decline two drinks than one German adjective.
+    I heard a Californian student in Heidelberg say, in one of his calmest moods,
+    that he would rather decline two drinks than one German adjective.
     """: "Mark Twain",
     "Nothing is more unbearable, once one has it, than freedom.": "James Baldwin",
     """
     The trouble with fighting for human freedom is that one spends most of one's time
     defending scoundrels. For it is against scoundrels that oppressive laws are first aimed,
     and oppression must be stopped at the beginning if it is to be stopped at all.
+    """: "H. L. Mencken",
+    """
+    For every complex problem there is an answer that is clear, simple, and wrong.
     """: "H. L. Mencken",
     """
     Failure sharpens people's awareness of their own fallibility, their own common humanity,
