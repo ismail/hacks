@@ -17,9 +17,9 @@ URL = "http://sozluk.gov.tr/gts"
 debug = 0
 
 
-def searchWord(word):
+def searchWord(words):
     try:
-        parameters = {"ara": word}
+        parameters = {"ara": " ".join(words)}
         url = "{}?{}".format(URL, urlencode(parameters))
         req = Request(
             url,
@@ -64,7 +64,9 @@ def searchWord(word):
             index += 1
 
             try:
-                word_type = meaning["ozelliklerListe"][0]["tam_adi"]
+                word_type = ", ".join(
+                    [x["tam_adi"] for x in meaning["ozelliklerListe"]]
+                )
                 print(f"{index}. ({word_type}) {meaning['anlam']}")
             except KeyError:
                 print(f"{index}. {meaning['anlam']}")
@@ -94,7 +96,7 @@ def searchWord(word):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) < 2:
         print("Aramak için bir sözcük girin.")
     else:
-        searchWord(sys.argv[1])
+        searchWord(sys.argv[1:])
