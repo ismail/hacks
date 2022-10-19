@@ -12,4 +12,4 @@ format="
                             ----------
                  time_total:  %{time_total}\n\n"
 
-curl -w "$format" -o /dev/null -s $1
+curl -L -w "$format" -o /dev/null -s $1
