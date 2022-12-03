@@ -207,7 +207,9 @@ quotes = {
     "Zweifle nicht an dem der sagt, er habe Angst, aber habe Angst vor dem, der sagt, er habe keine Zweifel.":
     "Erich Fried",
     "Everybody is disappointed at me at some point.":
-    "Larry David"
+    "Larry David",
+    "A person often meets his destiny on the road he took to avoid it.":
+    "Jean de la Fontaine"
 }
 
 quote, author = random.choice(list(quotes.items()))
