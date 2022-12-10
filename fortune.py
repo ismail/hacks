@@ -141,8 +141,7 @@ quotes = {
     "Das Schönste und Tiefste, was der Mensch erleben kann, ist das Gefühl des Geheimnisvollen.":
     "Albert Einstein",
     """
-    The tree which moves some to tears of joy is in the eyes of others only a green thing which stands in the way...
-    As a man is, so he sees.
+    The tree which moves some to tears of joy is in the eyes of others only a green thing which stands in the way... As a man is, so he sees.
     """:
     "William Blake",
     "The mind is a wonderful servant but a terrible master.":
