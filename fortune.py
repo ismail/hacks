@@ -208,7 +208,9 @@ quotes = {
     "Everybody is disappointed at me at some point.":
     "Larry David",
     "A person often meets his destiny on the road he took to avoid it.":
-    "Jean de la Fontaine"
+    "Jean de la Fontaine",
+    "All friendships of any length are based on a continued, mutual forgiveness. Without tolerance and mercy all friendships die.":
+    "David Whyte"
 }
 
 quote, author = random.choice(list(quotes.items()))
