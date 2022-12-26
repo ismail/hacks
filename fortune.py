@@ -210,7 +210,9 @@ quotes = {
     "A person often meets his destiny on the road he took to avoid it.":
     "Jean de la Fontaine",
     "All friendships of any length are based on a continued, mutual forgiveness. Without tolerance and mercy all friendships die.":
-    "David Whyte"
+    "David Whyte",
+    "Das ewig Unbegreifliche an der Welt ist ihre Begreiflichkeit.":
+    "Albert Einstein"
 }
 
 quote, author = random.choice(list(quotes.items()))
