@@ -11,4 +11,4 @@ curl -s 'https://www.deutschepost.de/sendung/simpleQueryResult.html' \
      -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36' \
      -H 'referer: https://www.deutschepost.de/sendung/simpleQuery.html' \
      --data-raw "form.sendungsnummer=$1&form.checkPostedDate=$DATE&form.postedDate=$2" \
-    --compressed | grep -m1 -E "Die Sendung|zur Sendung|Einlieferungsdatum|nicht vorgenommen|noch das Einlieferungsdatum" | sed -e 's/<[^>]*>//g' | sed -E 's/^\W+//g' | recode html..UTF-8
+    --compressed | grep -m1 -E "Die Sendung|keine Informationen zur Sendung|Einlieferungsdatum|nicht vorgenommen|noch das Einlieferungsdatum" | sed -e 's/<[^>]*>//g' | sed -E 's/^\W+//g' | recode html..UTF-8
