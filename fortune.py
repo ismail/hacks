@@ -212,7 +212,9 @@ quotes = {
     "All friendships of any length are based on a continued, mutual forgiveness. Without tolerance and mercy all friendships die.":
     "David Whyte",
     "Das ewig Unbegreifliche an der Welt ist ihre Begreiflichkeit.":
-    "Albert Einstein"
+    "Albert Einstein",
+    "Wherever you go, there you are":
+    "Thomas a Kempis"
 }
 
 quote, author = random.choice(list(quotes.items()))
