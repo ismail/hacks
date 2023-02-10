@@ -216,7 +216,9 @@ quotes = {
     "Wherever you go, there you are":
     "Thomas a Kempis",
     "I don't believe in anything you have to believe in.":
-    "Fran Lebowitz"
+    "Fran Lebowitz",
+    "The universe is transformation, life is judgement.":
+    "Marcus Aurelius"
 }
 
 quote, author = random.choice(list(quotes.items()))
