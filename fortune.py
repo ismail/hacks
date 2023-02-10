@@ -214,7 +214,9 @@ quotes = {
     "Das ewig Unbegreifliche an der Welt ist ihre Begreiflichkeit.":
     "Albert Einstein",
     "Wherever you go, there you are":
-    "Thomas a Kempis"
+    "Thomas a Kempis",
+    "I don't believe in anything you have to believe in.":
+    "Fran Lebowitz"
 }
 
 quote, author = random.choice(list(quotes.items()))
