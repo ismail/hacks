@@ -10,7 +10,7 @@ quotes = {
     Entrenched in both ancient and modern cultural tradition,
     the pursuit of happiness is a popular preoccupation around the world.
     """: "Ed Diener",
-    "Raffiniert ist der Herrgott, aber boshaft ist er nicht.": "Albert Einstein",
+    "Raffiniert ist der Herrgott, aber boshaft ist Er nicht.": "Albert Einstein",
     "Everything is the way it is because it got that way.": "D'Arcy Wentworth Thompson",
     "Every one suspects himself of at least one of the cardinal virtues.": "F. Scott Fitzgerald",
     "Nothing is true, everything is permitted.": "Hasan-i Sabbāh",
