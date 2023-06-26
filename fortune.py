@@ -25,8 +25,7 @@ quotes = {
     """: "Reinhold Niebuhr",
     "I come from a line of pessimists. My mother was a pessimist.": "Daniel Kahneman",
     """
-    Aus so krummem Holze, als woraus der Mensch gemacht ist,
-    kann nichts ganz Gerades gezimmert werden.
+    Aus so krummem Holze, als woraus der Mensch gemacht ist, kann nichts ganz Gerades gezimmert werden.
     """: "Immanuel Kant",
     "Never attribute to malice that which is adequately explained by stupidity.": "Hanlon's razor",
     """
@@ -158,6 +157,8 @@ quote, author = random.choice(list(quotes.items()))
 quote = quote.strip()
 quote = re.sub(r"\n[ ]+", r"\n", quote, flags=re.UNICODE)
 
-print(f"{quote.strip()}\n")
+print(f"{quote.strip()}", end='')
 if author:
-    print(f"— {author}")
+    print(f" — {author}")
+else:
+    print()
