@@ -147,7 +147,7 @@ quotes = {
     "A person often meets his destiny on the road he took to avoid it.": "Jean de la Fontaine",
     "All friendships of any length are based on a continued, mutual forgiveness. Without tolerance and mercy all friendships die.": "David Whyte",
     "Das ewig Unbegreifliche an der Welt ist ihre Begreiflichkeit.": "Albert Einstein",
-    "Wherever you go, there you are": "Thomas a Kempis",
+    "Wherever you go, there you are.": "Thomas a Kempis",
     "I don't believe in anything you have to believe in.": "Fran Lebowitz",
     "The universe is transformation, life is judgement.": "Marcus Aurelius",
     "Man is the only creature who refuses to be what he is.": "Albert Camus",
