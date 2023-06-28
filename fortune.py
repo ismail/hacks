@@ -66,7 +66,7 @@ quotes = {
     "For every complex problem there is an answer that is clear, simple, and wrong.": "H. L. Mencken",
     "Failure sharpens people's awareness of their own fallibility, their own common humanity, and deepens their understanding of those in others.": "Bryan Magee",
     "All of humanity’s problems stem from man’s inability to sit quietly in a room alone.": "Blaise Pascal",
-    "All good solutions have one thing in common: they are obvious but only in hindsight.": "Eli Goldratt",
+    "All good solutions have one thing in common: they are obvious, but only in hindsight.": "Eli Goldratt",
     "It ain't what you don't know that gets you into trouble. It's what you know for sure that just ain't so.": "Josh Billings",
     "What education often does appear to do, however, is imbue us with confidence in the errors we retain.": "David Dunning",
     "Zweifle nicht an dem der sagt, er habe Angst, aber habe Angst vor dem, der sagt, er habe keine Zweifel.": "Erich Fried",
