@@ -24,7 +24,7 @@ quotes = {
     "More than any other time in history mankind faces a crossroads. One path leads to despair and utter hopelessness, the other to total extinction. Let us pray we have the wisdom to choose correctly.": "Woody Allen",
     "How it is that anything so remarkable as a state of consciousness comes about as a result of irritating nervous tissue, is just as unaccountable as the appearance of the djinn when Aladdin rubbed his lampin the story.": "Thomas Henry Huxley",
     "There is a cult of ignorance in the United States, and there has always been. The strain of anti-intellectualism has been a constant thread winding its way through our political and cultural life, nurtured by the false notion that democracy means that my ignorance is just as good as your knowledge.": "Isaac Asimov",
-    "I would never belong to any club that would have me as a member.": "Groucho Marx",
+    "I don't want to belong to any club that will accept me as a member.": "Groucho Marx",
     "Every time I find the meaning of life, they change it.": "Reinhold Niebuhr",
     """
     What is youth?
