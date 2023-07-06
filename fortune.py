@@ -49,7 +49,7 @@ quotes = {
     "Der Mensch kann wohl tun, was er will, aber er kann nicht wollen, was er will.": "Arthur Schopenhauer",
     "Unglücklich das Land, das Helden nötig hat.": "Bertolt Brecht",
     "The heart has its reasons, which reason does not know... We know truth, not only by the reason, but also by the heart.": "Blaise Pascal",
-    "When you are dead, you do not know you are dead. It's only painful & difficult for others.The same applies when you are stupid.": "Ricky Gervais",
+    "When you are dead, you do not know you are dead. It's only painful & difficult for others. The same applies when you are stupid.": "Ricky Gervais",
     "People use statistics as a drunk uses a lamppost — for support rather than illumination.": "A. E. Housman",
     "Das Schönste und Tiefste, was der Mensch erleben kann, ist das Gefühl des Geheimnisvollen.": "Albert Einstein",
     "The tree which moves some to tears of joy is in the eyes of others only a green thing which stands in the way... As a man is, so he sees.": "William Blake",
