@@ -72,6 +72,7 @@ quotes = {
     "I don't believe in anything you have to believe in.": "Fran Lebowitz",
     "The universe is transformation, life is judgement.": "Marcus Aurelius",
     "Man is the only creature who refuses to be what he is.": "Albert Camus",
+    "Every one shall meet what he wishes to avoid by running away.": "Imam Ali Ibn Abi Talib",
 }
 
 quote, author = random.choice(list(quotes.items()))
