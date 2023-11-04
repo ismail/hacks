@@ -73,6 +73,7 @@ quotes = {
     "The universe is transformation, life is judgement.": "Marcus Aurelius",
     "Man is the only creature who refuses to be what he is.": "Albert Camus",
     "Every one shall meet what he wishes to avoid by running away.": "Imam Ali Ibn Abi Talib",
+    "Where all think alike, no one thinks very much.": "Walter Lippmann",
 }
 
 quote, author = random.choice(list(quotes.items()))
