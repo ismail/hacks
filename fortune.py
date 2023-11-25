@@ -75,6 +75,7 @@ quotes = {
     "Every one shall meet what he wishes to avoid by running away.": "Imam Ali Ibn Abi Talib",
     "Where all think alike, no one thinks very much.": "Walter Lippmann",
     "Whenever you find yourself on the side of the majority, it is time to pause and reflect.": "Mark Twain",
+    "Any sufficiently advanced incompetence is indistinguishable from malice.": "Fred Clark's Law",
 }
 
 quote, author = random.choice(list(quotes.items()))
