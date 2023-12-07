@@ -76,6 +76,7 @@ quotes = {
     "Where all think alike, no one thinks very much.": "Walter Lippmann",
     "Whenever you find yourself on the side of the majority, it is time to pause and reflect.": "Mark Twain",
     "Any sufficiently advanced incompetence is indistinguishable from malice.": "Fred Clark's Law",
+    "Inspiration is for amateurs. The rest of us just show up and get to work.": "Chuck Close",
 }
 
 quote, author = random.choice(list(quotes.items()))
