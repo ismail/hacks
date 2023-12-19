@@ -77,6 +77,7 @@ quotes = {
     "Whenever you find yourself on the side of the majority, it is time to pause and reflect.": "Mark Twain",
     "Any sufficiently advanced incompetence is indistinguishable from malice.": "Fred Clark's Law",
     "Inspiration is for amateurs. The rest of us just show up and get to work.": "Chuck Close",
+    "Owners of dogs will have noticed that, if you provide them with food and water and shelter and affection, they will think you are god. Whereas owners of cats are compelled to realize that, if you provide them with food and water and shelter and affection, they draw the conclusion that they are gods.": "Christopher Hitchens",
 }
 
 quote, author = random.choice(list(quotes.items()))
