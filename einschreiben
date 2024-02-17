@@ -2,13 +2,11 @@
 
 set -eo pipefail
 
-[[ -z $2 ]] && DATE=false || DATE=true
-
-curl -s 'https://www.deutschepost.de/sendung/simpleQueryResult.html' \
-     -H 'authority: www.deutschepost.de' \
-     -H 'origin: https://www.deutschepost.de' \
-     -H 'content-type: application/x-www-form-urlencoded' \
-     -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36' \
-     -H 'referer: https://www.deutschepost.de/sendung/simpleQuery.html' \
-     --data-raw "form.sendungsnummer=$1&form.checkPostedDate=$DATE&form.postedDate=$2" \
-    --compressed | grep -m1 -E "Die Sendung|keine Informationen zur Sendung|Einlieferungsdatum|nicht vorgenommen|noch das Einlieferungsdatum" | sed -e 's/<[^>]*>//g' | sed -E 's/^\W+//g' | recode html..UTF-8
+curl -s "https://www.deutschepost.de/int-verfolgen/data/search?piececode=${1}&inputSearch=true&language=de" \
+  -H 'authority: www.deutschepost.de' \
+  -H 'accept: application/json' \
+  -H 'accept-language: en-US,en;q=0.9,de;q=0.8' \
+  -H 'content-type: application/json' \
+  -H 'referer: https://www.deutschepost.de/de/s/sendungsverfolgung.html' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36' \
+  --compressed | jq -r '"Status: " + (.sendungen[].sendungsdetails.sendungsverlauf.aktuellerStatus), "\nHistory:", (.sendungen[].sendungsdetails.sendungsverlauf.events[] | "- " + .status)'
