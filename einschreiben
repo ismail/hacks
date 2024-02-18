@@ -2,11 +2,26 @@
 
 set -eo pipefail
 
-curl -s "https://www.deutschepost.de/int-verfolgen/data/search?piececode=${1}&inputSearch=true&language=de" \
+[[ -z $1 ]] || [[ -z $2 ]] && echo "Usage $(basename ${0}) <tracking_no> <DD.MM.YYYY>" && exit 1
+
+data=$(curl -s "https://www.deutschepost.de/int-verfolgen/data/shipment?language=de" \
   -H 'authority: www.deutschepost.de' \
   -H 'accept: application/json' \
   -H 'accept-language: en-US,en;q=0.9,de;q=0.8' \
   -H 'content-type: application/json' \
   -H 'referer: https://www.deutschepost.de/de/s/sendungsverfolgung.html' \
   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36' \
-  --compressed | jq -r '"Status: " + (.sendungen[].sendungsdetails.sendungsverlauf.aktuellerStatus), "\nHistory:", (.sendungen[].sendungsdetails.sendungsverlauf.events[] | "- " + .status)'
+  --data-raw "{\"piececode\":\"${1}\", \"postedDate\":\"${2}\"}" \
+  --compressed)
+
+
+if [[ $3 == "--debug" ]]; then
+    echo "${data}" | jq .
+else
+    echo "${data}" | jq -r '.sendungen[] | "Status: " + (.sendungsdetails.sendungsverlauf.aktuellerStatus) +
+      (if (.sendungsdetails.sendungsverlauf.events? | length) > 0 then
+          ("\nHistory:\n" + (.sendungsdetails.sendungsverlauf.events | map("- " + .status) | join("\n")))
+      else
+          ""
+      end)'
+fi
