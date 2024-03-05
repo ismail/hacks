@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
+
 import random
 import re
+import time
 
 quotes = {
     "Never attribute to malice that which is adequately explained by stupidity.": "Hanlon's razor",
@@ -41,6 +43,7 @@ quotes = {
     "Inspiration is for amateurs. The rest of us just show up and get to work.": "Chuck Close",
 }
 
+random.seed(time.time())
 quote, author = random.choice(list(quotes.items()))
 quote = quote.strip()
 quote = re.sub(r"\n[ ]+", r"\n", quote, flags=re.UNICODE)
