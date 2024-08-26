@@ -41,6 +41,7 @@ quotes = {
     "Whenever you find yourself on the side of the majority, it is time to pause and reflect.": "Mark Twain",
     "Any sufficiently advanced incompetence is indistinguishable from malice.": "Fred Clark's Law",
     "Inspiration is for amateurs. The rest of us just show up and get to work.": "Chuck Close",
+    "The optimist thinks this is the best of all possible worlds. The pessimist fears it is true.": "J. Robert Oppenheimer",
 }
 
 random.seed(time.time())
