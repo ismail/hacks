@@ -42,6 +42,7 @@ quotes = {
     "Any sufficiently advanced incompetence is indistinguishable from malice.": "Fred Clark's Law",
     "Inspiration is for amateurs. The rest of us just show up and get to work.": "Chuck Close",
     "The optimist thinks this is the best of all possible worlds. The pessimist fears it is true.": "J. Robert Oppenheimer",
+    "Half the harm that is done in this world is due to people who want to feel important. They don't mean to do harm; but the harm does not interest them. Or they do not see it, or they justify it because they are absorbed in the endless struggle to think well of themselves.": "T.S. Eliot",
 }
 
 random.seed(time.time())
