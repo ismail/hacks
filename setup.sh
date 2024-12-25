@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-curdir=$(pwd)
+curdir=$(dirname "$(realpath "$0")")
 cd $HOME
 
 mkdir -p bin
