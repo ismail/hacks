@@ -31,7 +31,7 @@ quotes = {
     "All good solutions have one thing in common: they are obvious, but only in hindsight.": "Eli Goldratt",
     "It ain't what you don't know that gets you into trouble. It's what you know for sure that just ain't so.": "Josh Billings",
     "Zweifle nicht an dem der sagt, er habe Angst, aber habe Angst vor dem, der sagt, er habe keine Zweifel.": "Erich Fried",
-    "Everybody is disappointed at me at some point.": "Larry David",
+    "Everybody is disappointed in me at some point.": "Larry David",
     "A person often meets his destiny on the road he took to avoid it.": "Jean de la Fontaine",
     "Wherever you go, there you are.": "Thomas a Kempis",
     "I don't believe in anything you have to believe in.": "Fran Lebowitz",
