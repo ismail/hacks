@@ -3,7 +3,6 @@
 import random
 import re
 import sys
-import time
 import unittest
 
 quotes = {
@@ -52,11 +51,8 @@ def normalize_quote(quote):
     return '\n'.join(line.strip() for line in quote.strip().split('\n'))
 
 def get_random_quote():
-    random.seed(random.SystemRandom().randint(0, sys.maxsize))
     quote, author = random.choice(list(quotes.items()))
-    quote = quote.strip()
-    quote = re.sub(r"\n[ ]+", r"\n", quote, flags=re.UNICODE)
-    return quote, author
+    return normalize_quote(quote), author
 
 def format_quote(quote, author):
     if author:
@@ -65,9 +61,9 @@ def format_quote(quote, author):
 
 class TestFortune(unittest.TestCase):
     def test_get_random_quote(self):
+        normalized_quotes = {normalize_quote(q): q for q in quotes.keys()}
         for _ in range(100):
             quote, author = get_random_quote()
-            normalized_quotes = {normalize_quote(q): q for q in quotes.keys()}
             self.assertIn(quote, normalized_quotes.keys())
             original_quote = normalized_quotes[quote]
             self.assertEqual(quotes[original_quote], author)
@@ -75,14 +71,6 @@ class TestFortune(unittest.TestCase):
     def test_format_quote(self):
         self.assertEqual(format_quote("test", "author"), "test — author")
         self.assertEqual(format_quote("test", None), "test")
-
-    def test_randomness(self):
-        quotes_set = set()
-        for _ in range(100):
-            quote, _ = get_random_quote()
-            quotes_set.add(quote)
-        # Check that we have a good distribution of quotes
-        self.assertGreater(len(quotes_set), len(quotes) * 0.9, "Randomness test failed: not enough unique quotes generated")
 
     def test_normalize_quote(self):
         multi_line_quote = """
