@@ -45,6 +45,7 @@ quotes = {
     "The optimist thinks this is the best of all possible worlds. The pessimist fears it is true.": "J. Robert Oppenheimer",
     "Half the harm that is done in this world is due to people who want to feel important. They don't mean to do harm; but the harm does not interest them. Or they do not see it, or they justify it because they are absorbed in the endless struggle to think well of themselves.": "T.S. Eliot",
     "Until one has loved an animal, a part of one's soul remains unawakened.": "Anatole France",
+    "There are no losers on a winning team, and no winners on a losing team.": "Fred Brooks, Jr. (quoting his basketball coach Dean Smith)",
 }
 
 def normalize_quote(quote):
