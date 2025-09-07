@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[[ -z "$1" ]] && echo "Pass a hostname argument." && exit 0
+[[ -z "$1" ]] && echo "Pass a hostname argument." && exit 1
 
 format="
             time_namelookup:  %{time_namelookup}
