@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo errexit
+set -euo pipefail
 
 usage() {
     echo "Usage: $0 -a|--arch <arch> -s|--shell --leap"
@@ -8,12 +8,12 @@ usage() {
 }
 
 run_zypper() {
-    sudo ZYPP_CONF=$conf zypper --non-interactive --root $TARGET "$@"
+    sudo ZYPP_CONF="$conf" zypper --non-interactive --root "$TARGET" "$@"
 }
 
-if [ $(whoami) = "root" ]; then
-    echo "Don't run this script as root."
-    exit -1
+if [[ $EUID -eq 0 ]]; then
+    echo "Don\'t run this script as root."
+    exit 1
 fi
 
 ARCH=''
@@ -28,14 +28,14 @@ BASE_URL="http://download.opensuse.org"
 declare -A arches=([armv7hl]=1 [aarch64]=1 [ppc64]=1 \
                    [ppc64le]=1 [riscv64]=1 [s390x]=1)
 
-opts=$(getopt -l "arch:,shell,leap,help" -o "a:s:l:h" -- "$@")
-eval set --$opts
+opts=$(getopt -l "arch:,shell,leap,help" -o "a:slh" -- "$@")
+eval set --"$opts"
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
         -a|--arch)
-            ARCH=$2
-            QEMU_SUFFIX=$ARCH
+            ARCH="$2"
+            QEMU_SUFFIX="$2"
             shift 2
             ;;
         -s|--shell)
@@ -57,45 +57,45 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-[[ -z $ARCH ]] && echo "--arch is a required argument." && usage && exit 1
+[[ -z "$ARCH" ]] && echo "--arch is a required argument." && usage && exit 1
 
 if [[ -z ${arches[$ARCH]:-} ]]; then
     echo "$ARCH is not supported, supported architectures: ${!arches[@]}"
     exit 1
 fi
 
-TARGET=$ROOT/$ARCH-$DISTRO_NAME
-[[ $DISTRO_NAME = "leap" ]] && TARGET=$TARGET-$LEAP_VERSION
+TARGET="$ROOT/$ARCH-$DISTRO_NAME"
+[[ "$DISTRO_NAME" = "leap" ]] && TARGET="$TARGET-$LEAP_VERSION"
 
 cleanup() {
-    sudo umount -l $TARGET/dev || true
-    sudo umount -l $TARGET/proc || true
+    sudo umount -l "$TARGET/dev" || true
+    sudo umount -l "$TARGET/proc" || true
 }
 trap cleanup EXIT
 
 if [[ $CHROOT -eq 1 ]]; then
-    [[ ! -d $TARGET ]] && echo "$TARGET does not exist" && exit 1
-    sudo chroot $TARGET && exit 0
+    [[ ! -d "$TARGET" ]] && echo "$TARGET does not exist" && exit 1
+    sudo chroot "$TARGET" && exit 0
 fi
 
-if [[ $DISTRO_NAME = "leap" ]]; then
-    [[ $ARCH = "riscv64" ]] && echo "Leap doesn't support riscv64." && exit 1
-    [[ $ARCH = "s390x" ]] && echo "Leap doesn't support s390x." && exit 1
+if [[ "$DISTRO_NAME" = "leap" ]]; then
+    [[ "$ARCH" = "riscv64" ]] && echo "Leap doesn\'t support riscv64." && exit 1
+    [[ "$ARCH" = "s390x" ]] && echo "Leap doesn\'t support s390x." && exit 1
 
     REPOURL="$BASE_URL/distribution/leap/15.3/repo/oss"
 else
     if [[ "$ARCH" == ppc* ]]; then
-        REPOURL="$BASE_URL"/ports/ppc/"$DISTRO_PATH"/repo/oss
+        REPOURL="$BASE_URL/ports/ppc/$DISTRO_PATH/repo/oss"
     elif [[ "$ARCH" == riscv64 ]]; then
-        REPOURL="$BASE_URL"/ports/riscv/"$DISTRO_PATH"/repo/oss
+        REPOURL="$BASE_URL/ports/riscv/$DISTRO_PATH/repo/oss"
     elif [[ "$ARCH" = s390x ]]; then
-        REPOURL="$BASE_URL"/ports/zsystems/"$DISTRO_PATH"/repo/oss
+        REPOURL="$BASE_URL/ports/zsystems/$DISTRO_PATH/repo/oss"
     else
-        REPOURL="$BASE_URL"/ports/"$ARCH"/"$DISTRO_PATH"/repo/oss
+        REPOURL="$BASE_URL/ports/$ARCH/$DISTRO_PATH/repo/oss"
     fi
 fi
 
-sudo mkdir -p $ROOT
+sudo mkdir -p "$ROOT"
 
 if [ "$ARCH" = "armv7hl" ]; then
     QEMU_SUFFIX=arm
@@ -103,16 +103,16 @@ fi
 
 # Create a fake zypp.conf
 conf=$(mktemp)
-cat << EOF > $conf
+cat << EOF > "$conf"
 [main]
 arch=$ARCH
 EOF
 
-if [ -e $TARGET ]; then
+if [ -e "$TARGET" ]; then
     read -p "$TARGET already exists do you want to re-create it? (y/n) "
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
+    if [[ "$REPLY" =~ ^[Yy]$ ]]; then
         # Clean up
-        sudo rm -rf $TARGET/{bin,boot,etc,home,lib,mnt,opt,root,run,sbin,srv,tmp,usr,var}
+        sudo rm -rf "$TARGET"/{bin,boot,etc,home,lib,mnt,opt,root,run,sbin,srv,tmp,usr,var}
     else
         echo "Ok, exiting..."
         exit 0
@@ -120,29 +120,29 @@ if [ -e $TARGET ]; then
 fi
 
 # Add default OSS repo
-run_zypper ar -f $REPOURL repo-oss
+run_zypper ar -f "$REPOURL" repo-oss
 
 # Update repos for Leap
-if [[ $DISTRO_NAME = "leap" ]]; then
+if [[ "$DISTRO_NAME" = "leap" ]]; then
     for repo in backports oss sle; do
-        run_zypper ar -f $BASE_URL/update/leap/$LEAP_VERSION/$repo update-$repo
+        run_zypper ar -f "$BASE_URL/update/leap/$LEAP_VERSION/$repo" "update-$repo"
     done
 fi
 
 run_zypper --gpg-auto-import-keys ref
 
 # Ubuntu...
-[[ -f /usr/bin/qemu-$QEMU_SUFFIX-static ]] && QEMU_SUFFIX="$QEMU_SUFFIX"-static
+[[ -f "/usr/bin/qemu-$QEMU_SUFFIX-static" ]] && QEMU_SUFFIX="$QEMU_SUFFIX-static"
 
 # Copy emulation binaries
-sudo mkdir -p $TARGET/usr/bin
-sudo cp /usr/bin/emu /usr/bin/qemu-$QEMU_SUFFIX $TARGET/usr/bin
+sudo mkdir -p "$TARGET/usr/bin"
+sudo cp "/usr/bin/emu" "/usr/bin/qemu-$QEMU_SUFFIX" "$TARGET/usr/bin"
 
 # Create /dev, /proc for bind mount
-sudo mkdir -p $TARGET/dev $TARGET/proc
+sudo mkdir -p "$TARGET/dev" "$TARGET/proc"
 
-mount -l | grep "$TARGET/dev" &>/dev/null || sudo mount --bind /dev $TARGET/dev
-mount -l | grep "$TARGET/proc" &>/dev/null || sudo mount --bind /proc $TARGET/proc
+mount -l | grep "$TARGET/dev" &>/dev/null || sudo mount --bind /dev "$TARGET/dev"
+mount -l | grep "$TARGET/proc" &>/dev/null || sudo mount --bind /proc "$TARGET/proc"
 
 # Install bash and some other required packages
 run_zypper in bash glibc-locale-base terminfo coreutils python3

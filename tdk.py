@@ -13,7 +13,7 @@ import pprint
 import sys
 
 
-URL = "http://sozluk.gov.tr/gts"
+URL = "https://sozluk.gov.tr/gts"
 debug = 0
 
 
@@ -30,7 +30,7 @@ def searchWord(words):
         results = json.loads(urlopen(req).read())
     except HTTPError as e:
         print(e)
-        sys.exit(-1)
+        sys.exit(1)
 
     if debug:
         pprint.pprint(results)

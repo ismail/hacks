@@ -1,11 +1,19 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#!/usr/bin/env -S uv run --script
+
+# /// script
+# dependencies = [
+#   "beautifulsoup4",
+#   "lxml",
+#   "rich",
+# ]
+# requires-python = ">=3.13"
+# ///
 
 from bs4 import BeautifulSoup as soup
 from rich.console import Console
 from rich.table import Table
 import urllib.error
-from urllib.parse import urlencode, quote
+from urllib.parse import quote
 from urllib.request import urlopen, Request
 import sys
 
@@ -33,12 +41,12 @@ def findKonjugation(string):
     for tense in filtered_tenses:
         result[tense] = []
 
-    for table in s.findAll("div", attrs={"class": "rAufZu"}):
-        for column in table.findAll("div", attrs={"class": "vTbl"}):
+    for table in s.find_all("div", attrs={"class": "rAufZu"}):
+        for column in table.find_all("div", attrs={"class": "vTbl"}):
             header = column.find("h2") or column.find("h3")
             tense = header.text
             if (tense in filtered_tenses) and not result[tense]:
-                for tr in column.findAll("tr"):
+                for tr in column.find_all("tr"):
                     result[tense].append(tr.text.strip())
 
     if result["Präsens"]:
@@ -47,10 +55,8 @@ def findKonjugation(string):
         for tense in filtered_tenses:
             table.add_column(tense, justify="left", style="magenta", no_wrap=True)
 
-        for i in range(0, len(result["Präsens"])):
-            row = []
-            for tense in filtered_tenses:
-                row.append(result[tense][i])
+        rows = zip(*(result[tense] for tense in filtered_tenses))
+        for row in rows:
             table.add_row(*row)
 
         console = Console()

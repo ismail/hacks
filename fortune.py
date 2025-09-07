@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import random
-import re
+
 import sys
 import unittest
 

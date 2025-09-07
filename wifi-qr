@@ -1,6 +1,19 @@
 #!/bin/bash
 
+set -euo pipefail
+
+if [[ -z "$1" ]]; then
+    echo "Usage: $0 <Access-Point-Name>"
+    exit 1
+fi
+
 AP=$1
-PASSWORD=$2
+read -s -p "Enter password for '$AP': " PASSWORD
+echo
+
+if [[ -z "$PASSWORD" ]]; then
+    echo "Password cannot be empty."
+    exit 1
+fi
 
 qrencode -t ANSIUTF8 "WIFI:T:WPA;S:$AP;P:$PASSWORD;;"

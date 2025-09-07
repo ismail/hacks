@@ -6,57 +6,56 @@
 
 import sys
 import os
+import subprocess
+from collections import OrderedDict
 
-vcDict = {
-    ".gclient": "gclient sync",
-    ".git/refs/remotes/git-svn": "git svn rebase",
-    ".git": "git pull",
-    ".svn": "svn up",
-    ".hg": "hg pull -u -v",
-    "CVS": "cvs -q -z3 update -dPA",
-    ".bzr": "bzr pull",
-    ".osc": "osc up",
-}
+vcDict = OrderedDict([
+    (".gclient", "gclient sync"),
+    (".git/refs/remotes/git-svn", "git svn rebase"),
+    (".git", "git pull"),
+    (".svn", "svn up"),
+    (".hg", "hg pull -u -v"),
+    ("CVS", "cvs -q -z3 update -dPA"),
+    (".bzr", "bzr pull"),
+    (".osc", "osc up"),
+])
 
-
-def log(string, isTTY=sys.stdout.isatty()):
-    if isTTY:
-        print("Updating \033[0;33m%s\033[0m" % string)
+def log(string):
+    if sys.stdout.isatty():
+        print(f"Updating \033[0;33m{string}\033[0m")
     else:
         print(string)
-
 
 def doPull(directory):
     currentDirectory = os.getcwd()
     os.chdir(directory)
 
-    for path in vcDict.keys():
+    for path, command in vcDict.items():
         if os.path.exists(path):
             log(os.path.abspath("."))
             sys.stdout.flush()
-            os.system(vcDict[path])
+            subprocess.run(command, shell=True, check=True)
             break
 
     os.chdir(currentDirectory)
 
-
 if __name__ == "__main__":
-    arglength = len(sys.argv)
-
-    if arglength > 1:
+    if len(sys.argv) > 1:
         if sys.argv[1] in ["-r", "--recursive"]:
-            if arglength == 3:
-                os.chdir(sys.argv[2])
-
+            start_dir = "."
+            if len(sys.argv) == 3:
+                start_dir = sys.argv[2]
+            
+            os.chdir(start_dir)
             root = os.path.abspath(".")
-            paths = sorted(set([os.path.join(root, x[0]) for x in os.walk(root)]))
+            paths = sorted(list(set([x[0] for x in os.walk(root)])))
             for path in paths:
                 doPull(path)
 
             sys.exit(0)
 
-        for i in range(0, arglength - 1):
-            path = os.path.expanduser(sys.argv[i + 1])
+        for arg in sys.argv[1:]:
+            path = os.path.expanduser(arg)
             if os.path.isdir(path):
                 doPull(path)
     else:

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[[ -z "$1" ]] && echo "Pass a hostname argument." && exit 0
+[[ -z "$1" ]] && echo "Pass a hostname argument." && exit 1
 
 format="
             time_namelookup:  %{time_namelookup}
@@ -12,4 +12,4 @@ format="
                             ----------
                  time_total:  %{time_total}\n\n"
 
-curl -L -w "$format" -o /dev/null -s $1
+curl -L -w "$format" -o /dev/null -s "$1"

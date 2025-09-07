@@ -16,6 +16,14 @@ func main() {
 	}
 
 	dir := args[0]
+
+	info, err := os.Stat(dir)
+	if os.IsNotExist(err) {
+		log.Fatalf("Directory does not exist: %s", dir)
+	}
+	if !info.IsDir() {
+		log.Fatalf("Path is not a directory: %s", dir)
+	}
 	http.Handle("/", http.FileServer(http.Dir(dir)))
 
 	port := 8080

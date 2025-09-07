@@ -1,10 +1,16 @@
 #!/bin/zsh
 
 set -euo pipefail
-if [[ ! -e $1 ]]; then
+
+if [[ $# -eq 0 ]]; then
+    print "Usage: $0 <file.pdf>"
+    exit 1
+fi
+
+if [[ ! -e "$1" ]]; then
     print "Cannot find the file $1."
     exit 1
 fi
 
-mv $1 ${1:r}_old.pdf
-qpdf --pages ${1:r}_old.pdf 1-z -- --empty ${1:r}.pdf
+mv "$1" "${1:r}_old.pdf"
+qpdf --pages "${1:r}_old.pdf" 1-z -- --empty "${1:r}.pdf"
